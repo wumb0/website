@@ -1,0 +1,7 @@
+#menu {
+    position: fixed;
+    background-color: red;
+    width:10%;
+    height:100%;
+    top:0px;
+}

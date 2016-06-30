@@ -1,0 +1,7 @@
+ipdb
+pelican
+pelican-git
+pelican-minification
+Markdown
+typogrify
+pelican-fontawesome

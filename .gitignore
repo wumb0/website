@@ -1,0 +1,4 @@
+pelican
+.vimrc.local
+*.pyc
+*.pid
