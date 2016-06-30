@@ -37,29 +37,38 @@
 </head>
 
 <body>
-    <div id="menu">
-        <div class="pure-menu">
-            <a class="pure-menu-heading" href="{{SITEURL}}">{{SITEURL}}</a>
-            <ul class="pure-menu-list">
-            {% for title, link in MENUITEMS %}
-                <li><a href="{{ link }}">{{ title }}</a></li>
-            {% endfor %}
-            {% if DISPLAY_PAGES_ON_MENU %}
-            {% for p in PAGES %}
-                <li{% if p == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
-            {% endfor %}
-            {% else %}
-            {% if DISPLAY_CATEGORIES_ON_MENU %}
-                {% for cat, null in categories %}
-                <li{% if cat == category %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
-                {% endfor %}
-            {% endif %}
-            {% endif %}
-            </ul>
+    <div class="uk-container uk-container-center">
+        <div class="uk-grid">
+            <div class="uk-width-1-1">
+                <nav class="uk-navbar">
+                    <a class="uk-navbar-brand" href="/">{{SITENAME}}</a>
+                    <ul class="uk-navbar-nav uk-hidden-small">
+                        <li><a href="/">Testing</a></li>
+                    {% for title, link in MENUITEMS %}
+                        <li><a href="{{ link }}">{{ title }}</a></li>
+                    {% endfor %}
+                    {% if DISPLAY_PAGES_ON_MENU %}
+                    {% for p in PAGES %}
+                        <li{% if p == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+                    {% endfor %}
+                    {% else %}
+                    {% if DISPLAY_CATEGORIES_ON_MENU %}
+                        {% for cat, null in categories %}
+                        <li{% if cat == category %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+                        {% endfor %}
+                    {% endif %}
+                    {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="uk-grid">
+            <div class="uk-width-1-1">
+                {% block content %}
+                {% endblock content %}
+            </div>
         </div>
     </div>
-{% block content %}
-{% endblock content %}
 </body>
 <footer>
         {% for js_file in JS_FILES %}

@@ -3,8 +3,8 @@
 from __future__ import unicode_literals
 
 AUTHOR = u'wumb0'
-SITENAME = u'wumb0.in'
-SITEURL = ''
+SITENAME = u'wumb0ing'
+SITEURL = u''
 
 PATH = 'content'
 
@@ -36,18 +36,40 @@ DEFAULT_PAGINATION = 10
 
 #--------------User Conf----------------
 CSS_FILES = (
-                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.xx.x/css/uikit.min.css",
-                "/theme/uikit/css/uikit.gradient.min.css",
-                "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/default.min.css"
+                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/css/uikit.min.css",
+                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/css/uikit.gradient.min.css",
+                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/css/components/tooltip.gradient.min.css",
+                "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/default.min.css",
                 "/theme/custom.css",
             )
 JS_FILES = (
 				"https://code.jquery.com/jquery-2.2.4.min.js",
-                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.xx.x/js/uikit.min.js",
-				"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"
+				"https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/js/uikit.min.js",
+                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/js/components/tooltip.min.js",
+				"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js",
                 "/theme/custom.js",
            )
 THEME = 'themes/mytheme1'
-FAVICON = 'skel/images/favicon.png'
+FAVICON = 'favicon.ico'
 PLUGINS = [ 'pelican_fontawesome',] #'minification' ]
+DISPLAY_CATEGORIES_ON_MENU = True
+PAGINATION_PATTERNS = (
+    (1, '{base_name}/', '{base_name}/page/1/index.html'),
+    (1, '{base_name}/', '{base_name}/index.html'),
+    (2, '{base_name}/page/{number}/', '{base_name}/page/{number}/index.html'),
+)
+TAG_URL = 'tag/{slug}/'
+TAG_SAVE_AS = 'tag/{slug}/index.html'
+TAGS_URL = 'tags/'
+TAGS_SAVE_AS = 'tags/index.html'
+
+AUTHOR_URL = 'author/{slug}/'
+AUTHOR_SAVE_AS = 'author/{slug}/index.html'
+AUTHORS_URL = 'authors/'
+AUTHORS_SAVE_AS = 'authors/index.html'
+
+CATEGORY_URL = 'category/{slug}/'
+CATEGORY_SAVE_AS = 'category/{slug}/index.html'
+CATEGORYS_URL = 'categories/'
+CATEGORYS_SAVE_AS = 'categories/index.html'
 #--------------/User Conf----------------
