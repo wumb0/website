@@ -2,3 +2,5 @@ pelican
 .vimrc.local
 *.pyc
 *.pid
+output
+.ropeproject

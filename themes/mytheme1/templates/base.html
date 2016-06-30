@@ -61,4 +61,9 @@
 {% block content %}
 {% endblock content %}
 </body>
+<footer>
+        {% for js_file in JS_FILES %}
+            <script src="{{js_file}}"></script>
+        {% endfor %}
+</footer>
 </html>

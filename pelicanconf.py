@@ -35,7 +35,18 @@ DEFAULT_PAGINATION = 10
 #RELATIVE_URLS = True
 
 #--------------User Conf----------------
-CSS_FILES = ("http://yui.yahooapis.com/pure/0.6.0/pure-min.css", "http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css", '/theme/custom.css')
+CSS_FILES = (
+                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.xx.x/css/uikit.min.css",
+                "/theme/uikit/css/uikit.gradient.min.css",
+                "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/default.min.css"
+                "/theme/custom.css",
+            )
+JS_FILES = (
+				"https://code.jquery.com/jquery-2.2.4.min.js",
+                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.xx.x/js/uikit.min.js",
+				"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"
+                "/theme/custom.js",
+           )
 THEME = 'themes/mytheme1'
 FAVICON = 'skel/images/favicon.png'
 PLUGINS = [ 'pelican_fontawesome',] #'minification' ]
