@@ -43,10 +43,10 @@ CSS_FILES = (
                 "/theme/custom.css",
             )
 JS_FILES = (
-				"https://code.jquery.com/jquery-2.2.4.min.js",
-				"https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/js/uikit.min.js",
+                "https://code.jquery.com/jquery-2.2.4.min.js",
+                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/js/uikit.min.js",
                 "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/js/components/tooltip.min.js",
-				"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js",
+                "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js",
                 "/theme/custom.js",
            )
 THEME = 'themes/mytheme1'
