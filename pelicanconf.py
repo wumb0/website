@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
+import re
+
+def rmhtmltags(s):
+    return re.sub('<[^>]*>', '', s)
+
+DELHTML = rmhtmltags
 
 AUTHOR = u'wumb0'
 SITENAME = u'wumb0in\''
@@ -76,4 +82,5 @@ CATEGORY_URL = 'category/{slug}/'
 CATEGORY_SAVE_AS = 'category/{slug}/index.html'
 CATEGORYS_URL = 'categories/'
 CATEGORYS_SAVE_AS = 'categories/index.html'
+PAGE_ORDER_BY = 'sortorder'
 #--------------/User Conf----------------
