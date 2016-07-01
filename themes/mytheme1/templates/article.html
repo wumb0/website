@@ -16,11 +16,11 @@
 {% endblock %}
 
 {% block content %}
-<section id="content" class="body">
+<section class="post-body">
     <header>
-        <h2 class="entry-title">
+        <h1 class="entry-title">
         <span data-uk-tooltip="{pos:'right'}" title="Permalink to {{ article.title|striptags }}"><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" >{{ article.title }}</a></span>
-        </h2>
+        </h1>
         {% import 'translations.html' as translations with context %}
         {{ translations.translations_for(article) }}
     </header>
@@ -28,15 +28,18 @@
         <div class="uk-container">
             <div class="uk-grid">
                 <div class="uk-width-1-1">
-                    {{ article.content }}
-                    <footer class="post-info">
-                        {% if article.authors %}
-                        <address>
-                            By {% for author in article.authors %}
-                            <a href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
-                            {% endfor %}
-                        </address>
+                    {{ article.content.replace("[[more]]", "") }}
+                    <div class="post-tags">Tags: 
+                        {% if article.tags %}
+                        {% for tag in article.tags %}
+                        <a href="{{tag.url}}">{{tag}}</a>&nbsp; 
+                        {% endfor %}
+                        {% else %}
+                        None
                         {% endif %}
+                    </div>
+                    <hr class="post-footer-sep"></hr>
+                    <footer class="post-info">
                         <abbr title="{{ article.date.isoformat() }}">
                             Added: {{ article.locale_date }}
                         </abbr>

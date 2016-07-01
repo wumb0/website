@@ -1,5 +1,20 @@
-.uk-navbar {
-    margin-top: 10px;
+html {
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    padding: 1.2em 0;
+    margin: 0;
+    min-height: 100%;
+    width: 100%
+    background: #cedce5;
+    background: -moz-linear-gradient(45deg,  #cedce5 0%, #aad2e2 20%, #58b4d8 50%, #aad2e2 80%, #cedce5 100%);
+    background: -webkit-linear-gradient(45deg,  #cedce5 0%,#aad2e2 20%,#58b4d8 50%,#aad2e2 80%,#cedce5 100%);
+    background: linear-gradient(45deg,  #cedce5 0%,#aad2e2 20%,#58b4d8 50%,#aad2e2 80%,#cedce5 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedce5', endColorstr='#cedce5',GradientType=1 );
+
 }
 
 /* adapted from http://stackoverflow.com/questions/11182775/how-to-style-the-number-on-a-html-list */
@@ -10,12 +25,12 @@ ol {
 }
 ol > li {
     position:relative;
-    margin:0 0 6px 2em;
+    margin:0 2px 6px 2em;
     padding:4px 8px;
     list-style:none;
     border-top:2px solid #666;
     background:#f9f9f9;
-    border-radius: 0px 0px 10px 10px;
+    border-radius: 0px 0px 8px 8px;
 }
 ol > li:before {
     content:counter(li);
@@ -42,7 +57,93 @@ ol > li:before {
     margin-bottom: 1.5em;
 }
 
-.entry-title {
-    font-family: "Consolas", Times, serif;
+.post-list div.uk-block {
+    padding: 1.1em 0;
+}
+
+.uk-navbar-brand {
+    margin-top: -38px;
+}
+
+.uk-navbar-brand-subtitle {
+    color: #007acc;
+    font-size: .5em;
+    margin-top: -4px;
+    text-align: center;
+}
+
+.uk-nav-navbar > li > a:hover {
+    background-color: #66c2ff;
+}
+
+.uk-nav-navbar > li.uk-active {
+    background-color: #009DD8;
+}
+
+.uk-nav-navbar > li.uk-active > a {
+    color: white;
+}
+
+.uk-nav-sub > li.uk-active {
+    background-color: #666666;
+    margin-left: -15px;
+    padding-left: 15px;
+}
+
+.uk-nav-sub > li.uk-nav-divider {
+    height: 1px;
+    border-top-width: 0px;
+    margin-left: -15px;
+}
+
+.uk-nav-sub > li.uk-nav-divider:last-child {
+    display:none;
+}
+
+hr.dashed {
+    border-style: dashed;
+}
+
+h1 {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight:bold;
     font-size: 50px;
+    line-height: 47px;
+}
+
+h1.entry-title {
+    text-shadow: 1px 1px #444;
+}
+
+h1.entry-title a:hover {
+    text-decoration: none;
+    color: #0070cc;
+}
+
+.page-content, .post-body .uk-block {
+    padding: 1.5em 0;
+}
+
+.post-category {
+    margin-top: -1.2em;
+    padding-left: 1px;
+}
+
+.uk-block {
+    border-radius: 8px;
+}
+
+.post-tags {
+    margin-top: 1.5em;
+    font-size: 13px;
+}
+
+.post-footer-sep {
+    margin: 7px 0;
+    width: 35%;
+}
+
+.post-info  abbr {
+    text-decoration: none;
+    border: none;
 }

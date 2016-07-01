@@ -41,25 +41,52 @@
         <div class="uk-grid">
             <div class="uk-width-1-1">
                 <nav class="uk-navbar">
-                    <a class="uk-navbar-brand" href="/">{{SITENAME}}</a>
+                    <a class="uk-navbar-brand" href="/">
+                        <div class="uk-width-1-1">{{SITENAME}}</div>
+                        <div class="uk-width-1-1 uk-navbar-brand-subtitle">Computers are Hard</div>
+                    </a>
                     <ul class="uk-navbar-nav uk-hidden-small">
-                        <li><a href="/">Testing</a></li>
-                    {% for title, link in MENUITEMS %}
-                        <li><a href="{{ link }}">{{ title }}</a></li>
-                    {% endfor %}
-                    {% if DISPLAY_PAGES_ON_MENU %}
-                    {% for p in PAGES %}
-                        <li{% if p == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
-                    {% endfor %}
-                    {% else %}
-                    {% if DISPLAY_CATEGORIES_ON_MENU %}
-                        {% for cat, null in categories %}
-                        <li{% if cat == category %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
-                        {% endfor %}
-                    {% endif %}
-                    {% endif %}
-                    </ul>
+                        {% if DISPLAY_CATEGORIES_ON_MENU %}
+                            <li class="uk-parent" data-uk-dropdown>
+                                <a href="#">Categories <i class="uk-icon-caret-down"></i></a>
+                                <div class="uk-dropdown uk-dropdown-navbar">
+                                    <ul class="uk-nav uk-nav-navbar">
+                                        {% for cat, null in categories %}
+                                        <li{% if cat == category %} class="uk-active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </li>
+                        {% endif %}
+                        {% include 'navlinks.html' %}
+                        </ul> 
+                    <div class="uk-navbar-flip">
+			<a href="#mobilenav" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
+		    </div>
                 </nav>
+		<div id="mobilenav" class="uk-offcanvas">
+		    <div class="uk-offcanvas-bar">
+                        <ul class="uk-nav uk-nav-offcanvas uk-nav-parent-icon" data-uk-nav>
+                            {% if DISPLAY_CATEGORIES_ON_MENU %}
+                                <li class="uk-parent
+                                {% for cat, null in categories if cat == category %}
+                                uk-active
+                                {% endfor %}
+                                ">
+                                    <a href="#">Categories</a>
+                                    <ul class="uk-nav-sub">
+                                        {% for cat, null in categories %}
+                                        <li{% if cat == category %} class="uk-active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+                                        <li class="uk-nav-divider"></li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% endif %}
+                            {% include 'navlinks.html' %}
+                            </ul> 
+                        </ul>
+		    </div>
+		</div>
             </div>
         </div>
         <div class="uk-grid">
