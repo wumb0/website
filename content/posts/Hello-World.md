@@ -1,7 +1,6 @@
 Title: Hello World
 Date: 2016-07-01 00:50
-[//]: # Modified:
-Category: Misc.
+Category: Misc
 Tags:
 Slug: hello-world
 Authors: wumb0
