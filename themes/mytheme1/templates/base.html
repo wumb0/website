@@ -42,13 +42,13 @@
             <div class="uk-width-1-1">
                 <nav class="uk-navbar">
                     <a class="uk-navbar-brand" href="/">
-                        <div class="uk-width-1-1">{{SITENAME}}</div>
+                        <div class="uk-width-1-1">{{HEADER_SITENAME}}</div>
                         <div class="uk-width-1-1 uk-navbar-brand-subtitle">Computers are Hard</div>
                     </a>
                     <ul class="uk-navbar-nav uk-hidden-small">
                         {% if DISPLAY_CATEGORIES_ON_MENU %}
                             <li class="uk-parent" data-uk-dropdown>
-                                <a href="#">Categories <i class="uk-icon-caret-down"></i></a>
+                                <a href="#"><i class="fa fa-code-fork"></i> Categories <i class="uk-icon-caret-down"></i></a>
                                 <div class="uk-dropdown uk-dropdown-navbar">
                                     <ul class="uk-nav uk-nav-navbar">
                                         {% for cat, null in categories %}
@@ -73,8 +73,9 @@
                                 uk-active
                                 {% endfor %}
                                 ">
-                                    <a href="#">Categories</a>
+                                    <a href="#"><i class="fa fa-code-fork"></i> Categories</a>
                                     <ul class="uk-nav-sub">
+                                        <li class="uk-nav-divider"></li>
                                         {% for cat, null in categories %}
                                         <li{% if cat == category %} class="uk-active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
                                         <li class="uk-nav-divider"></li>

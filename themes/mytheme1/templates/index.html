@@ -15,12 +15,12 @@
                         <article class="hentry">
                             <header>
                                 <h2 class="entry-title"><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a></h2>
-                                <h6 class="post-category">Category: <a href="{{article.category.url}}">{{article.category}}</a></h6>
+                                <div class="post-info" id="index">
+                                    <abbr class="published" title="{{ article.date.isoformat() }}"> {{ article.locale_date }} </abbr>
+                                    <h6 class="post-category">Category: <a href="{{article.category.url}}">{{article.category}}</a></h6>
+                                </div><!-- /.post-info -->
                             </header>
                             <hr class="title-divider"></hr>
-                            <footer class="post-info">
-                                <abbr class="published" title="{{ article.date.isoformat() }}"> {{ article.locale_date }} </abbr>
-                            </footer><!-- /.post-info -->
                             <div class="entry-content"> {{ article.content[:article.content.find("[[more]]")] }} {% if "[[more]]" in article.content %}...<hr class="dashed"></hr><div>Check out the <a href="{{ SITEURL }}/{{ article.url }}">full post</a> for more details!</div>{% endif %}</div><!-- /.entry-content -->
                         </article>
                     </div>
