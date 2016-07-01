@@ -60,7 +60,7 @@ JS_FILES = (
            )
 THEME = 'themes/mytheme1'
 FAVICON = 'favicon.ico'
-PLUGINS = [ 'pelican_fontawesome',] #'minification' ]
+PLUGINS = [ 'pelican_fontawesome', 'minification' ]
 DISPLAY_CATEGORIES_ON_MENU = True
 DISPLAY_PAGES_ON_MENU = True
 PAGINATION_PATTERNS = (
