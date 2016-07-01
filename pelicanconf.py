@@ -42,6 +42,7 @@ DEFAULT_PAGINATION = 10
 #RELATIVE_URLS = True
 
 #--------------User Conf----------------
+PLUGIN_PATH = 'pelican-plugins'
 CSS_FILES = (
                 "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/css/uikit.min.css",
                 "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/css/uikit.gradient.min.css",
@@ -60,7 +61,8 @@ JS_FILES = (
            )
 THEME = 'themes/mytheme1'
 FAVICON = 'favicon.ico'
-PLUGINS = [ 'pelican_fontawesome', 'minification' ]
+PLUGINS = [ 'pelican_fontawesome', 'minification', 'better_figures_and_images' ]
+RESPONSIVE_IMAGES = True
 DISPLAY_CATEGORIES_ON_MENU = True
 DISPLAY_PAGES_ON_MENU = True
 PAGINATION_PATTERNS = (
@@ -83,4 +85,5 @@ CATEGORY_SAVE_AS = 'category/{slug}/index.html'
 CATEGORYS_URL = 'categories/'
 CATEGORYS_SAVE_AS = 'categories/index.html'
 PAGE_ORDER_BY = 'sortorder'
+MD_EXTENSIONS = ['extra']
 #--------------/User Conf----------------

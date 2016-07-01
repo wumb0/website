@@ -164,3 +164,16 @@ h1.entry-title a:hover {
 div.post-info#index {
     margin-top: -.5em;
 }
+
+code.hljs {
+    padding-top: -1em;
+}
+
+pre {
+    padding:0;
+}
+
+pre code {
+    padding: 0 2em 1em 2em !important;
+    margin-top: -4px !important;
+}
