@@ -8,12 +8,16 @@
         <span><i class="uk-icon-angle-double-left"></i><span>
     {% endif %}
     </li>
-
+    {% if page_name == "index" %}
+    {% set page_name = "" %}
+    {% endif %}
     {% for i in range(1, articles_paginator.num_pages+1) %}
         {% if i == articles_page.number %}
         <li class="uk-active"><span>{{articles_page.number}}</span></li>
+        {% elif i == 1 %}
+        <li><a href="/{{page_name}}">{{i}}</a></li>
         {% else %}
-        <li><a href="/page/{{i}}">{{i}}</a></li>
+        <li><a href="/{{page_name}}page/{{i}}/">{{i}}</a></li>
         {% endif %}
     {% endfor %}
     {% if articles_page.has_next() %}
@@ -25,4 +29,5 @@
     {% endif %}
     </li>
 </ul>
+{{ page_name }}
 {% endif %}

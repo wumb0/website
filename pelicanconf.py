@@ -66,7 +66,6 @@ RESPONSIVE_IMAGES = True
 DISPLAY_CATEGORIES_ON_MENU = True
 DISPLAY_PAGES_ON_MENU = True
 PAGINATION_PATTERNS = (
-    (1, '{base_name}/', '{base_name}/page/1/index.html'),
     (1, '{base_name}/', '{base_name}/index.html'),
     (2, '{base_name}/page/{number}/', '{base_name}/page/{number}/index.html'),
 )
