@@ -17,7 +17,7 @@ f=os.popen("netstat -rn") # -f inet
 </code></pre>
 <pre><code class="python">
 \# to
-f=os.popen("netstat -rn \| grep -v vboxnet \| grep -v bridge") # -f inet
+f=os.popen("netstat -rn | grep -v vboxnet | grep -v bridge") # -f inet
 </code></pre>
 (/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/scapy/arch/unix.py will change based on the version you are using, replace 2.7 and python 2.7 with your version)
 And that should fix everything! Happy hacking!
