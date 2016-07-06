@@ -18,12 +18,12 @@ body {
 }
 
 /* adapted from http://stackoverflow.com/questions/11182775/how-to-style-the-number-on-a-html-list */
-ol {
+ol.post-list {
     counter-reset:li;
     margin-left:0;
     padding-left:0;
 }
-ol > li {
+ol > li.post-entry {
     position:relative;
     margin:0 2px 6px 2em;
     padding:4px 8px;
@@ -32,7 +32,7 @@ ol > li {
     background:#f9f9f9;
     border-radius: 0px 0px 8px 8px;
 }
-ol > li:before {
+ol > li.post-entry:before {
     content:counter(li);
     counter-increment:li;
     /* Position and style the number */
@@ -176,4 +176,17 @@ pre {
 pre code {
     padding: 0 2em 1em 2em !important;
     margin-top: -4px !important;
+}
+
+.entry-content ol li, .entry-content ul li {
+    margin-bottom: 3px;
+}
+
+.entry-content > ul > li {
+    color: black;
+    list-style-type: disc;
+}
+
+.entry-content img {
+    padding: 5px;
 }

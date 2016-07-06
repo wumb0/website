@@ -4,3 +4,5 @@ pelican
 *.pid
 output
 .ropeproject
+./old
+old.tar
