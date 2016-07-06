@@ -11,7 +11,7 @@ I don't know how I broke metasploit, but I did. It reported an incorrect passwor
 su - postgres
 psql
 postgres=# alter user msf3 with encrypted password 'mypasswordhere';
-postgres=# \\q
+postgres=# \q
 vim /opt/metasploit/apps/pro/ui/config/database.yml
 </code></pre>
 
