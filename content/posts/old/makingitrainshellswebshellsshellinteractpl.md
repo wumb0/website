@@ -13,4 +13,4 @@ The script utilizes curl to search for the shell and allow the user to enter com
 
 You can find the code on my GitHub, you can read more about the features/bugs there: <a title="here it is!" href="https://github.com/jgeigerm/web_shell" target="_blank">https://github.com/jgeigerm/web_shell</a>
 
-<a href="/images/old/uploads/2014/03/Screen-Shot-2014-03-24-at-8.01.03-PM.png"><img class="size-full wp-image-80 aligncenter" alt="shell_interact.pl" src="/images/old/uploads/2014/03/Screen-Shot-2014-03-24-at-8.01.03-PM.png" width="864" height="425" /></a>
+<a href="/images/old/uploads/2014/03/Screen-Shot-2014-03-24-at-8.01.03-PM.png"><img class="uk-align-center" alt="shell_interact.pl" src="/images/old/uploads/2014/03/Screen-Shot-2014-03-24-at-8.01.03-PM.png" width="864" height="425" /></a>
