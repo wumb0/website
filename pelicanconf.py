@@ -61,7 +61,7 @@ JS_FILES = (
            )
 THEME = 'themes/mytheme1'
 FAVICON = 'favicon.ico'
-PLUGINS = [ 'pelican_fontawesome', 'minification', 'better_figures_and_images' ]
+PLUGINS = [ 'pelican_fontawesome', 'minification',]# 'better_figures_and_images' ]
 RESPONSIVE_IMAGES = True
 DISPLAY_CATEGORIES_ON_MENU = True
 DISPLAY_PAGES_ON_MENU = True

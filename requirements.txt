@@ -5,3 +5,4 @@ pelican-minification
 Markdown
 typogrify
 pelican-fontawesome
+pillow
