@@ -22,13 +22,14 @@ But first we had to figure out <strong>where do we start</strong>? Our first tho
 
 ## Diving in with Binwalk
 The firmware archive contains a PDF with firmware release notes and a bin file (the image). Running *binwalk* on the image yields the following:
-<pre><code>
+```
 → binwalk DCS-930L_REVB1_FW_v2.12.01.bin
 DECIMAL       HEXADECIMAL     DESCRIPTION
-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
-0             0x0             uImage header, header size: 64 bytes, header CRC: 0x9678CD8, created: 2015-10-01 02:33:35, image size: 111116 bytes,
-Data Address: 0x80200000, Entry Point: 0x80200000, data CRC: 0xCD95F789, OS: Linux, CPU: MIPS, image type: Standalone Program, compression type: none,
-image name: "SPI Flash Image"
+--------------------------------------------------------------------------------
+0             0x0             uImage header, header size: 64 bytes, header CRC: 0x9678CD8, created: 2015-10-01 02:33:35,
+                              image size: 111116 bytes, Data Address: 0x80200000, Entry Point: 0x80200000,
+                              data CRC: 0xCD95F789, OS: Linux, CPU: MIPS, image type: Standalone Program,
+                              compression type: none, image name: "SPI Flash Image"
 91040         0x163A0         U-Boot version string, "U-Boot 1.1.3"
 105424        0x19BD0         HTML document header
 105770        0x19D2A         HTML document footer
@@ -36,14 +37,15 @@ image name: "SPI Flash Image"
 105972        0x19DF4         HTML document footer
 106140        0x19E9C         HTML document header
 106833        0x1A151         HTML document footer
-327680        0x50000         uImage header, header size: 64 bytes, header CRC: 0xCDBF3E85, created: 2015-10-01 02:33:29, image size: 3705182 bytes,
-Data Address: 0x80000000, Entry Point: 0x8038B000, data CRC: 0xC8AFE19B, OS: Linux, CPU: MIPS, image type: OS Kernel Image, compression type: lzma,
-image name: "Linux Kernel Image"
+327680        0x50000         uImage header, header size: 64 bytes, header CRC: 0xCDBF3E85, created: 2015-10-01 02:33:29,
+                              image size: 3705182 bytes, Data Address: 0x80000000, Entry Point: 0x8038B000,
+                              data CRC: 0xC8AFE19B, OS: Linux, CPU: MIPS, image type: OS Kernel Image,
+                              compression type: lzma, image name: "Linux Kernel Image"
 327744        0x50040         LZMA compressed data, properties: 0x5D, dictionary size: 33554432 bytes, uncompressed size: 6369023 bytes
-</code></pre>
+```
 [[more]]
 Looks like there are two sections of interest underneath "uImage" headers. The first section at the start of the binary seems to contain something called "U-Boot". What is U-Boot? It is a first- and second- stage bootloader that is used for embedded devices. You can read more about it on [Wikipedia](https://en.wikipedia.org/wiki/Das_U-Boot U-Boot). The other uImage is a Linux Kernel Image. Since we are looking for the filesystem, the Linux Kernel Image seems like the path to go down from here. It can be extracted with *dd*.
-<pre><code>
+```
 → dd if=DCS-930L_REVB1_FW_v2.12.01.bin of=linux.bin.lzma skip=$((0x50040)) bs=1
 3866560+0 records in
 3866560+0 records out
@@ -53,9 +55,9 @@ linux.bin.lzma (1/1)
  95.7 %   3,618.3 KiB / 6,219.7 KiB = 0.582                                    
 lzma: linux.bin.lzma: Compressed data is corrupt
  95.7 %   3,618.3 KiB / 6,219.7 KiB = 0.582
-</code></pre>
+```
 Uh oh. That's not good. We know that the magic on that section of the firmware binary indicates LZMA and because it failed at 95.7% we can look at the end of the file for issues.
-<pre><code>
+```
 003aff20: ffff ffff ffff ffff ffff ffff ffff ffff  ................
 003aff30: ffff ffff ffff ffff ffff ffff ffff ffff  ................
 003aff40: ffff ffff ffff ffff ffff ffff ffff ffff  ................
@@ -66,10 +68,10 @@ Uh oh. That's not good. We know that the magic on that section of the firmware b
 003aff90: ffff ffff ffff ffff ffff ffff ffff ffff  ................
 003affa0: ffff ffff ffff ffff ffff ffff ffff ffff  ................
 003affb0: ffff ffff ffff ffff ffff ffff f4a4 e2e5  ................
-</code></pre>
+```
 Seems like it is just padding, with 4 bytes at the end that we will get back to later.
 To take off the padding we needed to find the last line of data before the "ffff"s start. This can be done using  *xxd*, *fgrep*, and *tail* .
-<pre><code>
+```
 → xxd linux.bin.lzma | fgrep -v '................' | tail
 003888d0: 041f 72f2 d595 72be 18d1 7f21 97e7 4fa0  ..r...r....!..O.
 003888e0: b791 4084 0d9f af4a b5e0 acb6 7b83 2c5c  ..@....J....{.,\
@@ -81,10 +83,10 @@ To take off the padding we needed to find the last line of data before the "ffff
 00388940: 383c 2831 803a 1603 197b c150 c33c d522  8<(1.:...{.P.<."
 00388950: 34e0 0a68 e451 10eb 4a88 ccf3 4600 ffff  4..h.Q..J...F...
 003affb0: ffff ffff ffff ffff ffff ffff f4a4 e2e5  ................
-</code></pre>
+```
 The last line is the same as the previous dump, so we ignore it. We see above that the lines of all "ffff"s start at 0x388950+14. We plug this number into *dd* as the count to copy and try the decompression again.
 
-<pre><code>
+```
 → dd if=DCS-930L_REVB1_FW_v2.12.01.bin of=linux.bin.lzma skip=$((0x50040)) count=$((0x388950+14)) bs=1
 3705182+0 records in
 3705182+0 records out
@@ -92,10 +94,10 @@ The last line is the same as the previous dump, so we ignore it. We see above th
 → lzma -vd linux.bin.lzma
 linux.bin.lzma (1/1)
   100 %   3,618.3 KiB / 6,219.7 KiB = 0.582
-</code></pre>
+```
 Success! The next logical step is to check out the newly extracted linux.bin with *binwalk*.
 
-<pre><code>
+```
 → binwalk linux.bin
 DECIMAL       HEXADECIMAL     DESCRIPTION
 --------------------------------------------------------------------------------
@@ -110,11 +112,11 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 3514907       0x35A21B        Neighborly text, "neighbor %.2x%.2x.%.2x:%.2x:%.2x:%.2x:%.2x:%.2x lost on port %d(%s)(%s)"
 3637728       0x3781E0        CRC32 polynomial table, little endian
 3850240       0x3AC000        LZMA compressed data, properties: 0x5D, dictionary size: 1048576 bytes, uncompressed size: 8126976 bytes
-</code></pre>
+```
 
 Quite a few entries. Grepping out the word "path" yields less.
 
-<pre><code>
+```
 → binwalk linux.bin | grep -v path
 DECIMAL       HEXADECIMAL     DESCRIPTION
 --------------------------------------------------------------------------------
@@ -126,10 +128,10 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 3514907       0x35A21B        Neighborly text, "neighbor %.2x%.2x.%.2x:%.2x:%.2x:%.2x:%.2x:%.2x lost on port %d(%s)(%s)"
 3637728       0x3781E0        CRC32 polynomial table, little endian
 3850240       0x3AC000        LZMA compressed data, properties: 0x5D, dictionary size: 1048576 bytes, uncompressed size: 8126976 bytes
-</code></pre>
+```
 
 Two LZMA compressed sections! We then extracted them from the binary and attempted decompression.
-<pre><code>
+```
 → dd if=linux.bin of=linux1.bin.lzma bs=1 skip=1108304 count=$((3256396-1108304))
 2148092+0 records in
 2148092+0 records out
@@ -144,15 +146,15 @@ lzma: linux1.bin.lzma: Compressed data is corrupt
 → lzma -vd linux2.bin.lzma
 linux2.bin.lzma (1/1)
   100 %   2,459.7 KiB / 7,936.5 KiB = 0.310
-</code></pre>
+```
 
 It doesn't seem like the *lzma* utility even attempted to extract the contents of linux1.bin.lzma. Better luck was had with linux2.bin.lzma, so we went down this path further.
 
 Running *binwalk* against the newly extracted binary yields the following:
-<pre><code>
+```
 → binwalk linux2.bin
 DECIMAL       HEXADECIMAL     DESCRIPTION
-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+--------------------------------------------------------------------------------
 0             0x0             ASCII cpio archive (SVR4 with no CRC), file name: "/bin", file name length: "0x00000005", file size: "0x00000000"
 116           0x74            ASCII cpio archive (SVR4 with no CRC), file name: "/bin/chmod", file name length: "0x0000000B", file size: "0x00000008"
 248           0xF8            ASCII cpio archive (SVR4 with no CRC), file name: "/bin/busybox", file name length: "0x0000000D", file size: "0x00056100"
@@ -164,27 +166,25 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 8126464       0x7C0000        ASCII cpio archive (SVR4 with no CRC), file name: "/usr/sbin/telnetd", file name length: "0x00000012", file size: "0x00000012"
 8126612       0x7C0094        ASCII cpio archive (SVR4 with no CRC), file name: "/proc", file name length: "0x00000006", file size: "0x00000000"
 8126728       0x7C0108        ASCII cpio archive (SVR4 with no CRC), file name: "TRAILER!!!", file name length: "0x0000000B", file size: "0x00000000"
-</pre></code>
+```
 Lots of CPIO archive data here. It turns out that it's just a single CPIO! This certainly looks promising because there are Linux filesystem paths in the output. We extracted it using the *cpio* utility. (the Mac version of *cpio* does not come with the *--no-absolute-filenames* option, so this was done on Linux)
 
-<pre><code>
-$ mkdir extract && mv linux2.bin $\_ && cd $\_
+```
+$ mkdir extract && mv linux2.bin $_ && cd $_
 $ cpio -i --no-absolute-filenames < linux2.bin
 cpio: Removing leading `/' from member names
 15873 blocks
 $ ls
 bin  etc     home  lib         media  mydlink  sbin  tmp  var
 dev  etc_ro  init  linux2.bin  mnt    proc     sys   usr
-</pre></code>
+```
 Jackpot! Looks like a valid Linux filesystem!
 <img width="300px" class="uk-align-center" src="/images/money.gif" />
 
 ## Examining the filesystem
-Before extracting the firmware we connected the camera like a normal user would to a network and tried gaining access via the web interface. D-Link did a decent job sanitizing input boxes to make sure we weren't able to pass linux commands straight to the command line. We found that the web application lived in */etc_ro* which we assumed was a read only folder based on the name. After a while of poking and prodding the web app we thought "We have physical access, why not just make malware?" So that's what we did. Now comes the fun part of dissecting filesystem. Lets take a look at some of these folders we just extracted.
-
-Since the web app runs in */etc_ro* lets look there first.
-<pre><code>
-/etc_ro
+We decided to check out the */etc_ro* directory first, because that is where startup scripts and other configurations live.
+```
+→ ls -l etc_ro
   \-rw\-r\-\-r\-\- 1 501 501 15086 Jul 12 21:36 icon.large.ico
   \-rw\-r\-\-r\-\- 1 501 501    45 Jul 12 21:36 inittab
   drwxrwxr\-x 2 501 501  4096 Jul 12 21:36 linuxigd
@@ -200,7 +200,63 @@ Since the web app runs in */etc_ro* lets look there first.
   drwxrwxr-x 5 501 501  4096 Jul 12 21:36 Wireless
   drwxrwxr-x 2 501 501  4096 Jul 12 21:36 wlan
   drwxrwxr-x 2 501 501  4096 Jul 12 21:36 xml
-</code></pre>
+```
+
+Usually files that start with rc are startup scripts, so we examined *rcS*.
+```bash
+→ cat etc_ro/rcS
+#!/bin/sh
+
+mount -a
+mkdir -p /var/run
+cat /etc_ro/motd
+
+# generate Dev Node
+# Linux 2.6 uses udev instead of devfs, we have to create static dev node by myself
+###mounted=`mount | grep mdev | wc -l`
+###if [ $mounted -eq 0 ]; then
+###mount -t ramfs mdev /dev
+###mkdir /dev/pts
+###mount -t devpts devpts /dev/pts
+mdev -s
+###fi
+
+###mknod   /dev/spiS0       c       217     0
+###mknod   /dev/i2cM0       c       218     0
+###mknod   /dev/rdm0        c       254     0
+###mknod   /dev/flash0      c       200     0
+###mknod   /dev/swnat0      c       210     0
+###mknod   /dev/hwnat0      c       220     0
+###mknod   /dev/acl0        c       230     0
+###mknod   /dev/ac0         c       240     0
+###mknod   /dev/mtr0        c       250     0
+###mknod   /dev/gpio        c       252     0
+###mknod   /dev/PCM         c       233     0
+###mknod   /dev/I2S         c       234     0
+
+echo "# <device regex> <uid>:<gid> <octal permissions> [<@|$|*> <command>]" > /etc/mdev.conf
+echo "# The special characters have the meaning:" >> /etc/mdev.conf
+echo "# @ Run after creating the device." >> /etc/mdev.conf
+echo "# $ Run before removing the device." >> /etc/mdev.conf
+echo "# * Run both after creating and before removing the device." >> /etc/mdev.conf
+echo "sd[a-z][1-9] 0:0 0660 */sbin/automount.sh \$MDEV" >> /etc/mdev.conf
+echo "sd[a-z] 0:0 0660 */sbin/automount.sh \$MDEV" >> /etc/mdev.conf
+
+#enable usb hot-plug feature
+echo "/sbin/mdev" > /proc/sys/kernel/hotplug
+
+nvram_daemon &
+sleep 3
+
+internet.sh
+
+#for telnet debugging
+#security issue - don't run telnetd here -- andy 2012-07-03
+#telnetd
+
+#for syslogd
+mkdir -p /var/log
+```
 
 ## Trying to re-pack the firmware
 
