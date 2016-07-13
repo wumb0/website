@@ -165,17 +165,9 @@ div.post-info#index {
     margin-top: -.5em;
 }
 
-code.hljs {
-    padding-top: -1em;
-}
-
-pre {
-    padding:0;
-}
-
-pre code {
-    padding: 0 2em 1em 2em !important;
-    margin-top: -4px !important;
+pre > code.hljs {
+    margin: -1em;
+    padding: .7em 1.5em;
 }
 
 .entry-content ol li, .entry-content ul li {
