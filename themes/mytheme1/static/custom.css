@@ -170,6 +170,10 @@ pre > code.hljs {
     padding: .7em 1.5em;
 }
 
+pre {
+    overflow: visible;
+}
+
 .entry-content ol li, .entry-content ul li {
     margin-bottom: 3px;
 }
