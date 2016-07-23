@@ -6,3 +6,4 @@ output
 .ropeproject
 ./old
 old.tar
+.DS_Store

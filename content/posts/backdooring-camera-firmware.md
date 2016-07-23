@@ -6,11 +6,11 @@ Slug: reversing-and-backdooring-ip-camera-firmware
 Status: draft
 Authors: wumb0
 
-RIT's Competitive Cybersecurity Club (*RC3*) held it's 2nd annual Incident Response Security Competition (*IRSeC*) in May and I once again had the privilege to be on both the red and white teams! This year we had IP cameras to play with, so one of my buddies on the white team and I decided to try to mess with the firmware.
+RIT's Competitive Cybersecurity Club (*RC3*) held it's 2nd annual Incident Response Security Competition (*IRSeC*) in May and I once again had the privilege to be on both the red and white teams! This year we had IP cameras to play with, so one of my buddies <a href="https://github.com/muchosecureo">Nikko</a> on the white team and I decided to try to mess with the firmware.
 
 <div class="uk-clearfix">
-<img width="300px" class="uk-align-medium-right" src="/images/dlink-front.jpg" />
-<img width="300px" class="uk-align-medium-right" src="/images/dlink-back.jpg" />
+<img width="300px" class="uk-align-medium-right" src="/images/DCS-930L_back.png" />
+<img width="300px" class="uk-align-medium-right" src="/images/DCS-930L_front.png" />
 We had 9 *D-Link DCS-930L Rev. B2* cameras; eight for teams and one <s>to brick</s> for testing. We wanted to accomplish a few things:
 <div><ul>
     <li>Install sshd for pivoting,</li>
@@ -185,16 +185,16 @@ Jackpot! Looks like a valid Linux filesystem!
 We decided to check out the */etc_ro* directory first, because that is where startup scripts and other configurations live.
 ```
 → ls -l etc_ro
-  \-rw\-r\-\-r\-\- 1 501 501 15086 Jul 12 21:36 icon.large.ico
-  \-rw\-r\-\-r\-\- 1 501 501    45 Jul 12 21:36 inittab
-  drwxrwxr\-x 2 501 501  4096 Jul 12 21:36 linuxigd
-  \-rw\-r\-\-r\-\- 1 501 501    79 Jul 12 21:36 lld2d.conf
-  \-rw\-r\-\-r\-\- 1 501 501   326 Jul 12 21:36 motd
-  \-rw\-r\-\-r\-\- 1 501 501  9373 Jul 12 21:36 openssl.cnf
-  drwxrwxr\-x 5 501 501  4096 Jul 12 21:36 ppp
-  \-rwxr\-xr\-x 1 501 501  1626 Jul 12 21:36 rcS
-  \-rw\-r\-\-r\-\- 1 501 501  1159 Jul 12 21:36 servercert.pem
-  \-rw\-r\-\-r\-\- 1 501 501   887 Jul 12 21:36 serverkey.pem
+  -rw-r--r-- 1 501 501 15086 Jul 12 21:36 icon.large.ico
+  -rw-r--r-- 1 501 501    45 Jul 12 21:36 inittab
+  drwxrwxr-x 2 501 501  4096 Jul 12 21:36 linuxigd
+  -rw-r--r-- 1 501 501    79 Jul 12 21:36 lld2d.conf
+  -rw-r--r-- 1 501 501   326 Jul 12 21:36 motd
+  -rw-r--r-- 1 501 501  9373 Jul 12 21:36 openssl.cnf
+  drwxrwxr-x 5 501 501  4096 Jul 12 21:36 ppp
+  -rwxr-xr-x 1 501 501  1626 Jul 12 21:36 rcS
+  -rw-r--r-- 1 501 501  1159 Jul 12 21:36 servercert.pem
+  -rw-r--r-- 1 501 501   887 Jul 12 21:36 serverkey.pem
   drwxrwxr-x 2 501 501  4096 Jul 12 21:36 usb
   drwxrwxr-x 5 501 501  4096 Jul 12 21:36 web
   drwxrwxr-x 5 501 501  4096 Jul 12 21:36 Wireless
@@ -265,6 +265,15 @@ mkdir -p /var/log
 ## Issues compiling
 
 ## Issues flashing
+Before doing any real backdooring, we tested remote communication by undoing Andy's work of commenting out telnetd on startup and enabling it from that rcS file in /etc_ro. With telnetd running at startup it was time to re-pack the firmware and load it to the device. Neither of us had physical access to the device so we yolo'd and the update was done over the internet. With a couple of hours between when the update was pushed and my friend was able to head home to check if the push was successful, signs from DDNS weren't great.
+
+Getting access to the device showed that it was in fact not good. On a cycle of about 3 seconds, a Red and Blue LED would light up, then go dark, then light up again. It was stuck in a loop, but there was no way to tell what it was stuck on over the network. That's where the <a href="https://wiki.openwrt.org/toh/d-link/dcs-930l">OpenWRT wiki</a> saved the day. The DCS-930L has 4 blank headers (G,Rx,Tx,Vbatt) for a serial connection which was the only way to recover from this.
+<img width="300px" class="uk-align-center" src="/images/dcs930l.jpg" alt="Source: OpenWRT"/>
+Upon getting leads soldered to the headers, next was opening a screen session using the software settings 57600 8N1. After a few reboots it was clear that it was a firmware issue.
+```
+Uncompressing Kernel Image ... LZMA ERROR 1 - must RESET board to recover
+```
+Luckily we had console access via a Universal asynchronous receiver/transmitter(UART).
 
 ## Backdooring telnetd
 
@@ -273,7 +282,7 @@ mkdir -p /var/log
 ## Installing <s>sshd</s> dropbear
 
 ## Making space
-
+Initially working with sshd presented some issues we didn't account for like the binary being 2MB and a total space of 4MB to work with. Right there half our usable space was gone and the camera's firmware binary was *some size* . Pushing the limits of storage we decided to pack the firmware, however it was still too big. Eventually we ripped out all the Java Applet programs from the camera's binary.
 ## Missing web front-end
-
+After ripping Java from the camera's binary in an effort to save space, it broke motion and sound detection.
 ## Results
