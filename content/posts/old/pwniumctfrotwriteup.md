@@ -8,11 +8,11 @@ Authors: wumb0
 I wanted to do a writeup on SOMETHING from this CTF. So I picked the task I spent the most time on: ROT, a programming challenge worth 300 points.
 
 The challenge said "nc 41.231.53.40 9090" and "ROT 90, ROT -90, ROT 90..." so as an obvious first step I connected to the server to see what I had to do.
-<pre><code class="lang:shell">
+```shell
 nc 41.231.53.40 9090
 iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAIAAAAiOjnJAAATGUlEQVR4nO2de2wVx73HP2vjBHxsCNjXdrFDeCYqpFxCIA5VCSE...
 Answer:
-</code></pre>
+```
 
 About fifty lines of base64 encoded data and then an answer prompt. Okay so decode, solve for the flag, and submit it. No, not that simple!
 The connection to the server would close after about 3 seconds and each time that I connected the challenge base64 data changed. Whatever I had to program needed to work fast and provide the answer back.
@@ -21,14 +21,14 @@ Alright, now time to figure out what that base64 is...
 
 [[more]]
 
-<pre><code class="lang:python" >
+```python
 #!/usr/bin/env python
 import socket
 import base64
 s = socket.socket(socket.AF\_INET, socket.SOCK\_STREAM)
 s.connect(("41.231.53.40", 9090))
 print(base64.b64decode(s.recv(30000)))
-</code></pre>
+```
 
 Looks like a file and checking the header confirms: it's a PNG... with the "Answer: " prompt still tacked onto the end.
 Cool so split the output by newline, write it to a file, and check it out:
@@ -42,7 +42,7 @@ Pillow allows selection of a square, rotation, and pasting back onto the origina
 
 <a href="/images/old/uploads/2014/07/ans.png"><img class="uk-align-center" src="/images/old/uploads/2014/07/ans.png" alt="ans" width="200" height="200" /></a>
 
-<pre><code class="lang:python">
+```python
 def rotateImg():
     img = Image.open(sys.argv[1])
     img.load()
@@ -67,18 +67,18 @@ def rotateImg():
             region = region.transpose(Image.ROTATE_90)
         img.paste(region, box)
         img.save("ans.png", "PNG")
-</code></pre>
+```
 
 Now the issue of recognizing the text and sending the answer. The readbot library uses the <a href="https://github.com/tesseract-ocr/tesseract" target="_blank">tesseract-ocr engine</a> to recognize text. Now all that needed to be done was implement it and send back the answer. Sure enough, after a couple of incorrect reads the flag was returned!
-<pre><code class="lang:shell">
+```shell
 ./prog300.py lol.png
 Tesseract Open Source OCR Engine v3.03 with Leptonica
 GV7DUTWRZT
 <strong>Flag: Pwnium{b1a371c90da6a1d2deba2f6ebcfe3fc0}</strong>
-</code></pre>
+```
 Here's the final code:
-<pre><code class="lang:python">
-\#!/usr/bin/env python
+```python
+#!/usr/bin/env python
 import base64
 import socket
 import sys
@@ -128,4 +128,4 @@ def main():
     s.close()
 if __name__ == '__main__':
     sys.exit(main())
-</code></pre>
+```

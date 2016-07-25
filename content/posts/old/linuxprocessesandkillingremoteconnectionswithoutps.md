@@ -12,9 +12,9 @@ I ended up getting bored and creating a NOPASSWD sudo account bob:bob for people
 The person attacking me saw that I kept killing their connection so they deleted the ps command. I was left helpless in trying to figure out what processes they were running. Of course there are two fairly obvious solutions, one that I thought of and one that I didn't at the time. I thought to reinstall the ps binary with `yum install --reinstall coreutils` but there was no internet in the lab I was in so that wasn't an option. I spent my time trying to figure out one liners to kill remote connections without using ps...
 
 The first method I thought up was using the /proc directory, as all of the processes are in there by process ID. I started exploring all of the options the `find` command had to offer. Since the <em>environ</em> file within processes' directories listed the the variable <em>TTY</em> I had a place to start. Here is what I came up with:
-<pre><code>
+```
 find /proc -maxdepth 2 -name environ -exec grep /dev/pts {} \; | cut -d/ -f3 | xargs kill -9
-</code></pre>
+```
 <ul>
 	<li><strong>find</strong> - the find command (use `man find` for details, this command is very powerful)</li>
 	<li><strong>/proc</strong> - the directory that find looks in</li>
@@ -25,9 +25,9 @@ find /proc -maxdepth 2 -name environ -exec grep /dev/pts {} \; | cut -d/ -f3 | x
 	<li><strong>xargs kill -9</strong> - takes in the PIDs as arguments to kill and force kills the process</li>
 </ul>
 One problem with this method is that on some distributions (such as CentOS) some sessions that are local are listed as pts sessions, so running the `w` command to check your session is a good idea before you run this. If you are running under a pts the command would look something like this:
-<pre><code>
+```
 find /proc -maxdepth 2 -name environ -exec sh -c 'grep -v /dev/pts $0 | grep -av /pts/<strong>#</strong> &gt;/dev/null' {} \; -print | cut -d/ -f3 | xargs kill -9
-</code></pre>
+```
 <ul>
 	<li><strong>find</strong> - the find command (use `man find` for details, this command is very powerful)</li>
 	<li><strong>/proc</strong> - the directory that find looks in</li>
@@ -39,9 +39,9 @@ find /proc -maxdepth 2 -name environ -exec sh -c 'grep -v /dev/pts $0 | grep -av
 	<li><strong>xargs kill -9</strong> - takes in the PIDs as arguments to kill and force kills the process</li>
 </ul>
 The other route that was brought to my attention was through netstat to kill remote connections by pid. This is arguably more effective than the one above.
-<pre><code>
+```
 netstat -apunt | grep STAB | awk '{print $7}' | cut -d/ -f1 | xargs kill -9
-</code></pre>
+```
 <ul>
 	<li><strong>netstat -apunt</strong> - Prints active connections.</li>
 	<li><strong>grep STAB</strong> - Picks established connections out of the output of netstat</li>
@@ -50,9 +50,9 @@ netstat -apunt | grep STAB | awk '{print $7}' | cut -d/ -f1 | xargs kill -9
 	<li><strong>xargs kill -9</strong> - takes in the PIDs as arguments to kill and force kills the process</li>
 </ul>
 This got me thinking on how to kill backdoors such as the <a title="Link to the backdoor code" href="http://www.ussrback.com/UNIX/penetration/rootkits/blackhole.c" target="_blank">b(l)ackhole backdoor</a>. Processes that run any type of shell directly are probably malicious. I have found this in my tests. To find active backdoors I tried the following:
-<pre><code>
+```
 find /proc -maxdepth 2 -name cmdline -exec egrep "/bin/[a-z]+?sh" {} \; | cut -d/ -f3 | xargs kill -9
-</code></pre>
+```
 <ul>
 	<li><strong>find</strong> - the find command (use `man find` for details, this command is very powerful)</li>
 	<li><strong>/proc</strong> - the directory that find looks in</li>
@@ -65,9 +65,9 @@ find /proc -maxdepth 2 -name cmdline -exec egrep "/bin/[a-z]+?sh" {} \; | cut -d
 Additionally you can use netstat to monitor established connections.
 
 Some other approaches are to use lsof and who to figure out PIDs. The lsof command is used to figure out what programs have what files open. It has a ton of options but with just a few of them it can be very easy to see what is being accessed. The options we care about allow us to see what files are open, who opened them, and what connections are being made. It looks something like this: (thanks Luke!)
-<pre><code>
+```
 lsof -nPi
-</code></pre>
+```
 <strong>n</strong> - Ignore host names
 <strong>P</strong> - Do not convert port numbers to port names
 <strong>i</strong> - see internet connections files are making
@@ -75,7 +75,7 @@ lsof -nPi
 What is unique about this is that it will show what files are listening or have established connections. It becomes much easier to see if there is some sort of backdoor listening and what it is called.
 
 For the who command I use the -u option and present another method of killing things:
-<pre><code>
+```
 who -u | grep pts | awk '{print $6}' | xargs kill
-</code></pre>
+```
 Again here keep in mind that some operating system's window manager list as the lowest pts, so grep -v that before you go and kill all connections.

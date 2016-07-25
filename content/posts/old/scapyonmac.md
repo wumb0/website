@@ -11,13 +11,13 @@ Another issue I had was with bridged or vbox adapters. Scapy will throw the foll
 <blockquote>
 "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/scapy/arch/pcapdnet.py", line 168, in get_if_raw_addr return i.get(ifname)["addr"].data File "dnet.pyx", line 990, in dnet.intf.get OSError: Device not configured</blockquote>
 The error has to do with getting details about interfaces on the computer. To fix edit /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/scapy/arch/unix.py:
-<pre><code class="python">
-\# from
+```python
+# from
 f=os.popen("netstat -rn") # -f inet
-</code></pre>
-<pre><code class="python">
-\# to
+```
+```python
+# to
 f=os.popen("netstat -rn | grep -v vboxnet | grep -v bridge") # -f inet
-</code></pre>
+```
 (/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/scapy/arch/unix.py will change based on the version you are using, replace 2.7 and python 2.7 with your version)
 And that should fix everything! Happy hacking!

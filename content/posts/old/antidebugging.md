@@ -7,12 +7,12 @@ Authors: wumb0
 
 I know anti-debugging and anti-reversing methods can be beaten fairly easily, but I played around with some today and thought it was worth sharing. My goal at the beginning was to be able to detect if a software breakpoint had been set (0xCC or 0xCD in memory). With a bit of searching around and figuring out different things I came up with the following code:
 
-<pre><code class="c">
-#include &lt;unistd.h&gt;
-#include &lt;sys/types.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;signal.h&gt;
+```c
+#include <unistd.h>
+#include <sys/types.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <signal.h>
 
 extern char __executable_start;
 extern char __etext;
@@ -40,7 +40,7 @@ int main(){
     //do main stuff
     return 0;
 }
-</code></pre>
+```
 
 The external symbol __executable_start denotes where the text section starts in Linux. The external symbol __etext denotes the end of the text section in Linux. Basically this code finds where the text section starts and the size of the text section then scans through it to look for 0xCC or 0xCD. If it finds a breakpoint then the address and hex code of the breakpoint are printed to the screen and a segfault is raised. 
 This can easily be bypassed by skipping over the check_bp function in GDB, but it is still a neat proof of concept.
