@@ -291,8 +291,11 @@ static const char *issuefile = "/etc/issue.net";
 Since we weren't just going to go changing build flags, the easy option was to just replace */bin/login* with */bin/sh*. This worked wonderfully!
 
 ## Installing sshd
+Our next goal was to get sshd running so that the red team could pivot through it to access other blue team resources. Since the teams had network firewalls, it was important to get this working. Since we already had the MIPS build toolchain from the camera firmware source package, downloading the source for sshd and its dependencies (openssl and zlib) seemed like the way to go. 
 
-## Installing <s>sshd</s> dropbear
+After compiling sshd and looking at the size we were somewhat disappointed... the executable was about 2MB in size. On a 4MB filesystem, some things needed to be cleared out before trying to put it on. We removed some mydlink cloud components and executables that we didn't think were necessary. After fitting the binary on the device, creating the keys, and making sure it started fine, the disappointment continued. When we tried sshing into the camera using the keys we had set up the server kept disconnecting saying **Connection closed by remote host**. Further investigation showed that the process sshd was forking to deal with the client connection was segmentation faulting pretty much immediately after being created.  After some poking around we decided that because of the segfault issues and the concerns about lack of space on the device that we were going to try and find another way to get an sshd server working. I had been reading about ways to get sshd on embedded devices and came across a program called *dropbear*, which is actually designed to be a small version of sshd specifically for embedded devices. 
+
+## Installing <s>sshd</s> [dropbear](https://matt.ucc.asn.au/dropbear/dropbear.html)
 
 ## Making space
 Initially working with sshd presented some issues we didn't account for like the binary being 2MB and a total space of 4MB to work with. Right there half our usable space was gone and the camera's firmware binary was *some size* . Pushing the limits of storage we decided to pack the firmware, however it was still too big. Eventually we ripped out all the Java Applet programs from the camera's binary.
