@@ -44,7 +44,7 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 327744        0x50040         LZMA compressed data, properties: 0x5D, dictionary size: 33554432 bytes, uncompressed size: 6369023 bytes
 ```
 [[more]]
-Looks like there are two sections of interest underneath "uImage" headers. The first section at the start of the binary seems to contain something called "U-Boot". What is U-Boot? It is a first- and second- stage bootloader that is used for embedded devices. You can read more about it on [Wikipedia](https://en.wikipedia.org/wiki/Das_U-Boot U-Boot). The other uImage is a Linux Kernel Image. Since we are looking for the filesystem, the Linux Kernel Image seems like the path to go down from here. It can be extracted with *dd*.
+Looks like there are two sections of interest underneath "uImage" headers. The first section at the start of the binary seems to contain something called "U-Boot". What is U-Boot? It is a first- and second- stage bootloader that is used for embedded devices. You can read more about it on [Wikipedia](https://en.wikipedia.org/wiki/Das_U-Boot U-Boot). The other uImage is a Linux Kernel Image. Since we are looking for the filesystem, the Linux Kernel Image seems like the path to go down from here. It can be extracted with *dd* and then decompressed with *lzma*.
 ```
 → dd if=DCS-930L_REVB1_FW_v2.12.01.bin of=linux.bin.lzma skip=$((0x50040)) bs=1
 3866560+0 records in
@@ -84,7 +84,7 @@ To take off the padding we needed to find the last line of data before the "ffff
 00388950: 34e0 0a68 e451 10eb 4a88 ccf3 4600 ffff  4..h.Q..J...F...
 003affb0: ffff ffff ffff ffff ffff ffff f4a4 e2e5  ................
 ```
-The last line is the same as the previous dump, so we ignore it. We see above that the lines of all "ffff"s start at 0x388950+14. We plug this number into *dd* as the count to copy and try the decompression again.
+The last line is the same as the previous dump's last line, so we ignore it. We see above that the lines of all "ffff"s start at 0x388950+14. We plug this number into *dd* as the count to copy and try the decompression again.
 
 ```
 → dd if=DCS-930L_REVB1_FW_v2.12.01.bin of=linux.bin.lzma skip=$((0x50040)) count=$((0x388950+14)) bs=1
@@ -276,6 +276,19 @@ Uncompressing Kernel Image ... LZMA ERROR 1 - must RESET board to recover
 Luckily we had console access via a Universal asynchronous receiver/transmitter(UART).
 
 ## Backdooring telnetd
+The telnetd executable is actually busybox. If you are not familiar with busybox, it is a set of common Linux commands included in a single executable. Its purpose is to pack many functionalities into a single execuatble for convenience and space conservation on devices with little storage like this one. The source for busybox is included with the camera firmware source at **dcs930lb1/RT288x_SDK/source/user/busybox** and the telnetd source at **networking/telnetd.c** under the busybox directory. The goal was to disable authentication so that either hard-coded credentials were accepted or no credentials were required. Looking at the code's global variable definition section looked promising.
+```
+/* Globals */
+static int maxfd;
+static struct tsession *sessions;
+#if ENABLE_LOGIN
+static const char *loginpath = "/bin/login";
+#else
+static const char *loginpath = DEFAULT_SHELL;
+#endif
+static const char *issuefile = "/etc/issue.net";
+```
+Since we weren't just going to go changing build flags, the easy option was to just replace */bin/login* with */bin/sh*. This worked wonderfully!
 
 ## Installing sshd
 
