@@ -37,4 +37,6 @@ Here is the respone I got:
 
 > they have changed their standard issue. we have a way in.
 
-What does that even mean? At the end of the episode this line of dialogue was not shown. Only *wait for my instructions* was. After this I investigated a couple of other IP addresses I found (192.251.68.240, 104.97.14.93, 192.251.68.249, irc.eversible.co) but none of them turned up anything. I looked at the page source too, hoping to find something hidden in the javascript or HTML. Nothing there either... I guess we will just have to wait and see where this goes! I'll probably take a closer look at this after work, but I thought this would be cool to share now.
+What does that even mean? At the end of the episode this line of dialogue was not shown. Only *wait for my instructions* was. The scene after shows a news article from Business Insider titled *FBI gives up Blackberry for Android*. I assume that is their "standard issue" and he is going to hack into them via their smartphones. That's a bold move, we'll see how it plays out next week.
+
+After this I investigated a couple of other IP addresses I found (192.251.68.240, 104.97.14.93, 192.251.68.249, irc.eversible.co) but none of them turned up anything. I looked at the page source too, hoping to find something hidden in the javascript or HTML. Nothing there either... I guess we will just have to wait and see where this goes! I'll probably take a closer look at this after work, but I thought this would be cool to share now.
