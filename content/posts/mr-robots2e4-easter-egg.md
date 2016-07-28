@@ -1,5 +1,6 @@
 Title: Mr. Robot Season 2 Episode 4 Easter Egg
 Date: 2016-07-28 9:00
+Modified: 2016-07-28 10:40
 Category: Misc
 Tags: Mr. Robot, easter egg, fsociety
 Slug: mr-robots2e4-easter-egg 
@@ -36,4 +37,4 @@ Here is the respone I got:
 
 > they have changed their standard issue. we have a way in.
 
-What does that even mean? At the end of the episode this line of dialogue was not shown. Only *wait for my instructions* was. After this I investigated a couple of other IP addresses I found (192.251.68.240, 104.97.14.93, 192.251.68.249) but none of them turned up anything. I looked at the page source too, hoping to find something hidden in the javascript or HTML. Nothing there either... I guess we will just have to wait and see where this goes! I'll probably take a closer look at this after work, but I thought this would be cool to share now.
+What does that even mean? At the end of the episode this line of dialogue was not shown. Only *wait for my instructions* was. After this I investigated a couple of other IP addresses I found (192.251.68.240, 104.97.14.93, 192.251.68.249, irc.eversible.co) but none of them turned up anything. I looked at the page source too, hoping to find something hidden in the javascript or HTML. Nothing there either... I guess we will just have to wait and see where this goes! I'll probably take a closer look at this after work, but I thought this would be cool to share now.
