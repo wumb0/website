@@ -1,7 +1,7 @@
 Title: IceCTF 2016 - Vape Nation
 Date: 2016-08-15 19:18
 Category: CTF
-Tags: icectf2016 CTF stego
+Tags: icectf2016, ctf, stego
 Slug: icectf-2016-vape-nation
 Authors: wumb0
 

@@ -1,7 +1,7 @@
 Title: IceCTF 2016 - A Strong Feeling
 Date: 2016-08-15 19:18
 Category: CTF
-Tags: icectf2016 CTF reversing
+Tags: icectf2016, ctf, reversing
 Slug: icectf-2016-a-strong-feeling
 Authors: wumb0
 
