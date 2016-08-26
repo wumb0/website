@@ -16,6 +16,8 @@ For this challenge a file with the extension .png was provided. A common CTF cha
 The first byte and bytes 5-8 are wrong.
 To fix, I opened the image up in hexedit and changed the bytes to their correct values. 
 Opening the file provided a valid image:
+
 ![flag]({filename}/images/icectf/corrupt.png)
+
 And of course, the flag: 
 **IceCTF{t1s_but_4_5cr4tch}**
