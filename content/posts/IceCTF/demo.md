@@ -1,7 +1,7 @@
 Title: IceCTF 2016 - Demo
 Date: 2016-08-15 19:18
 Category: CTF
-Tags: icectf2016 CTF
+Tags: icectf2016, ctf
 Slug: icectf-2016-demo
 Authors: wumb0
 

@@ -1,7 +1,7 @@
 Title: IceCTF 2016 - Blue Monday
 Date: 2016-08-15 19:18
 Category: CTF
-Tags: icectf2016 ctf
+Tags: icectf2016, ctf
 Slug: icectf-2016-blue-monday
 Authors: wumb0
 

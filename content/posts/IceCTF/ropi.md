@@ -1,7 +1,7 @@
 Title: IceCTF 2016 - ROPi
 Date: 2016-08-21 18:11
 Category: CTF
-Tags: icectf2016 ctf pwn
+Tags: icectf2016, ctf, pwn
 Slug: icectf-2016-ropi
 Authors: wumb0
 

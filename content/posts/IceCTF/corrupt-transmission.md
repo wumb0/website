@@ -1,7 +1,7 @@
 Title: IceCTF 2016 - Corrupt Transmission
 Date: 2016-08-15 19:18
 Category: CTF
-Tags: icectf2016 CTF forensics
+Tags: icectf2016, ctf, forensics
 Slug: icectf-2016-corrupt-transmission
 Authors: wumb0
 
