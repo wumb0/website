@@ -15,6 +15,8 @@ The main function just calls ezy, which `read`s 0x40 bytes on top of a buffer th
 
 <script type="text/javascript" src="https://asciinema.org/a/cibcbemfhn7m5x5bqu131bijk.js" id="asciicast-cibcbemfhn7m5x5bqu131bijk" async></script>
 
+[[more]]
+
 Ok so we have program control. Nice! Now what? Since the program is called **ROP**i I started looking for things to jump to. I actually spent a lot of time trying to find gadgets to write an actual ROP chain. I was stumped for a bit and asked Chris Eagle for some advice because he had solved the challenge for Samurai earlier in the week. He pointed out that there are uncalled functions. If you look in the r2 video above, you can see there are three functions right after ezy in the function list (afl): `ret`, `ori`, and `pro`. After disassembling and reversing them it was clear what the intended solution was:
 <script type="text/javascript" src="https://asciinema.org/a/az9litz1gxi1s7nmiq8qifqik.js" id="asciicast-az9litz1gxi1s7nmiq8qifqik" async></script>
 The `ret` (0x8048569) function calls open("./flag.txt", 0), the `ori` (0x80485c4) function calls read(dati, 0x80, fd) where fd is the file descriptor opened by open previously and dati is the buffer to read to, and `pro` (0x804862c) calls printf("%s", dati). So the proper solution is to use return oriented programming to call all of these functions in order. There is one trick, however. If you look closely at `ret` and `ori` you will see that there is a condition that needs to be met in order for the functions to not hard exit. For `ret`, ebp-8 must be 0xbadbeeef and for `ori`, either ebp-8 must equal 0xabcdefff or ebp-0xc must equal 0x78563412. To start I just tried calling `ret` then `ori` so I needed to set up my buffer as follows:
