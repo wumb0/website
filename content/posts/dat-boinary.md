@@ -77,7 +77,7 @@ Nice. The important thing here is that meme id + 8 is the meme dankness. So befo
 ## Pointer Overwrite
 Loading the binary up in gdb I was able to test this overwrite theory. My plan of attack was:
 
-1. Set a breakpoint at 0x0804889d to check the stack after each operation.
+1. Set a breakpoint at 0x08048898 to check the stack after each operation.
 
 2. Set the meme id to a string of length 8 to stop it from writing a null byte into the meme id buffer. It actually goes into the meme dankness, but I control that as well so it does not matter.
 
