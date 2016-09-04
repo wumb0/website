@@ -85,4 +85,5 @@ CATEGORYS_URL = 'categories/'
 CATEGORYS_SAVE_AS = 'categories/index.html'
 PAGE_ORDER_BY = 'sortorder'
 MD_EXTENSIONS = ['extra']
+STATIC_PATHS = ['files']
 #--------------/User Conf----------------
