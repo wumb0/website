@@ -72,7 +72,7 @@ secret
 ```
 All I can really say to that is **oh shit, whaddup?**
 
-Nice. The important thing here is that meme id + 8 is the meme dankness. So before there was no way to set the meme dankness (located right before the content pointer) to something that is 4 bytes in length, leaving null bytes.
+Nice. The important thing here is that meme id + 8 is the meme dankness. So before there was no way to set the meme dankness (located right before the content pointer) to something that is 4 bytes in length, eliminating null bytes betweek the meme id and the meme content pointer.
 
 ## Pointer Overwrite
 Loading the binary up in gdb I was able to test this overwrite theory. My plan of attack was:
