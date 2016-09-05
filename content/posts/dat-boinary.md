@@ -12,15 +12,11 @@ The first block of main allocates a dynamic buffer of size 0x80 with `malloc` an
 
 Stack locations of interest are:
 
-- ebp-0xc - location of menu choice (4 bytes)
-
-- ebp-0x10 - Temporary storage for the dankness of the meme (4 bytes)
-
-- ebp-0x14 - `malloc`ed buffer for meme content - (4 byte pointer)
-
-- ebp-0x18 - Meme dankness if the temporary dankness is greater than 0x7f (4 bytes)
-
-- ebp-0x20 - meme id location (8 bytes)
+- ebp-0xc - location of menu choice (4 bytes)  
+- ebp-0x10 - Temporary storage for the dankness of the meme (4 bytes)  
+- ebp-0x14 - `malloc`ed buffer for meme content - (4 byte pointer)  
+- ebp-0x18 - Meme dankness if the temporary dankness is greater than 0x7f (4 bytes)  
+- ebp-0x20 - meme id location (8 bytes)  
 
 After some trial and error in gdb I noticed that the initial `fgets` for the id of the meme takes 9 characters instead of the provided 8. This would prove useful later.
 
@@ -77,13 +73,10 @@ Nice. The important thing here is that meme id + 8 is the meme dankness. So befo
 ## Pointer Overwrite
 Loading the binary up in gdb I was able to test this overwrite theory. My plan of attack was:
 
-1. Set a breakpoint at 0x08048898 to check the stack after each operation.
-
-2. Set the meme id to a string of length 8 to stop it from writing a null byte into the meme id buffer. It actually goes into the meme dankness, but I control that as well so it does not matter.
-
-3. Run the `secret_meme` function to set the dankness to 0x69696969
-
-4. Run the update id function providing 0xc bytes of junk data and then the pointer (0x41414141 for now)
+1. Set a breakpoint at 0x08048898 to check the stack after each operation.  
+2. Set the meme id to a string of length 8 to stop it from writing a null byte into the meme id buffer. It actually goes into the meme dankness, but I control that as well so it does not matter.  
+3. Run the `secret_meme` function to set the dankness to 0x69696969  
+4. Run the update id function providing 0xc bytes of junk data and then the pointer (0x41414141 for now)  
 
 <script type="text/javascript" src="https://asciinema.org/a/0zihp3unod4hbvdgwmt6ocz5e.js" id="asciicast-0zihp3unod4hbvdgwmt6ocz5e" async></script>
 
@@ -192,11 +185,11 @@ I was ready to get the flag!
 ## Flag Captured
 Since the meme id was being read in using `fread` and not `fgets` I was able to put a null terminated /bin/sh string right at the beginning of the meme id while still being able to set the GOT entry for `strlen` to the leaked `system` address. I chose `strlen` here because it is run on command and has the meme id buffer as its only argument. I followed the following steps to make this work:
 
-1. Set the meme id to [/bin/sh\x00][0xc-8 bytes junk][address of strlen GOT entry][10 bytes extra to satisfy the read]
-2. Set the meme dankness back to 5 in order to overwrite the meme content
-3. Overwrite the `strlen` GOT entry with the leaked and calculated `system` address
-4. Set the meme id to trigger system instead of strlen with /bin/sh in the buffer passed as an argument
-5. Get the flag :)
+1. Set the meme id to [/bin/sh\x00][0xc-8 bytes junk][address of strlen GOT entry][10 bytes extra to satisfy the read]  
+2. Set the meme dankness back to 5 in order to overwrite the meme content  
+3. Overwrite the `strlen` GOT entry with the leaked and calculated `system` address  
+4. Set the meme id to trigger system instead of strlen with /bin/sh in the buffer passed as an argument  
+5. Get the flag :)  
 
 The full code for the end of this exploit can be seen at the bottom of this post. Running the script on the remote host resulted in the flag!
 ```shell
