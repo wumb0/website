@@ -1,7 +1,7 @@
 Title: MMACTF 2016 - Judgement
 Date: 2016-09-05 19:19
 Category: CTF
-Tags: ctf, mmactf2016 pwn
+Tags: ctf, mmactf2016, pwn
 Slug: mmactf-2016-judgement
 Authors: wumb0
 
