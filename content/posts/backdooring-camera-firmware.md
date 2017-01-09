@@ -258,14 +258,14 @@ internet.sh
 mkdir -p /var/log
 ```
 
-## Trying to re-pack the firmware
+How thoughtful Andy!
 
-## Getting the source
+## Re-packing the firmware (1/2)
+Before doing any real backdooring, we tested remote communication by undoing Andy's work of commenting out telnetd on startup and enabling it from that rcS file in /etc\_ro. With telnetd running at startup it was time to re-pack the firmware and load it to the device. 
 
-## Issues compiling
 
-## Issues flashing
-Before doing any real backdooring, we tested remote communication by undoing Andy's work of commenting out telnetd on startup and enabling it from that rcS file in /etc_ro. With telnetd running at startup it was time to re-pack the firmware and load it to the device. Neither of us had physical access to the device so we yolo'd and the update was done over the internet. With a couple of hours between when the update was pushed and my friend was able to head home to check if the push was successful, signs from DDNS weren't great.
+
+Neither of us had physical access to the device so we yolo'd and the update was done over the internet. With a couple of hours between when the update was pushed and my friend was able to head home to check if the push was successful, signs from DDNS weren't great.
 
 Getting access to the device showed that it was in fact not good. On a cycle of about 3 seconds, a Red and Blue LED would light up, then go dark, then light up again. It was stuck in a loop, but there was no way to tell what it was stuck on over the network. That's where the <a href="https://wiki.openwrt.org/toh/d-link/dcs-930l">OpenWRT wiki</a> saved the day. The DCS-930L has 4 blank headers (G,Rx,Tx,Vbatt) for a serial connection which was the only way to recover from this.
 <img width="300px" class="uk-align-center" src="/images/dcs930l.jpg" alt="Source: OpenWRT"/>
@@ -273,10 +273,19 @@ Upon getting leads soldered to the headers, next was opening a screen session us
 ```
 Uncompressing Kernel Image ... LZMA ERROR 1 - must RESET board to recover
 ```
-Luckily we had console access via a Universal asynchronous receiver/transmitter(UART).
+Luckily we had console access via a Universal asynchronous receiver/transmitter (UART).   
+
+After a few more attempts at manual re-packing we decided that we were a bit in over our heads. That's when I found something...
+
+## Getting the source
+It turns out, since this camera runs linux it has to be open source somewhere. GNU General Public License (GPL) for the win!
+
+## Issues compiling
+
+## Re-packing the firmware (2/2)
 
 ## Backdooring telnetd
-The telnetd executable is actually busybox. If you are not familiar with busybox, it is a set of common Linux commands included in a single executable. Its purpose is to pack many functionalities into a single execuatble for convenience and space conservation on devices with little storage like this one. The source for busybox is included with the camera firmware source at **dcs930lb1/RT288x_SDK/source/user/busybox** and the telnetd source at **networking/telnetd.c** under the busybox directory. The goal was to disable authentication so that either hard-coded credentials were accepted or no credentials were required. Looking at the code's global variable definition section looked promising.
+The telnetd executable is actually busybox. If you are not familiar with busybox, it is a set of common Linux commands included in a single executable. Its purpose is to pack many functionalities into a single execuatble for convenience and space conservation on devices with little storage like this one. The source for busybox is included with the camera firmware source at **dcs930lb1/RT288x\_SDK/source/user/busybox** and the telnetd source at **networking/telnetd.c** under the busybox directory. The goal was to disable authentication so that either hard-coded credentials were accepted or no credentials were required. Looking at the code's global variable definition section looked promising.
 ```
 /* Globals */
 static int maxfd;
@@ -300,5 +309,6 @@ After compiling sshd and looking at the size we were somewhat disappointed... th
 ## Making space
 Initially working with sshd presented some issues we didn't account for like the binary being 2MB and a total space of 4MB to work with. Right there half our usable space was gone and the camera's firmware binary was *some size* . Pushing the limits of storage we decided to pack the firmware, however it was still too big. Eventually we ripped out all the Java Applet programs from the camera's binary.
 ## Missing web front-end
-After ripping Java from the camera's binary in an effort to save space, it broke motion and sound detection.
+After ripping Java from the camera's binary in an effort to save space, it broke motion and sound detection. The competition included monitoring the IP camera for someone stealing pieces of a puzzle. The detection component was supposed to make that easier... whoops.
 ## Results
+We got to learn all about taking apart firmware binary blobs! This was something I had wanted to do for a while and was a really fun project to work on. All of this was done in the span of about 4 days before the competition. Recompiling and testing the firmware was nerve wracking and time consuming but the work paid off in the end. Thanks to RC3 for putting on the competition and thanks to my friend for helping me with this and being better at soldering than me.
