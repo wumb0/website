@@ -1,7 +1,7 @@
 Title: CTFX 2016 - dat-boinary
 Date: 2016-09-04 14:41
 Category: CTF
-Tags: ctf pwn ctfx2016
+Tags: ctf, pwn, ctfx2016
 Slug: ctfx-2016-dat-boinary
 Authors: wumb0
 
