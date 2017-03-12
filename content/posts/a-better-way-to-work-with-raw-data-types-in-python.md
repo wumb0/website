@@ -5,7 +5,7 @@ Tags: python ctypes
 Slug: a-better-way-to-work-with-raw-data-types-in-python
 Authors: wumb0
 
-Working with raw data in any language can be a pain. If you are a developer there are many solutions to make it easier such as Google's Protocol Buffers. If you are a reverse engineer these methods can be too bulky especially if you are trying to quickly script an exploit (perhaps in a CTF where time is constrained). Python has always been my go-to language for exploit dev and general script writing but working with raw datatypes using just **pack** and **unpack** from the *struct* module is annoying and leaves much to be desired. I'm here to tell you that if you are still using pack and unpack for complex datatypes **there is a better way**.  
+Working with raw data in any language can be a pain. If you are a developer there are many solutions to make it easier such as Google's Protocol Buffers. If you are a reverse engineer these methods can be too bulky especially if you are trying to quickly script an exploit (perhaps in a CTF where time is constrained). Python has always been my go-to language for exploit dev and general script writing but working with raw datatypes using just **pack** and **unpack** from the *struct* module is annoying and leaves much to be desired. I'm here to tell you that if you are still using **pack** and **unpack** for complex datatypes **there is a better way**.  
 
 For the sake of this post we will attempt to work with the raw datatypes below defined as a C structures:  
 ```c
