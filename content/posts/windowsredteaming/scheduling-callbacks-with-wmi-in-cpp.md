@@ -149,9 +149,14 @@ Autoruns' detection of this kind of persistence is very basic and easily bypasse
 WMI is used by several actors mostly for information gathering and persistence. APT29 (a.k.a. Cozy Bear) uses this particular form of WMI persistence to run tasks at specified intervals. The backdoor was supposedly used in the DNC hacks that surrounded the 2017 presidential election. CrowdStrike has a [fantastic write up](https://www.crowdstrike.com/blog/bears-midst-intrusion-democratic-national-committee/) on their site.  
 Source: [Mitre ATT&CK](https://attack.mitre.org/wiki/Technique/T1047)
 
-# References and resources
-[http://la.trendmicro.com/media/misc/understanding-wmi-malware-research-paper-en.pdf](http://la.trendmicro.com/media/misc/understanding-wmi-malware-research-paper-en.pdf)  
-[https://msdn.microsoft.com/en-us/library/aa389276(v=vs.85).aspx](https://msdn.microsoft.com/en-us/library/aa389276(v=vs.85).aspx)  
-[https://msdn.microsoft.com/en-us/library/aa390423(v=vs.85).aspx](https://msdn.microsoft.com/en-us/library/aa390423(v=vs.85).aspx)  
-[https://wmie.codeplex.com/](https://wmie.codeplex.com/)
+# Experimentation and tools
+WMI explorer (see references) was a huge help when testing this stuff out. I find it easiest to experiment in powershell and then finalize anything in C++ for delivery with malware that does other things too. Matt's scripts are a great starting point.
 
+# References and resources
+Trend Micro paper detailing WMI scheduled callbacks. - [http://la.trendmicro.com/media/misc/understanding-wmi-malware-research-paper-en.pdf](http://la.trendmicro.com/media/misc/understanding-wmi-malware-research-paper-en.pdf)  
+COM API for WMI - [https://msdn.microsoft.com/en-us/library/aa389276(v=vs.85).aspx](https://msdn.microsoft.com/en-us/library/aa389276(v=vs.85).aspx)  
+Code sample for setting up WMI connection in C++ - [https://msdn.microsoft.com/en-us/library/aa390423(v=vs.85).aspx](https://msdn.microsoft.com/en-us/library/aa390423(v=vs.85).aspx)  
+WMI Explorer - [https://wmie.codeplex.com/](https://wmie.codeplex.com/)  
+<br>
+<br>
+I hope this post has been informative for anyone curious about Windows internals and some of the nasty things you can accomplish with WMI. Check back for other posts in this series!
