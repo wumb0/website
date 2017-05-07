@@ -60,7 +60,7 @@ Running this resulted in an output of `argnum: 12, padding: 2`. There was one ot
 
 Armed with the argument number, padding, and start number I was ready to try and overwrite some values. The issue I ran into was that there are no function calls after the call to `printf` in main. I though of trying to overwrite a destructor (dtors), but there were none. I came across a way to overwrite the `fini` section of a binary to execute a function when the program was supposed to be quitting. I could not find much documentation on exactly what I needed to overwrite to make this work so I just used `objdump` and `grep` to find the symbols with `fini` in the name:
 
-```nohighlight
+```
 → objdump -t greeting | grep fini
 08048780 l    d  .fini  00000000              .fini
 08049934 l    d  .fini_array    00000000              .fini_array
@@ -81,7 +81,7 @@ I wrote the following script to do the above:
 <script src="https://gist.github.com/wumb0/1c3d32efbc3f45aa6d724ce46b7efbdd.js"></script>
 
 Running it resulted in the flag :)
-```nohighlight
+```
 → python greet2.py REMOTE
 [*] '/home/vagrant/CTF/tokyo/greeting'
     Arch:     i386-32-little
