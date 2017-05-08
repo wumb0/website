@@ -137,7 +137,7 @@ wmic /namespace:\\root\subscription PATH __TimerInstruction delete
 wmic /namespace:\\root\subscription PATH __EventFilter delete
 wmic /namespace:\\root\subscription PATH __FilterToConsumerBinding delete
 ```
-These WMI callbacks also may show up win Sysinternals Autoruns and can be deleted from its interface:
+These WMI callbacks also may show up in Sysinternals Autoruns and can be deleted from its interface:
 ![autoruns]({filename}/images/autoruns_wmi.png)
 Based on some other tests I have run I have found that autoruns shows yellow entries for ones that it cannot find the files of as shown above. Changing the command in the CommandLineTemplate property so that it uses *powershell.exe* or the absolute path of powershell instead of just *powershell* makes the entry turn red! Even worse. Entires can be hidden from autoruns by setting the CommandLineTemplate property as follows:
 ```batch
