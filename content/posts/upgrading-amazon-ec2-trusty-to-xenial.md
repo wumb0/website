@@ -45,7 +45,7 @@ reboot
 8. Get rid of the unauth.cfg file you created
 9. Reboot and pray.
 
-Thanks to these three links for the solutions (I just put them together):
-- <https://askubuntu.com/a/426121>
-- <https://askubuntu.com/a/769239>
-- <http://willhaley.com/blog/resolvconf-dns-issue-after-ubuntu-xenial-upgrade/>
+Thanks to these three links for the solutions (I just put them together):  
+* <https://askubuntu.com/a/426121>  
+* <https://askubuntu.com/a/769239>  
+* <http://willhaley.com/blog/resolvconf-dns-issue-after-ubuntu-xenial-upgrade/>  
