@@ -28,10 +28,11 @@ class Bracket(db.Model):
                             secondaryjoin=Teams.id == tb.c.team_id)
 ```
 Breaking this down:  
-* The table `tb` defines the table `team\_bracket`, which associates a team and a bracket by id  
-* The `Bracket` class, which represents a database table and has an attribute teams  
-* The `teams` attribute has a `backref` that allows access to the bracket of a team using the `Teams.chal\_bracket` attribue. The attribute is back-populated by sqlalchemy internally; this means the table isn't changed, but sqlalchemy does the work for you! The `uselist=False` argument is used so that `team.chal_bracket` returns just the bracket object and not a list of length 1 with the bracket object in it.  
-* The `teams` attribute also defines two joins: a `primaryjoin` that links the `id` of the object to the bracket id and a `secondaryjoin` that links the team id to the `team_id` of the object. This makes it so that you can get all of the teams associated with a bracket by just doing `bracket.teams` and also get the bracket associated with a team by doing `team.chal_bracket`.  
+- The table `tb` defines the table `team\_bracket`, which associates a team and a bracket by id  
+- The `Bracket` class, which represents a database table and has an attribute teams  
+- The `teams` attribute has a `backref` that allows access to the bracket of a team using the `Teams.chal\_bracket` attribue. The attribute is back-populated by sqlalchemy internally; this means the table isn't changed, but sqlalchemy does the work for you! The `uselist=False` argument is used so that `team.chal_bracket` returns just the bracket object and not a list of length 1 with the bracket object in it.  
+- The `teams` attribute also defines two joins: a `primaryjoin` that links the `id` of the object to the bracket id and a `secondaryjoin` that links the team id to the `team_id` of the object. This makes it so that you can get all of the teams associated with a bracket by just doing `bracket.teams` and also get the bracket associated with a team by doing `team.chal_bracket`.  
+
 Normally you would have to define a relationship in the parent as follows:
 ```python
 class Teams(db.Model):
