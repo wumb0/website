@@ -26,7 +26,7 @@ class Bracket(db.Model):
                             secondary=tb, primaryjoin=id == tb.c.bracket_id,
                             secondaryjoin=Teams.id == tb.c.team_id)
 ```
-Breaking this down:
+Breaking this down:  
 - The table `tb` defines the table `team\_bracket`, which associates a team and a bracket by id  
 - The `Bracket` class, which represents a database table and has an attribute teams  
 - The `teams` attribute has a `backref` that allows access to the bracket of a team using the `Teams.chal\_bracket` attribue. The attribute is back-populated by sqlalchemy internally; this means the table isn't changed, but sqlalchemy does the work for you! The `uselist=False` argument is used so that `team.chal_bracket` returns just the bracket object and not a list of length 1 with the bracket object in it.  
