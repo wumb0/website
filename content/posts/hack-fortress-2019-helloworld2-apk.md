@@ -5,7 +5,7 @@ Tags: CTF, apk, reversing, hack fortress
 Slug: hack-fortress-2019-helloworld2-apk
 Authors: wumb0
 
-![Final Score]({static}/images/hack-fortress-finals/hackfortressfinal.jpg)
+![Final Score]({filename}/images/hack-fortress-finals/hackfortressfinal.jpg)
 
 Another great year of Hack Fortress at Shmoocon!  
 I wanted to do a post on this challenge in particular becuase it was one of two 300 point challenges on the board. I always get inside my own head about these challenges but I remind myself: **they are not normal CTF challenges**. These challenges are meant to be solved in just a few minutes, since the board is pretty big and the length of the competition is pretty short (30 min for prelims, 45 min for finals).  
