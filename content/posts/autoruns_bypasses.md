@@ -32,9 +32,7 @@ Showing windows entries reveals the entry, but this time it is not highlighted r
 The *Image File Execution Options* (IFEO) registry key located at HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrrentVersion\\Image File Execution Options is used to set a myriad of options such as heap options and setting a program's debugger. For this bypass to work we can pick a lesser-used executable in System32 and set its Debugger in IFEO to cmd.exe or powershell.exe. I chose print.exe for this test, but there may be better options.  
 <center>![print ifeo]({filename}/images/autoruns-print-ifeo.PNG)</center>  
 The technique involves creating a key under the parent IFEO and adding a REG\_SZ value with the executable to execute.  
-Then we need to edit our run key to use print.exe instead of powershell.exe.  
-<center>![malicious entry found in autoruns]({filename}/images/autoruns-badstuff-found.PNG) </center>  
-Checking back with autoruns the entry is gone!  
+Then we need to edit our run key to use print.exe instead of powershell.exe. Checking back with autoruns the entry is gone!  
 <center>![clean autoruns]({filename}/images/autoruns-badstuff-not-found.PNG)</center>  
 And again unhiding windows entries results in the entry being shown, but this time we have the added bonus of not appearing as powershell in the description!
 <center>![autoruns with windows entries print]({filename}/images/autoruns-print-windows-entries.PNG)</center>  
