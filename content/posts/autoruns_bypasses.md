@@ -13,8 +13,8 @@ For some prior work done in this area check out [Huntress Labs's research](https
 ## Method 1: Copy a file
 This one is as easy as copying powershell or cmd to another name and using that name instead. It looks like autoruns will flag by name on powershell and cmd as shown below:  
 <center>![malicious entry found in autoruns]({filename}/images/autoruns-badstuff-found.PNG)</center>  
-This entry in the infamous run key is running powershell to use Net.Webclient to download and execute a string (DownloadString -> IEX).
-<center>![badstuff registry entry]({filename}/images/autoruns-malicious-entry.PNG</center>  
+This entry in the infamous run key is running powershell to use Net.Webclient to download and execute a string (DownloadString -> IEX).  
+<center>![badstuff registry entry]({filename}/images/autoruns-malicious-entry.PNG)</center>  
 Clearly malicious! So now let's try copying powershell.exe to badstuff.exe:
 ```
 copy \Windows\system32\WindowsPowerShell\v1.0\powershell.exe \Windows\system32\badstuff.exe
