@@ -2,6 +2,8 @@
 <html lang="{{ DEFAULT_LANG }}">
 <head>
         {% block head %}
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-176592651-1"></script>
         <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -39,8 +41,6 @@
         <link rel="stylesheet" href="{{css_file}}">
         {% endfor %}
         <link rel="shortcut icon" href="{{SITEURL}}/{{THEME_STATIC_DIR}}/{{FAVICON}}">
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-176592651-1"></script>
         {% endblock head %}
 </head>
 
