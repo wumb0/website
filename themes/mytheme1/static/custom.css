@@ -120,17 +120,30 @@ hr.dashed {
 h1 {
     font-family: "Helvetica Neue", Arial, sans-serif;
     font-weight:bold;
-    font-size: 50px;
+    font-size: 37px;
     line-height: 47px;
 }
 
 h1.entry-title {
     text-shadow: 1px 1px #444;
+    font-size: 48px;
 }
 
 h1.entry-title a:hover {
     text-decoration: none;
     color: #0070cc;
+}
+
+h2 {
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+h4 {
+    font-style: italic;
 }
 
 .page-content, .post-body .uk-block {

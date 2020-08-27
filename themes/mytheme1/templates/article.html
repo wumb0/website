@@ -18,14 +18,20 @@
 
 {% block content %}
 <section class="post-body">
+    <div class="uk-block uk-block-muted">
+    <div class="uk-container">
     <header>
         <h1 class="entry-title">
         <span data-uk-tooltip="{pos:'right'}" title="Permalink to {{ article.title|striptags }}"><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" >{{ article.title }}</a></span>
         </h1>
+        <div class="post-info" id="index">
+            <abbr class="published" title="{{ article.date.isoformat() }}"> {{ article.locale_date }} </abbr>
+            <h6 class="post-category">Category: <a href="{{article.category.url}}">{{article.category}}</a></h6>
+        </div><!-- /.post-info -->
         {% import 'translations.html' as translations with context %}
         {{ translations.translations_for(article) }}
     </header>
-    <div class="uk-block uk-block-muted">
+    </div>
         <div class="uk-container">
             <div class="uk-grid">
                 <div class="uk-width-1-1 entry-content">
