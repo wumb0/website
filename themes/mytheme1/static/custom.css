@@ -184,7 +184,7 @@ pre > code.hljs {
 }
 
 pre {
-    overflow: visible;
+    overflow-x: scroll;
 }
 
 .entry-content ol li, .entry-content ul li {
