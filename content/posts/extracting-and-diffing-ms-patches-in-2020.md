@@ -395,7 +395,7 @@ Platform folders without an n, f, or r directory in them contain the full file t
 How would you get ahold of another copy of this file to diff against? This can be difficult, but you may be able to look in previous patches for a different version. It turns out that differentials are actually the more convenient case here!  
 
 ## Patch Deltas
-When a platform folder has an n, f, or r directory in it the patch is a delta that is applied to the existing file. Microsoft published a [whitepaper](https://docs.microsoft.com/en-us/windows/deployment/update/psfxwhitepaper) on differentials at the beginning of this year (2020). It contains some details about the technology, but not enough to be useful in applying patches, other than knowing what f, r, and n mean.  
+When a platform folder has an n, f, or r directory in it the patch is a delta that is either applied to the existing file (r/f) or to an empty buffer to create a new file (n). Microsoft published a [whitepaper](https://docs.microsoft.com/en-us/windows/deployment/update/psfxwhitepaper) on differentials at the beginning of this year (2020). It contains some details about the technology, but not enough to be useful in manually applying the deltas, other than knowing what f, r, and n mean.  
 
 ### Types of Deltas
 As mentioned previously, there are three types of deltas:
@@ -403,6 +403,8 @@ As mentioned previously, there are three types of deltas:
 - **Forward differentials (f)** - brings the base binary (.1) up to that particular patch level  
 - **Reverse differentials (r)** - reverts the applied patch back to the base binary (.1)  
 - **Null differentials (n)** - a completely new file, just compressed; apply to an empty buffer to get the full file  
+
+You will always see r and f folders together inside of a patch because you need to be able to revert the patch later on to apply a newer update.  
 
 ### Delta APIs
 Before I start diving into the format of deltas and applying them to files, it is worth noting that Microsoft provides (slightly outdated, but still relevant) [developer documentation](https://docs.microsoft.com/en-us/previous-versions/bb417345(v=msdn.10)) on the Delta Compression APIs. There are actually two completely different APIs for creating and applying patch deltas: [PatchAPI](https://docs.microsoft.com/en-us/previous-versions/bb417345(v=msdn.10)#patchapi) and [MSDELTA](https://docs.microsoft.com/en-us/previous-versions/bb417345(v=msdn.10)#msdelta). For this post I will be focusing on the MSDELTA API since it is newer and soley used in new patches that are being published. Besides, if you call into the MSDELTA API and provide a PatchAPI patch file it will recognize that and apply the patch anyway by calling into `mspatcha.dll`.  
