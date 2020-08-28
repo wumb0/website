@@ -199,3 +199,7 @@ pre {
 .entry-content img {
     padding: 5px;
 }
+
+summary {
+    overflow: hidden;
+}

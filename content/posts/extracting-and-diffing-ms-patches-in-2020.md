@@ -164,7 +164,7 @@ For purposes of this post, I'm going to leave .mum and .cat files alone, since t
 ### WinSxS Manifests
 The .manifest files in the patch describe how the patch is to be applied, the files that are part of the patch, the expected result of the patch in the form of file hashes, permissions of the resulting files, registry keys to set, and more. They define the effects that happen to the system other than replacing the file that is being updated.  
 
-Here is an example manifest for the `Windows-Gaming-XboxLive-Storage-Service-Component`, whatever that is.  
+Here is an example manifest for the *Windows-Gaming-XboxLive-Storage-Service-Component*, whatever that is.  
 
 <details open>
 <summary>amd64_windows-gaming-xbox..e-service-component_31bf3856ad364e35_10.0.18362.836_none_a949879e457dbcd4.manifest</summary>
