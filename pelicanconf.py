@@ -11,7 +11,7 @@ DELHTML = rmhtmltags
 AUTHOR = u'wumb0'
 SITENAME = u'wumb0in\''
 HEADER_SITENAME = u'wumb0.in(g)'
-SITEURL = u''
+SITEURL = u'https://wumb0.in'
 
 PATH = 'content'
 
@@ -20,11 +20,14 @@ TIMEZONE = 'America/New_York'
 DEFAULT_LANG = u'en'
 
 # Feed generation is usually not desired when developing
-FEED_ALL_ATOM = None
-CATEGORY_FEED_ATOM = None
+FEED_DOMAIN = SITEURL
+FEED_ALL_ATOM = u'feeds/all.atom.xml'
+CATEGORY_FEED_ATOM = 'feeds/{slug}.atom.xml'
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
+FEED_ALL_RSS = u'feeds/all.rss.xml'
+CATEGORY_FEED_RSS = 'feeds/{slug}.rss.xml'
 
 # Blogroll
 LINKS = (('Pelican', 'http://getpelican.com/'),

@@ -5,7 +5,7 @@
 <h1>Posts</h1>
 {% endblock %}
 
-<ol class="post-list">
+<ol class="post-list" style="counter-set: li {{(articles_page.number-1)*articles_paginator.per_page}};">
 {% for article in articles_page.object_list %}
     <li class="post-entry">
         <div class="uk-block uk-block-muted">
