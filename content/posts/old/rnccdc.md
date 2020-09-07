@@ -17,7 +17,7 @@ Authors: wumb0
 <div class="uk-thumbnail-caption">The RNCCDC topology.</div>
 </a>
 <p>They were holding us responsible for <strong>twenty two </strong>systems (excluding networking devices) that included <strong>fourteen </strong>scored services:  web shop , web ticketing system, web blog, cloud DNS, internal DNS, mail (POP3, SMTP), SSH, Minecraft, Unreal Tournament, Medal of Honor, Quake II, Ventrilo, and Teamspeak. We were running a gaming company called Warp Core Gaming. This was a big jump from the eight systems and seven scored services we had at regionals.</p>
-<a class="uk-thumbnail" href="/images/old/uploads/2014/05/SHdN6jbX-BCyEYi5ogOe7o7EnG8U4I5oK7o04HaLvj8.jpg"><img src="/images/old/uploads/2014/05/SHdN6jbX-BCyEYi5ogOe7o7EnG8U4I5oK7o04HaLvj8.jpg" alt="" width="779" height="517" />
+<a class="uk-thumbnail" href="/images/old/uploads/2014/05/SHdN6jbX-BCyEYi5ogOe7o7EnG8U4I5oK7o04HaLvj8.jpg"><img src="/images/old/uploads/2014/05/SHdN6jbX-BCyEYi5ogOe7o7EnG8U4I5oK7o04HaLvj8.jpg" alt="team room" width="779" height="517" />
 <div class="uk-thumbnail-caption">Our team room</div>
 </a>
 <a class="uk-thumbnail" href="/images/old/uploads/2014/05/Screen-Shot-2014-05-11-at-9.03.06-PM.png"><img class="uk-align-center" src="/images/old/uploads/2014/05/Screen-Shot-2014-05-11-at-9.03.06-PM.png" alt="Screen Shot 2014-05-11 at 9.03.06 PM" width="278" height="242" />
@@ -25,11 +25,11 @@ Authors: wumb0
 </a> 
 <p>We knew we were going to get a large amount of systems but we thought there would be services that we knew how to manage completely. The challenge this year was to manage the games and chat servers in the cloud.</p>
 <p>Despite getting second place in the main competition Bryan and I ended up teaming up with a couple of red teamers (Mubix and Egypt) to win the king-of-the-hill style competition that took place after day two called Panoply. We ended up taking first in that thanks to Bryan's scripts that he wrote for the RC3 competition.</p>
-<a class="uk-thumbnail" href="/images/old/uploads/2014/05/2dJgMtQ0gh0x4_7HgWlRNqJ-Yir_hK_WqaBkz6orAXM.jpg"><img class="uk-align-center" src="/images/old/uploads/2014/05/2dJgMtQ0gh0x4_7HgWlRNqJ-Yir_hK_WqaBkz6orAXM.jpg" alt="" width="815" height="541" />
+<a class="uk-thumbnail" href="/images/old/uploads/2014/05/2dJgMtQ0gh0x4_7HgWlRNqJ-Yir_hK_WqaBkz6orAXM.jpg"><img class="uk-align-center" src="/images/old/uploads/2014/05/2dJgMtQ0gh0x4_7HgWlRNqJ-Yir_hK_WqaBkz6orAXM.jpg" alt="Panoply team" width="815" height="541" />
 <div class="uk-thumbnail-caption">From left to right: Egypt, Myself, Bryan, Mubix</div>
 </a>
 <p>RNCCDC was one of the best experiences of my life so far. I got to compete with and against the best in the industry, learned so many things to help me prepare for next year, and most importantly I got to know a fantastic group of guys I got to call my team. We were so wiped out after the two days and a total of about 18 hours of competition (plus panopoly) that some of us just fell asleep during some of the sponsor presentations (like the one about Walmart's hyperextended internal APT malcode darknet honeypot in the cloud).</p>
-<a class="uk-thumbnail" href="/images/old/uploads/2014/05/unnamed.jpg"><img class="uk-align-center" src="/images/old/uploads/2014/05/unnamed.jpg" alt="" width="673" height="505" />
+<a class="uk-thumbnail" href="/images/old/uploads/2014/05/unnamed.jpg"><img class="uk-align-center" src="/images/old/uploads/2014/05/unnamed.jpg" alt="tired boys" width="673" height="505" />
 <div class="uk-thumbnail-caption">Bryan (Left) and I (Right) sleeping after two long days and a long night at Panoply</div>
 </a> 
 <p>As always a huge thanks to my team, everyone who supported me through this, the sponsors, the white team, CCDC staff, and anyone else I missed. Everyone put a lot of work in to make this all happen and give college students like me the opportunity to learn so much about cybersecurity from some of the best in the business. See you next year CCDC!</p>

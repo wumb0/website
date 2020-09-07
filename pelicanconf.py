@@ -45,7 +45,7 @@ DEFAULT_PAGINATION = 10
 #RELATIVE_URLS = True
 
 #--------------User Conf----------------
-PLUGIN_PATH = 'pelican-plugins'
+PLUGIN_PATHS = ['pelican-plugins']
 CSS_FILES = (
                 "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/css/uikit.min.css",
                 "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/css/uikit.gradient.min.css",
@@ -87,6 +87,13 @@ CATEGORY_SAVE_AS = 'category/{slug}/index.html'
 CATEGORYS_URL = 'categories/'
 CATEGORYS_SAVE_AS = 'categories/index.html'
 PAGE_ORDER_BY = 'sortorder'
-MD_EXTENSIONS = ['extra']
 STATIC_PATHS = ['files', 'images']
+MARKDOWN = {
+    'extension_configs': {
+        'markdown.extensions.codehilite': {'css_class': 'highlight'},
+        'markdown.extensions.extra': {},
+        'markdown.extensions.meta': {},
+    },
+    'output_format': 'html5',
+}
 #--------------/User Conf----------------

@@ -30,7 +30,7 @@ Nice to meet you, 080487d0 :)
 Neat. Now for exploitation.
 
 ## Background
-For information on `printf` and a more basic format string exploit, check out the post I did on the [judgement]({static}/posts/MMACTF/judgement.md) pwn challenge also from this CTF. In addition to having positional arguments, `printf` also has a cool feature where you can write the number of bytes that have been printed so far to a variable. This feature is what makes format string vulnerabilities so dangerous. If you can exploit one, you can get arbitrary write. 
+For information on `printf` and a more basic format string exploit, check out the post I did on the [judgement](|filename|MMACTF/judgement.md) pwn challenge also from this CTF. In addition to having positional arguments, `printf` also has a cool feature where you can write the number of bytes that have been printed so far to a variable. This feature is what makes format string vulnerabilities so dangerous. If you can exploit one, you can get arbitrary write. 
 
 Passing `%hn` to `printf` in the format string will write up to a half word value of the number of characters written so far. Combining this with positional arguments allows for half a word at a time to be written to anywhere. So this is bad.
 
