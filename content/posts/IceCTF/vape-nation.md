@@ -10,11 +10,11 @@ Challenge description:
 
 They provide a png called vape_nation.png:
 
-![vape nation]({filename}/images/icectf/vape_nation.png)
+![vape nation]({static}/images/icectf/vape_nation.png)
 
 With the hint I figured it must be a green filter of some sort so I loaded up [Stegsolve](http://www.caesum.com/handbook/Stegsolve.jar) and checked out the green plane filters. Green plane 0 resulted in the following:
 
-![solved nation]({filename}/images/icectf/solved_nation.png)
+![solved nation]({static}/images/icectf/solved_nation.png)
 
 Looks like a flag :)
 

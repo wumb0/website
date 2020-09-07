@@ -10,7 +10,7 @@ Challenge description:
 
 The text file provided is just a hexdump produced with xxd. xxd actually has a feature to reverse a hexdump back into the original file, from there I identified the resulting file's format with the file command. It was an lzip. Extracting the lzip resulted in the following image:
 
-![thor]({filename}/images/icectf/thor.jpg)
+![thor]({static}/images/icectf/thor.jpg)
 
 Flag: 
 

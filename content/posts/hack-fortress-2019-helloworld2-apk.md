@@ -5,7 +5,7 @@ Tags: CTF, apk, reversing, hack fortress
 Slug: hack-fortress-2019-helloworld2-apk
 Authors: wumb0
 
-![Final Score]({filename}/images/hack-fortress-finals/hackfortressfinal.jpg)
+![Final Score]({static}/images/hack-fortress-finals/hackfortressfinal.jpg)
 
 Another great year of Hack Fortress at Shmoocon!  
 I wanted to do a post on this challenge in particular becuase it was one of two 300 point challenges on the board. I always get inside my own head about these challenges but I remind myself: **they are not normal CTF challenges**. These challenges are meant to be solved in just a few minutes, since the board is pretty big and the length of the competition is pretty short (30 min for prelims, 45 min for finals).  
@@ -86,7 +86,7 @@ We are looking for the encryption key. In the encrypt function the first paramte
 Native libraries for an android application can be found in the lib directory of the APK. The unpacked apk shows four different architectures in the lib directory: arm64-v8a, armeabi-v7a, x86, and x86\_64. I chose to look at the x86 version of *libnative-lib.so*, since [Hopper](https://www.hopperapp.com/) is better at x86 than other architectures (in my opinion).  
 Since I have reverse engineered java native libraries before I know to look for the function name and/or class name in the function list. Pictured below is both the search and the decompiled function.  
 
-![Hopper]({filename}/images/hack-fortress-finals/hopper-search.png)
+![Hopper]({static}/images/hack-fortress-finals/hopper-search.png)
 
 Looks like the classic "build a string as integers" trick. I'm assuming sub\_61a0 is some kind of memory allocation function, and arg0 is always the [JNIEnv](https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/functions.html) pointer, which contains a bunch of useful functions to convert C types into java types to return. I'm guessing the arg0+0x29c is either NewString or NewStringUTF. Moving forward I just took all of the hex bytes from the four integers that get put into the key buffer and unhexlified them. 
 

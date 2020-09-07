@@ -7,7 +7,7 @@ Slug: mr-robots2e4-easter-egg
 Authors: wumb0
 
 After seeing [the last Mr. Robot easter egg](http://imgur.com/gallery/RKRAi) from season 2 episode 1 I have been on the lookout for IP's and domains to try and go after. At the end of season 2 episode 4 (init_1.asec) Elliot logs into an IRC server and the IP address is clearly visible as **192.251.68.53**.
-![ip]({filename}/images/mrrobotip.png)
+![ip]({static}/images/mrrobotip.png)
 
 I decided to scan that host with nmap and got the following results:
 ```bash
@@ -25,15 +25,15 @@ Service Info: Device: load balancer
 ```
 
 HTTP up, cool. I went to the site and it was a fake IRC server with the hostname irc.colo-solutions.net:
-![irc]({filename}/images/mrrobotirc.png)
+![irc]({static}/images/mrrobotirc.png)
 
 After it logged me in as *D0loresH4ze* I was dropped in a channel called *#th3g3ntl3man* with the all too familiar *samsepi0l* (for the uninformed, Sam Sepiol was the alias Elliot used in season one to gain access to Steel Mountain, a secure datacenter). 
 
 After poking around and trying to get samsepi0l to say something besides "i don't have time for this right now." I played the roll of Darlene and entered what she said in the show:
-![input]({filename}/images/mrrobotirc2.png)
+![input]({static}/images/mrrobotirc2.png)
 
 Here is the respone I got:
-![response]({filename}/images/mrrobotchat.png)
+![response]({static}/images/mrrobotchat.png)
 
 > they have changed their standard issue. we have a way in.
 

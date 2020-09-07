@@ -17,7 +17,7 @@ The first byte and bytes 5-8 are wrong.
 To fix, I opened the image up in hexedit and changed the bytes to their correct values. 
 Opening the file provided a valid image:
 
-![flag]({filename}/images/icectf/corrupt.png)
+![flag]({static}/images/icectf/corrupt.png)
 
 And of course, the flag: 
 **IceCTF{t1s_but_4_5cr4tch}**
