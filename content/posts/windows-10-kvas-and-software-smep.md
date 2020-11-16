@@ -14,9 +14,8 @@ First, I'm going to dive into a short introduction to x86\_64 (4-level) paging, 
 [[more]]
 
 ## \_MMPTE\_HARDWARE
-The structure that represents a page table entry on x86\_64 is `nt!_MMPTE_HARDWARE`. It is an 8 byte structure with a lot of information:
-```
-0: kd> dt -v nt!_MMPTE_HARDWARE
+The structure that represents a page table entry on x86\_64 is `nt!_MMPTE_HARDWARE`. It is an 8 byte structure with a lot of information:  
+<pre><code class="plaintext">0: kd> dt -v nt!_MMPTE_HARDWARE
 struct _MMPTE_HARDWARE, 18 elements, 0x8 bytes
    +0x000 Valid               : Bitfield Pos 0, 1 Bit
    +0x000 Dirty1              : Bitfield Pos 1, 1 Bit
@@ -36,21 +35,22 @@ struct _MMPTE_HARDWARE, 18 elements, 0x8 bytes
    +0x000 WsleAge             : Bitfield Pos 56, 4 Bits
    +0x000 WsleProtection      : Bitfield Pos 60, 3 Bits
    +0x000 NoExecute           : Bitfield Pos 63, 1 Bit
+</code></pre>
 
-```
-Some fields of particular importance:
-- **Valid** - this entry is valid. must be 1 to consider the data inside the rest of the structure valid.  
-- **Owner** - 0 for kernel mode pages, 1 for user mode pages. corresponds to the `KPROCESSOR_MODE` enum in the DDK.  
-- **LargePage** - noted here, discussed below!  
-- **Write** - 0 if the page is read only, 1 if R/W  
-- **PageFrameNumber** - the physical address of the base of the next level of paging. mask these bits out or pull them out and shift left by 12 (0xc) to get the address, shown in detail below. abbreviated PFN.    
-- **NoExecute** - NX bit. code canot be executed in these pages.  
+Some fields of particular importance:  
+
+* **Valid** - this entry is valid. must be 1 to consider the data inside the rest of the structure valid.  
+* **Owner** - 0 for kernel mode pages, 1 for user mode pages. corresponds to the `KPROCESSOR_MODE` enum in the DDK.  
+* **LargePage** - noted here, discussed below!  
+* **Write** - 0 if the page is read only, 1 if R/W  
+* **PageFrameNumber** - the physical address of the base of the next level of paging. mask these bits out or pull them out and shift left by 12 (0xc) to get the address, shown in detail below. abbreviated PFN.    
+* **NoExecute** - NX bit. code canot be executed in these pages.  
 
 Each level of the page table hierarchy has an `_MMPTE_HARDWARE` entry. If a permission is set at a lower level, then the permission must be set at all higher levels as well in order for it to take effect. Conversely, if a permission is set at a higher level, it must also be set at all lower levels in order for it to have effect.  
 
 Let's look at an example in user mode on a system with KVAS disabled:  
-```
-0: kd> !process 0 0 explorer.exe
+
+<pre><code class="plaintext">0: kd> !process 0 0 explorer.exe
 PROCESS ffffc8064497b340
     SessionId: 1  Cid: 1038    Peb: 0090c000  ParentCid: 100c
     DirBase: bc33c000  ObjectTable: ffffa2827c3a1800  HandleCount: 1884.
@@ -77,14 +77,15 @@ ntdll!NtCreateFile:
 PXE at FFFFE5F2F97CB7F8    PPE at FFFFE5F2F96FFF80    PDE at FFFFE5F2DFFF0D78    PTE at FFFFE5BFFE1AF700
 contains 0A000000BBF48867  contains 0A000000BC34E867  contains 0A000000BC34F867  contains 8100000003806025
 pfn bbf48     ---DA--UWEV  pfn bc34e     ---DA--UWEV  pfn bc34f     ---DA--UWEV  pfn 3806      ----A--UR-V
-```
+</code></pre>
+
 There are executable pages in `kernel32`, but the page containing the header should not be executable. This is reflected in the page hierarchy above, where the PXE, PPE, and PDE are all RWX, but the PTE indicates that the page is read only. The `!pte` command is detailed more in a few sections, so don't worry if the output is confusing at this moment.  
 
 ## Manually Walking the Page Tables
 To appreciate tools like `!pte` let's look at an example of manually walking the page tables to resolve the physical address of data from it's virtual address. I'm going to be walking the page tables on a system that has KVAS disabled, to reduce complexity, but note there will be a slight twist in this example.  
 Let's look for `nt!NtCreateFile`. First, we can use the `.formats` command to get the binary representation of the address of `nt!NtCreateFile`. The `CR3` register is also required here, since it holds the hardware address of the base of the page tables.  
-```
-0: kd> .formats nt!NtCreateFile
+
+<pre><code class="plaintext">0: kd> .formats nt!NtCreateFile
 Evaluate expression:
   Hex:     fffff805`2e3ff090
   Decimal: -8773842243440
@@ -96,21 +97,25 @@ Evaluate expression:
   Double:  -1.#QNAN
 0: kd> r cr3
 cr3=00000000001ad000
-```
- Since addresses must be canonical, bits **63-49** will all be the same. Then we have bits representing the index into each level of the page tables (9 bits at a time until the page offset):  
-- Bits **47-39** = Page-Map Level 4 (*PML4*) entry (sometimes *PXE*)  
-- Bits **38-30** = Page Directory Pointer Table (*PDPT*) entry (sometimes *PPE*)  
-- Bits **29-21** = Page Directory Entry (*PDE*)  
-- Bits **20-12** = Page Table Entry (*PTE*)  
-- Bits **11-0** = Offset into physical page where the start of the data resides  
-```
-                            PML4 idx.   PDPT idx.   PDT idx.    PTE idx.     page idx.
-Binary:  11111111 11111111 [11111000 0][0000101 00][101110 001][11111 11110][000 10010000]
-```
+</code></pre>
 
-Each level of the page hierarchy is just an array of 512 (0x200) `_MMPTE_HARDWARE` structures. To get the PML4 entry, index into the array starting at `CR3` by the PML4 index found from the `.formats` command above. Remember the `-p` flag to `dt` or this will fail.    
-```
-0: kd> dt -p _MMPTE_HARDWARE @@C++(@cr3+@@(0y111110000)*sizeof(_MMPTE_HARDWARE))
+ Since addresses must be canonical, bits **63-49** will all be the same. Then we have bits representing the index into each level of the page tables (9 bits at a time until the page offset):  
+
+* Bits **47-39** = Page-Map Level 4 (*PML4*) entry (sometimes *PXE*)  
+* Bits **38-30** = Page Directory Pointer Table (*PDPT*) entry (sometimes *PPE*)  
+* Bits **29-21** = Page Directory Entry (*PDE*)  
+* Bits **20-12** = Page Table Entry (*PTE*)  
+* Bits **11-0** = Offset into physical page where the start of the data resides  
+
+Let's break down the `.formats` output into each index:  
+
+<pre><code class="plaintext">                            PML4 idx.   PDPT idx.   PDT idx.    PTE idx.     page idx.
+Binary:  11111111 11111111 [11111000 0][0000101 00][101110 001][11111 11110][000 10010000]
+</code></pre>
+
+Each level of the page hierarchy is just an array of 512 (0x200) `_MMPTE_HARDWARE` structures. To get the PML4 entry, index into the array starting at `CR3` by the PML4 index found from the `.formats` command above. Remember the `-p` flag to `dt` or this will fail. Also, instead of prefixing binary with `0b`, which would make too much sense, WinDbg prefixes binary with `0y`.  
+
+<pre><code class="plaintext">0: kd> dt -p _MMPTE_HARDWARE @@C++(@cr3+@@(0y111110000)*sizeof(_MMPTE_HARDWARE))
 nt!_MMPTE_HARDWARE
    +0x000 Valid            : 0y1
    +0x000 Dirty1           : 0y1
@@ -130,16 +135,17 @@ nt!_MMPTE_HARDWARE
    +0x000 WsleAge          : 0y0000
    +0x000 WsleProtection   : 0y000
    +0x000 NoExecute        : 0y0
-```
-Let's also look at the entry with `!dq`:
-```
-0: kd> !dq @@C++(@cr3+@@(0y111110000)*sizeof(_MMPTE_HARDWARE)) L1
+</code></pre>
+
+Let's also look at the entry with `!dq`:  
+
+<pre><code class="plaintext">0: kd> !dq @@C++(@cr3+@@(0y111110000)*sizeof(_MMPTE_HARDWARE)) L1
 #  1adf80 00000000`04b09063
-```
+</code></pre>
 
 To get to the Page Directory Pointer Table (PDPT) entry from here we need to take the `PageFrameNumber`, shift it back into its original position in `_MMPTE_HARDWARE` via a shift left by 12 (0xc) bits and then take the PDPT index. You can also just mask the QWORD that represents the entry (ex. 0x0000000004b09063 & 0xfffffffff000).  
-```
-0: kd> dt -p _MMPTE_HARDWARE @@C++((0x4b09<<0xc)+@@(0y000010100)*sizeof(_MMPTE_HARDWARE))
+
+<pre><code class="plaintext">0: kd> dt -p _MMPTE_HARDWARE @@C++((0x4b09<<0xc)+@@(0y000010100)*sizeof(_MMPTE_HARDWARE))
 nt!_MMPTE_HARDWARE
    +0x000 Valid            : 0y1
    +0x000 Dirty1           : 0y1
@@ -159,11 +165,11 @@ nt!_MMPTE_HARDWARE
    +0x000 WsleAge          : 0y0000
    +0x000 WsleProtection   : 0y000
    +0x000 NoExecute        : 0y0
-```
+</code></pre>
 
 Now for the PDE and PTE levels, which are calculated the same way, using the next level's PFN.  
-```
-0: kd> dt -p _MMPTE_HARDWARE @@C++((0x4b0a<<0xc)+@@(0y101110001)*sizeof(_MMPTE_HARDWARE))
+
+<pre><code class="plaintext">0: kd> dt -p _MMPTE_HARDWARE @@C++((0x4b0a<<0xc)+@@(0y101110001)*sizeof(_MMPTE_HARDWARE))
 nt!_MMPTE_HARDWARE
    +0x000 Valid            : 0y1
    +0x000 Dirty1           : 0y0
@@ -203,34 +209,36 @@ nt!_MMPTE_HARDWARE
    +0x000 WsleAge          : 0y0000
    +0x000 WsleProtection   : 0y000
    +0x000 NoExecute        : 0y0
-```
+</code></pre>
 
-What happened here? The PTE does not seem valid. Pay close attention to the flags in the PDE.
-```
-   +0x000 LargePage        : 0y1
-```
-This means that the page is part of a *large page* and the attributes from the PDE apply to every page that it would represent. Large pages on x86 represent a whole PDE worth of pages. The math works out to 1GB of pages represented by a large page:
-```
-0: kd> ? 0n512 * 0n512 * 0x1000 // << number of bytes calculation
+What happened here? The PTE does not seem valid. Pay close attention to the flags in the PDE.  
+
+<pre><code class="plaintext">   +0x000 LargePage        : 0y1</code></pre>
+
+This means that the page is part of a *large page* and the attributes from the PDE apply to every page that it would represent. Large pages on x86 represent a whole PDE worth of pages. The math works out to 1GB of pages represented by a large page:  
+
+<pre><code class="plaintext">0: kd> ? 0n512 * 0n512 * 0x1000 // << number of bytes calculation
 Evaluate expression: 1073741824 = 00000000`40000000
 0: kd> ? 0n1024 * 0n1024 * 0n1024 // << 1GB calculation
 Evaluate expression: 1073741824 = 00000000`40000000
-```
+</code></pre>
+
 There are also **huge** pages that work the same way, except at the PDPT level instead.  
 
 To resolve the starting physical address in this situation, you just need to use the remaining bits (20-0) as an offset into the large page PFN. The diagram above (from the `.formats` command) becomes the following:  
-```
-                            PML4 idx.   PDPT idx.   PDT idx.    page idx.
+
+<pre><code class="plaintext">                            PML4 idx.   PDPT idx.   PDT idx.    page idx.
 Binary:  11111111 11111111 [11111000 0][0000101 00][101110 001][11111 11110000 10010000]
-```
+</code></pre>
+
 Now we just need to do the math:  
-```
-0: kd> ? (0x2c00<<c)+0y111111111000010010000
+<pre><code class="plaintext">0: kd> ? (0x2c00<<c)+0y111111111000010010000
 Evaluate expression: 48230544 = 00000000`02dff090
-```
-Validate by dumping out what is at the virtual address for `nt!NtCreateFile` and what is at the physical address we calculated above:
-```
-0: kd> !dq (0x2c00<<c)+0y111111111000010010000
+</code></pre>
+
+Validate by dumping out what is at the virtual address for `nt!NtCreateFile` and what is at the physical address we calculated above:  
+
+<pre><code class="plaintext">0: kd> !dq (0x2c00<<c)+0y111111111000010010000
 # 2dff090 33000000`88ec8148 44c77824`448948c0
 # 2dff0a0 44890000`00207024 89602444`89486824
 # 2dff0b0 00e02484`8b582444 8b485024`44890000
@@ -248,22 +256,24 @@ fffff805`2e3ff0d0  848b4024`44890000 24448900`0000c824
 fffff805`2e3ff0e0  000000c0`24848b38 b824848b`30244489
 fffff805`2e3ff0f0  48282444`89000000 48000000`b024848b
 fffff805`2e3ff100  000017e8`20244489 00000088`c4814800
-```
+</code></pre>
+
 There you have it, validation that the process we followed was correct. If the PDE was not a large page then the PTE would have been valid and bits 11-0 would have been an index into the PFN of the PTE.  
 
 ## Windbg Commands
-Of course it is very annoying to do that whole process manually, so WinDbg provides two ways to accomplish what we just looked at. The `!pte` command will take what is in `CR3` and walk the page tables with the virtual address you give it. To match up with the same example as above:
-```
-0: kd> !pte nt!NtCreateFile
+Of course it is very annoying to do that whole process manually, so WinDbg provides two ways to accomplish what we just looked at. The `!pte` command will take what is in `CR3` and walk the page tables with the virtual address you give it. To match up with the same example as above:  
+
+<pre><code class="plaintext">0: kd> !pte nt!NtCreateFile
                                            VA fffff8052e3ff090
 PXE at FFFFE5F2F97CBF80    PPE at FFFFE5F2F97F00A0    PDE at FFFFE5F2FE014B88    PTE at FFFFE5FC02971FF8
 contains 0000000004B09063  contains 0000000004B0A063  contains 0A00000002C001A1  contains 0000000000000000
 pfn 4b09      ---DA--KWEV  pfn 4b0a      ---DA--KWEV  pfn 2c00      -GL-A--KREV  LARGE PAGE pfn 2dff 
-```
+</code></pre>
+
 This shows the virtual addresses of each level in the hierarchy as well as a breakdown of what each `_MMPTE_HARDWARE` structure contains. 
-There is also the `!vtop` command, which will let you specify what page table base (hardware address) to use as the base of the page tables (PML4). This will become useful to us in investigating KVAS, because we want to be able to look at each page table without having to change `CR3`. Again mirroring the example above to show what data it provides:
-```
-0: kd> r cr3
+There is also the `!vtop` command, which will let you specify what page table base (hardware address) to use as the base of the page tables (PML4). This will become useful to us in investigating KVAS, because we want to be able to look at each page table without having to change `CR3`. Again mirroring the example above to show what data it provides:  
+
+<pre><code class="plaintext">0: kd> r cr3
 cr3=00000000001ad000
 0: kd> ? nt!NtCreateFile
 Evaluate expression: -8773842243440 = fffff805`2e3ff090
@@ -274,12 +284,13 @@ Amd64VtoP: PDPE 0000000004b090a0
 Amd64VtoP: PDE 0000000004b0ab88
 Amd64VtoP: Large page mapped phys 0000000002dff090
 Virtual address fffff8052e3ff090 translates to physical address 2dff090.
-```
+</code></pre>
+
 You can examine the addresses via dump commands prefixed with `!` (ex. `!dq`, `!dd`, `!dc`) and by using dump type (`dt`) with the `-p` flag for physical addresses.  
 
 Note that `!vtop` doesn't play as nice with symbols or WinDbg numbers, so make sure things are in the right format before passing them in. For example, the following commands are invalid to `!vtop`:  
-```
-0: kd> !vtop 1ad000 nt!NtCreateFile
+
+<pre><code class="plaintext">0: kd> !vtop 1ad000 nt!NtCreateFile
 Amd64VtoP: Virt 0000000000000000, pagedir 00000000001ad000
 Amd64VtoP: PML4E 00000000001ad000
 Amd64VtoP: PDPE 0000000100ee1000
@@ -293,7 +304,8 @@ Amd64VtoP: PML4E 00000000001ad000
 Amd64VtoP: PDPE 0000000100ee1018
 Amd64VtoP: zero PDPE
 Virtual address fffff805 translation fails, error 0xD0000147.
-```
+</code></pre>
+
 We will be using these commads to walk the page tables for the rest of the post, but it is good to know how to manually walk them.  
 
 # SMEP
@@ -312,11 +324,17 @@ Your first thought with this implementation may be: "that sounds very memory exp
 
 > Because these applications are fully trusted by the operating system, and already have (or could obtain) the capability to load drivers that could naturally access kernel memory, KVA shadowing is not required for fully-privileged applications.
 
-This includes applications that are run by users in the `BUILTIN\Administrators` group and `processes that execute as a fully-elevated administrator account`. Remember: this is an information disclosure concern, so if that information can already be accessed, disclosing it is not a concern. Low privileged users should not be able to leak kernel memory, so this mitigation will be in full effect for those users.    
- 
-`_KPROCESS.DirectoryTableBase == _KPCR.Prcb.KernelDirectoryTableBase` and has all mappings (user/kernel). Switched out when a context switch occurs. When returning to user mode `KiKernelSysretExit` loads the user mode base from `_KPROCESS.UserDirectoryTableBase` if and only if `_KPROCESS.AddressPolicy` is 0.  
+This includes applications that are run by users in the `BUILTIN\Administrators` group and `processes that execute as a fully-elevated administrator account`. Remember: this is an information disclosure concern, so if that information can already be accessed, disclosing it is not a concern. Low privileged users should not be able to leak kernel memory, so this mitigation will be in full effect for those users.  
 
-With KVAS enabled, the hardware address in CR3 has some flags in the bottom bits. 2 for kernel mode page table (kernel/user exposed) and 1 for user mode page table (user ONLY). To use the `!vtop` command with these values, just mask off the bottom bits. 
+** Below this point is not finished yet. **
+`_KPROCESS.DirectoryTableBase == _KPCR.Prcb.KernelDirectoryTableBase` and has all mappings (user/kernel). Switched out when a context switch occurs. When returning to user mode `nt!KiKernelSysretExit` loads the user mode base from `_KPROCESS.UserDirectoryTableBase` if and only if `_KPROCESS.AddressPolicy` is 0.  
+
+<center>
+![KiKernelSysretExit]({static}/images/windows-10-kvas-and-software-smep/KiKernelSysretExit.png)  
+<small>KiKernelSysretExit checks if `CR3` needs to be updated or not</small>
+</center>
+
+With KVAS enabled, the hardware address in CR3 has some flags in the bottom bits. 2 for kernel mode page table (kernel/user exposed) and 1 for user mode page table (user ONLY). To use the `!vtop` command with these values, just mask off the bottom bits.  
 
 `_KPCR.Prcb.ShadowFlags` will hold 2 for a privileged process and 1 for an unprivileged process.  
 
@@ -405,5 +423,5 @@ g
 I hope you've learned a thing or two from this. I've been wanting to do this investigation for a while, just to nail down the implementation details here. If you have questions feel free to reach out on Twitter [@jgeigerm](https://twitter.com/jgeigerm). For now and as always ~~h a v e f u n i n s i d e~~.  
 
 ## Other resources I didn't find a place for but still wanted to include
-Using KVAS to hide from KPP checks: https://www.cyfyx.com/2019/01/melting-down-patchguard-leveraging-kpti-to-bypass-kernel-patch-protection/  
-Considerations for exploits: https://zerosum0x0.blogspot.com/2019/11/fixing-remote-windows-kernel-payloads-meltdown.html  
+* Using KVAS to hide from KPP checks: [https://www.cyfyx.com/2019/01/melting-down-patchguard-leveraging-kpti-to-bypass-kernel-patch-protection/](https://www.cyfyx.com/2019/01/melting-down-patchguard-leveraging-kpti-to-bypass-kernel-patch-protection/)  
+* Considerations for exploits: [https://zerosum0x0.blogspot.com/2019/11/fixing-remote-windows-kernel-payloads-meltdown.html](https://zerosum0x0.blogspot.com/2019/11/fixing-remote-windows-kernel-payloads-meltdown.html)  
