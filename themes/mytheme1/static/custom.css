@@ -178,13 +178,16 @@ div.post-info#index {
     margin-top: -.5em;
 }
 
-pre > code.hljs {
-    margin: -1em;
-    padding: .7em 1.5em;
+pre code.hljs {
+    padding: 8px;
 }
 
 pre {
+    padding: 0px;
     overflow-x: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .entry-content ol li, .entry-content ul li {
