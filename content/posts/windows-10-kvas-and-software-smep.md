@@ -4,7 +4,6 @@ Category: System Internals
 Tags: windows windows-internals  
 Slug: windows-10-kvas-and-software-smep  
 Authors: wumb0  
-Status: draft   
 
 Kernel Virtual Address Shadow (KVAS) is the Windows implementation of Kernel Page Table Isolation (KPTI). It was introduced to mitigate the [Meltdown](https://meltdownattack.com/meltdown.pdf) vulnerability, which allowed an attacker that could execute code in user mode to leak out data from the kernel by abusing a side channel. While there are plenty of papers and blog posts on Meltdown and KVAS, there isn't much info on an interesting feature that KVAS enables: software SMEP. Unfortunately or fortunately, depending on your interest level in this post and Windows internals, understanding how software SMEP works requires knowledge of x86\_64 paging, regular SMEP, and KVAS, so I'll be getting into those topics enough to give you an understanding of the underlying technology. Near the end I'll be running some experiments to show the internals of what I covered in the technical sections prior.  
 
