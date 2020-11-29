@@ -306,7 +306,7 @@ Amd64VtoP: zero PDPE
 Virtual address fffff805 translation fails, error 0xD0000147.
 </code></pre>
 
-We will be using these commads to walk the page tables for the rest of the post, but it is good to know how to manually walk them.  
+We will be using these commands to walk the page tables for the rest of the post, but it is good to know how to manually walk them.  
 
 # SMEP
 SMEP stands for Supervisor Mode Execution Prevention (or sometimes Protection). The idea here is code in lower privileged memory pages should never be trusted (i.e. executed) by a higher privileged mode. For standard SMEP this means executable pages allocated in user mode should not be executed while in kernel mode. It is enforced by the CPU itself and requires [explicit support](https://www.intel.com/content/dam/www/public/us/en/documents/datasheets/3rd-gen-core-desktop-vol-1-datasheet.pdf). AMD and Intel processors started rolling out support for this feature in around 2012 for Intel (Ivy Bridge) and 2014 for AMD (Family 17h, Family 15h model >60h). SMEP is enabled on a supported processor when bit 20 of the `CR4` register is set. This is consistent between AMD and Intel processors. Do you remember the owner bit (U/K) from the `_MMPTE_HARDWARE` structure? This is the bit that says whether a page belongs to user mode or kernel mode and is how SMEP is enforced. When in kernel mode (supervisor mode), if the owner bit is 1, then the page is owned by user mode and code should not be executed inside of it. This begs the question: well, what if we can flip that bit? Can we execute those pages? The answer there is yes absolutely, until KVAS was introduced. My favorite presentation on this topic is from EKOParty 2015 by Enrique Nissim and Nicolas Economou called [Windows SMEP Bypass U=S](https://github.com/n3k/EKOParty2015_Windows_SMEP_Bypass). We will examine why KVAS mitigates this attack soon.  
@@ -342,7 +342,7 @@ ntdll!_KPROCESS
    +0x8e98 ShadowFlags              : Uint4B
 </code></pre>
 
-Before KVAS, `_KPROCESS.DirectoryTableBase` held the base of the page tables for a particular process. Remember, on a system without KVAS or in a process where KVAS is disabled, the user and kernel page tables are not separated, so `_KPROCESS.DirectoryTableBase` is moved into `CR3` on process context switch. When KVAS is enabled, `_KPROCESS.DirectoryTableBase` holds the complete (user and kernel) page table base. The value of `_KPROCESS.DirectoryTableBase` is moved into `_KPRCB.KernelDirectoryTableBase` when a process context switch occurs. The user-only page table base is held in  `_KPROCESS.UserDirectoryTableBase`. The `_KPROCESS.AddressPolicy` field tells the kernel if a process participates in KVAS. If `_KPROCESS.AddressPolicy` is 1, then KVAS is disabled for the process; if it is 0, then KVAS is enabled. `_KPRCB.ShadowFlags` holds flags that tell the kernel if KVAS is enabled for the process (according to `_KPROCESS.AddressPolicy`) and which page table is active. On entrypoints to the kernel, the value from `_KPRCB.KernelDirectoryTableBase` is loaded into `CR3`. On exit from the kernel `_KPROCESS.UserDirectoryTableBase` is moved into `CR3`. `_KPRCB.RspBaseShadow` and `_KPRCB.UserRspShadow` hold the stack pointer for each mode and are loaded into `RSP` at entry/exit from the kernel, respectively.  
+Before KVAS, `_KPROCESS.DirectoryTableBase` held the base of the page tables for a particular process. Remember, on a system without KVAS or in a process where KVAS is disabled, the user and kernel page tables are not separated, so `_KPROCESS.DirectoryTableBase` is moved into `CR3` on process context switch. When KVAS is enabled, `_KPROCESS.DirectoryTableBase` holds the complete (user and kernel) page table base. The value of `_KPROCESS.DirectoryTableBase` is moved into `_KPRCB.KernelDirectoryTableBase` when a process context switch occurs. The user-only page table base is held in  `_KPROCESS.UserDirectoryTableBase`. The `_KPROCESS.AddressPolicy` field tells the kernel if a process participates in KVAS. If `_KPROCESS.AddressPolicy` is 1, then KVAS is disabled for the process; if it is 0, then KVAS is enabled. `_KPRCB.ShadowFlags` holds flags that tell the kernel if KVAS is enabled for the process (according to `_KPROCESS.AddressPolicy`) and which page table is active. On entry points to the kernel, the value from `_KPRCB.KernelDirectoryTableBase` is loaded into `CR3`. On exit from the kernel `_KPROCESS.UserDirectoryTableBase` is moved into `CR3`. `_KPRCB.RspBaseShadow` and `_KPRCB.UserRspShadow` hold the stack pointer for each mode and are loaded into `RSP` at entry/exit from the kernel, respectively.  
   
 
 In a KVAS participating process, the hardware address in `CR3` has some flags in the bottom bits:  bit 0 is set for a user mode page table and bit 1 is set for a kernel mode page table. This can be seen by examining `_KPROCESS.DirectoryTableBase` and `_KPROCESS.UserDirectoryTableBase` for a KVAS participating process (explorer.exe):  
@@ -440,7 +440,7 @@ Next, let's look at cross references of `KiKvaShadow` just to get an idea of wha
 <small>The shadow flag is checked in many places</small>
 </center>
 
-There are quite a few functions where this flag is checked. Investigating interesting functions is an excercise left up to the reader.
+There are quite a few functions where this flag is checked. Investigating interesting functions is an exercise left up to the reader.
 
 <hr>
 
@@ -857,6 +857,8 @@ The non-elevated process has a `_KPROCESS.AddressPolicy` of 0 and the 1st bit of
 ## Faults
 For this section I will be testing the existence of software SMEP by running with permutations of not only KVAS enabled/disabled, but also with SMEP enabled/disabled. For each case, I have outlined an expected result for fun, let's see if my assumptions match up with reality!  
 
+To test, I'll context switch to a KVAS enabled process (or any process on the KVAS disabled system), set the instruction pointer to executable code in user mode, then I'll single step and see what happens to the system in each case.  
+
 ### KVAS Enabled, SMEP Enabled
 Expected result: fault on user mode page execution in kernel mode  
 
@@ -1176,7 +1178,7 @@ KERNEL32!SortGetSortKey+0xedf:
 00007ff8`b5a02170 ff              ???
 </code></pre>
 
-No crash!!
+**No crash!!**
 
 ### Results
 As expected, all tests but the last caused a crash immediately. Interestingly, the CPU executed the breakpoint instruction and crashed on the next instruction on every test that crashed. Instruction caching? Or just how the CPU is designed. Very interesting!  
@@ -1214,8 +1216,7 @@ There's a bug in the `dt` command where it sign extends bit 31 on 64-bit values 
 Memory read error ffffffffbd6de7f8
 </code></pre>
 
-
-Totally bogus! The solution I found was to wrap the value in the MASM or C++ interpreter:
+Totally bogus! The solution I found was to wrap the value in the MASM or C++ interpreter:  
 
 <pre><code class="plaintext">1: kd> dt -p nt!_MMPTE_HARDWARE @@C++(0x00000000bd6de7f8)
    +0x000 Valid            : 0y1
