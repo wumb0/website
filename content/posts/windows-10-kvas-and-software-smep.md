@@ -1132,7 +1132,7 @@ Arg3: ffff9884ab7f0940, (reserved)
 Arg4: 0000000080000005, (reserved)
 </code></pre>
 
-### KVAS Disabled, SMEP Enabled
+### KVAS Disabled, SMEP Disabled
 Expected result: successful execution in a user mode page  
 
 <pre><code class="plaintext">0: kd> !process 0 0 explorer.exe
