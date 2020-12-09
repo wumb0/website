@@ -319,11 +319,11 @@ To avoid information disclosure from a successful exploit of the Meltdown vulner
 
 Check out the [Microsoft blog post describing the implementation](https://msrc-blog.microsoft.com/2018/03/23/kva-shadow-mitigating-meltdown-on-windows/). Fortinet also has a [great post](https://www.fortinet.com/blog/threat-research/a-deep-dive-analysis-of-microsoft-s-kernel-virtual-address-shadow-feature) on the internals of how KVAS is initialized in the kernel.
 
-Your first thought with this implementation may be: "that sounds very memory expensive!". The overhead of having two sets of paging structures (which occupy some memory) is definitely nonzero. However, one optimization that exists relies on the fact that Microsoft does not consider the boundary between an administrator account and the kernel to be a security boundary. Processes that execute in an elevated context do not use KVAS at all! From [Microsoft](https://msrc-blog.microsoft.com/2018/03/23/kva-shadow-mitigating-meltdown-on-windows/)
+Your first thought with this implementation may be: "that sounds very memory expensive!". The overhead of having two sets of paging structures (which occupy some memory) per process is definitely nonzero. However, one optimization that exists relies on the fact that Microsoft does not consider the boundary between an administrator account and the kernel to be a security boundary. Processes that execute in an elevated context do not use KVAS at all! From [Microsoft](https://msrc-blog.microsoft.com/2018/03/23/kva-shadow-mitigating-meltdown-on-windows/)
 
 > Because these applications are fully trusted by the operating system, and already have (or could obtain) the capability to load drivers that could naturally access kernel memory, KVA shadowing is not required for fully-privileged applications.
 
-This includes applications that are run by users in the `BUILTIN\Administrators` group and _processes that execute as a fully-elevated administrator account_. Remember: this is an information disclosure concern, so if that information can already be accessed, disclosing it is not a concern. Low privileged users should not be able to leak kernel memory, so this mitigation will be in full effect for those users.  
+This includes applications that are run by users in the `BUILTIN\Administrators` group and *"processes that execute as a fully-elevated administrator account"*. Remember: this is an information disclosure concern, so if that information can already be accessed, disclosing it is not a concern. Low privileged users should not be able to leak kernel memory, so this mitigation will be in full effect for those users.  
 
 <hr>
 
