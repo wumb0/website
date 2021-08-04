@@ -15,5 +15,5 @@ You should also set it in `HKLM\SOFTWARE\WOW6432Node\Microsoft\Symbol Server` to
 
 This issue will happen with cdb.exe and kd.exe, so I hope this solution helps someone.  
 
-https://stackoverflow.com/questions/5095328/cannot-download-microsoft-symbols-when-running-cdb-in-a-windows-service
-https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/configuring-the-registry
+[https://stackoverflow.com/questions/5095328/cannot-download-microsoft-symbols-when-running-cdb-in-a-windows-service](https://stackoverflow.com/questions/5095328/cannot-download-microsoft-symbols-when-running-cdb-in-a-windows-service)  
+[https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/configuring-the-registry](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/configuring-the-registry)  
