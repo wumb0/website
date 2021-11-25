@@ -354,7 +354,7 @@ let kernel_base = cursor as usize;
 ```
 Obviously, this code has to be version dependent so we can still use the `KUSER_SHARED_DATA` version detection method to decide which step amount to use. The algorithm is the same as before, but instead of rounding down to the nearest page and then scanning backward by page size, we use 0x200000. 
 
-If Microsoft decides to change the .text section offset or puts more unmapped regions between sections this will need to be re-written. 
+If Microsoft decides to change the `.text` section offset or puts more unmapped regions between sections this will need to be re-written. 
 
 # Wrap Up
 I hope that this post has been informative! I thought there was going to be more in the solutions section than literature review, but I think this ended up being a good round up of info regardless. It's been something I've wanted to post for a few months but finally took the time to write it up properly. I have been working on a few projects this year that I am excited to talk about in the coming months, so look out for those! Also, Shmoocon is coming up and I'll be there in person so come say hi.  
