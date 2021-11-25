@@ -1,7 +1,7 @@
 Title: sqlalchemy Magic
 Date: 2018-03-04 00:06
 Category: Programming
-Tags: python sqlalchemy
+Tags: python, sqlalchemy
 Slug: sqlalchemy-magic
 Authors: wumb0
 

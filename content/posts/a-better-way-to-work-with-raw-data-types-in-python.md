@@ -1,7 +1,7 @@
 Title: A Better Way to Work with Raw Data Types in Python
 Date: 2017-03-11 11:12
 Category: Programming
-Tags: python ctypes
+Tags: python, ctypes
 Slug: a-better-way-to-work-with-raw-data-types-in-python
 Authors: wumb0
 

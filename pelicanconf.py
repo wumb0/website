@@ -47,18 +47,18 @@ DEFAULT_PAGINATION = 10
 #--------------User Conf----------------
 PLUGIN_PATHS = ['pelican-plugins']
 CSS_FILES = (
-                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/css/uikit.min.css",
-                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/css/uikit.gradient.min.css",
-                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/css/components/tooltip.gradient.min.css",
+                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/css/uikit.min.css",
+                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/css/uikit.gradient.min.css",
+                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/css/components/tooltip.gradient.min.css",
                 "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css",
                 "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css",
                 "/theme/custom.css",
             )
 JS_FILES = (
                 "https://code.jquery.com/jquery-2.2.4.min.js",
-                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/js/uikit.min.js",
-                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/js/components/tooltip.min.js",
-                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/js/core/dropdown.min.js",
+                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/js/uikit.min.js",
+                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/js/components/tooltip.min.js",
+                "https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/js/core/dropdown.min.js",
                 "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js",
                 "/theme/custom.js",
            )

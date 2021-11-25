@@ -1,7 +1,7 @@
 Title: Extracting and Diffing Windows Patches in 2020  
 Date: 2020-08-23 11:51  
 Category: Vuln. Research  
-Tags: patch-diff VR bindiff patch-delta  
+Tags: patch-diff, VR, bindiff, patch-delta  
 Slug: extracting-and-diffing-ms-patches-in-2020 
 Authors: wumb0  
 

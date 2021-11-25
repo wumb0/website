@@ -1,7 +1,7 @@
 Title: Using kd.exe from VSCode Remote
 Date: 2021-07-02 22:36
 Category: Misc
-Tags: windows windows-kernel
+Tags: windows, windows-kernel
 Slug: using-kd.exe-from-vscode-remote
 Authors: wumb0
 

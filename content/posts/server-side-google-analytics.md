@@ -1,7 +1,7 @@
 Title: Server Side Google Analytics
 Date: 2017-09-21 19:37
 Category: Sysadmin
-Tags: nginx,google analytics
+Tags: nginx, google analytics
 Slug: server-side-google-analytics
 Authors: wumb0
 

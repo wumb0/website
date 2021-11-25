@@ -24,3 +24,6 @@ $("summary").on('click', function(e) {
         di.addClass(classname);
     }
 });
+
+// https://stackoverflow.com/a/43321596
+$("summary").mousedown(function(e) { if (e.detail > 1) { e.preventDefault(); } });

@@ -1,7 +1,7 @@
 Title: Windows 10 KVAS and Software SMEP  
 Date: 2020-11-14 20:32  
 Category: System Internals  
-Tags: windows windows-internals  
+Tags: windows, windows-internals  
 Slug: windows-10-kvas-and-software-smep  
 Authors: wumb0  
 
@@ -231,13 +231,14 @@ Binary:  11111111 11111111 [11111000 0][0000101 00][101110 001][11111 11110000 1
 </code></pre>
 
 Now we just need to do the math:  
-<pre><code class="plaintext">0: kd> ? (0x2c00<<c)+0y111111111000010010000
+
+<pre><code class="plaintext">0: kd> ? (0x2c00&lt;&lt;c)+0y111111111000010010000
 Evaluate expression: 48230544 = 00000000`02dff090
 </code></pre>
 
 Validate by dumping out what is at the virtual address for `nt!NtCreateFile` and what is at the physical address we calculated above:  
 
-<pre><code class="plaintext">0: kd> !dq (0x2c00<<c)+0y111111111000010010000
+<pre><code class="plaintext">0: kd> !dq (0x2c00&lt;&lt;c)+0y111111111000010010000
 # 2dff090 33000000`88ec8148 44c77824`448948c0
 # 2dff0a0 44890000`00207024 89602444`89486824
 # 2dff0b0 00e02484`8b582444 8b485024`44890000

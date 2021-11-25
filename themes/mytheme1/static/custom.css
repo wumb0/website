@@ -206,3 +206,12 @@ pre {
 summary {
     overflow: hidden;
 }
+
+.alert-text {
+    padding-left: 15px;
+}
+
+.img-center {
+    width: 100%;
+    margin:0 auto;
+}
