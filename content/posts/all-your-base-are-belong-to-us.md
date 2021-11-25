@@ -323,7 +323,7 @@ In kernel versions prior to 20H1, the .text section of the kernel binary bordere
 Scanning backwards page-by-page is obviously going to run us into unmapped memory and cause an access violation.  
 
 ## hal.dll
-Another interesting change in the kernel in 20H1+ is that the Hardware Abstraction Layer (HAL) has moved into the kernel image itself and no longer lives inside of hal.dll. If you open up hal.dll in a disassembler, you will notice that it actually does not even have a .text section. It is just a forwarding DLL that forwards exports into the kernel. The forwarding is done to not break backwards compatibility with drivers and components that expect to import HAL functionality from hal.dll and not ntoskrnl.exe.  
+Another interesting change in the kernel in 20H1+ is that the Hardware Abstraction Layer (HAL) has moved into the kernel image itself and no longer lives inside of hal.dll. If you open up hal.dll in a disassembler, you will notice that it actually does not even have a .text section. It is just a forwarding DLL that [forwards exports](https://docs.microsoft.com/en-us/archive/msdn-magazine/2002/march/inside-windows-an-in-depth-look-into-the-win32-portable-executable-file-format-part-2#export-forwarding) into the kernel. The forwarding is done to not break backwards compatibility with drivers and components that expect to import HAL functionality from hal.dll and not ntoskrnl.exe.  
 
 <center>
 ![hal.dll]({static}/images/all-your-base-are-belong-to-us/hal-segments.png)  
