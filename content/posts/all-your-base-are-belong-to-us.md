@@ -4,6 +4,7 @@ Category: System Internals
 Tags: windows, windows-kernel, windows-internals, programming
 Slug: finding-the-base-of-the-windows-kernel
 Authors: wumb0
+Status: draft
 
 Recently-ish (~2020), Microsoft changed the way the kernel image is mapped and also some implementation details of hal.dll. The kernel changes have caused existing methods of finding the base of the kernel via shellcode or a leak and arbitrary read to crash. This obviously isn't great, so I decided to figure out a way around the issue to support some code I've been writing in my free time (maybe more on that later).  
 
