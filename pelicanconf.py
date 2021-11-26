@@ -96,4 +96,9 @@ MARKDOWN = {
     },
     'output_format': 'html5',
 }
+
+import sys, os
+sys.path.append(os.path.dirname(__file__))
+import postfilter
+JINJA_FILTERS = {'datefilter':postfilter.datefilter}
 #--------------/User Conf----------------
