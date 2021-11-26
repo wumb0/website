@@ -295,7 +295,7 @@ Talking about how more specific kernel memory leaks work is outside the scope of
 Version detection can be accomplished by looking at the `NtMajorVersion`, `NtMinorVersion`, `NtBuildNumber`, and `NtProductType` fields of [KUSER_SHARED_DATA](https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/ntddk/ns-ntddk-kuser_shared_data), which is always located in the kernel at 0xFFDF0000 (32-bit) or 0xFFFFF78000000000 (64-bit). Microsoft hasn't gotten around to randomizing it yet, but according to one Windows OS engineer [changes in KUSER_SHARED_DATA are coming](https://twitter.com/rohitwas/status/1442966987198459904 )!  
 
 <div class="uk-alert">
-    <i class="fa fa-info-circle fa-lg"></i><span class="alert-text">Funny enough, at least on the Windows 11 Beta, the <code>NtMajorVersion</code> is still 10</span>
+    <i class="fa fa-info-circle fa-lg"></i><span class="alert-text">Funny enough the <code>NtMajorVersion</code> is still 10 on Windows 11</span>
 </div>
 
 # What Has Changed?
