@@ -1,9 +1,8 @@
 Title: Finding the Base of the Windows Kernel
-Date: 2021-11-14 12:00
+Date: 2021-11-26 12:00
 Category: System Internals
 Tags: windows, windows-kernel, windows-internals, programming
 Slug: all-your-base-are-belong-to-us
-Status: draft
 Authors: wumb0
 
 Recently-ish (~2020), Microsoft changed the way the kernel image is mapped and also some implementation details of hal.dll. The kernel changes have caused existing methods of finding the base of the kernel via shellcode or a leak and arbitrary read to crash. This obviously isn't great, so I decided to figure out a way around the issue to support some code I've been writing in my free time (maybe more on that later).  
@@ -58,7 +57,7 @@ To get a kernel address from an exploit you usually have to have a memory leak (
 ### KPCR
 Each logical processor on a Windows system has an associated structure called the Kernel Processor Control Region (KPCR). The KPCR is a **massive** structure, coming in at 0xC000 bytes as of the Windows 11 Beta. The first 0x180 bytes are [almost](https://www.vergiliusproject.com/kernels/x64/Windows%20XP%20|%202003/SP2/_KPCR) [entirely](https://www.vergiliusproject.com/kernels/x64/Windows%207%20|%202008R2/SP1/_KPCR) [consistent](https://www.vergiliusproject.com/kernels/x64/Windows%208.1%20|%202012R2/Update%201/_KPCR) [across](https://www.vergiliusproject.com/kernels/x64/Windows%2010%20|%202016/1809%20Redstone%205%20(October%20Update)/_KPCR) [versions](https://www.vergiliusproject.com/kernels/x64/Windows%2011/Insider%20Preview%20(Jun%202021)/_KPCR). At offset 0x180 lies the nested Kernel Processor Region Control Block (KPRCB) structure, which is very large and the reason that the KPCR is as large as it is. Members are added when major features (like [KVAS]({filename}/posts/windows-10-kvas-and-software-smep.md)) are added to the OS.  
 
-On 64-bit Windows, the GS segment register points to the KPCR for that processor. The `swapgs` instruction at kernel entry points (such as the system call handler, KiSystemCall64\[Shadow\], and Interrupt Service Routines (ISRs)) causes the processor to swap the contents of Model Specific Register (MSR) 0xC0000101 (GSBASE) with MSR 0xC0000102 (KERNEL_GSBASE). GSBASE is also the contents of the GS segment register. On 32-bit, 0x30 is explicitly loaded into FS at kernel entry points, and the GDT entry at offset 0x30 defines the base as the address of the KPCR for that processor.  
+On 64-bit Windows, the GS segment register points to the KPCR for that processor. The `swapgs` instruction at kernel entry points (such as the system call handler, `KiSystemCall64\[Shadow\]`, and Interrupt Service Routines (ISRs)) causes the processor to swap the contents of Model Specific Register (MSR) 0xC0000101 (GSBASE) with MSR 0xC0000102 (KERNEL_GSBASE). GSBASE is also the contents of the GS segment register. On 32-bit, 0x30 is explicitly loaded into FS at kernel entry points, and the GDT entry at offset 0x30 defines the base as the address of the KPCR for that processor.  
 
 <div class="uk-grid">
     <div class="uk-width-medium-1-2 uk-width-small-1-1">
@@ -303,7 +302,7 @@ Version detection can be accomplished by looking at the `NtMajorVersion`, `NtMin
 Now that we are all up to speed on what techniques are already out there, we need to take a look at what Microsoft has changed in the most recent versions of Windows that get in the way of some of these techniques and then how to work around these changes to make sure exploitation and/or execution can keep working on 20H1 and higher.  
 
 ## Kernel Mapping
-In kernel versions prior to 20H1, the .text section of the kernel binary bordered the top of the image. This means that it also bordered the PE header for the image. This fact is why it is possible to use the scanback technique from a pointer into the text section. In kernel versions 20H1 and up, the text section no longer borders the PE header. In fact, no code sections at all border the PE header. The .rdata (read-only data), .idata (import data) and .pdata sections now border the PE header. After those sections comes a section called `PROTDATA`, a large region of unallocated memory, and then the text section at 0x200000 bytes offset from the base of the PE. Additionally, .text and KVASCODE are no longer contiguous in memory and are separated by more unmapped pages.  
+In kernel versions prior to 20H1, the `.text` section of the kernel binary bordered the top of the image. This means that it also bordered the PE header for the image. This fact is why it is possible to use the scanback technique from a pointer into the `.text` section. In kernel versions 20H1 and up, the `.text` section no longer borders the PE header. In fact, no code sections at all border the PE header. The `.rdata` (read-only data), `.idata` (import data) and `.pdata` (exception data) sections now border the PE header. After those sections comes a section called `PROTDATA`, a large region of unallocated memory, and then the text section at 0x200000 bytes offset from the base of the PE. Fortunately, `.text` and `KVASCODE` are contiguous with the sections in between them.   
 
 <div class="uk-grid">
     <div class="uk-width-1-1">
@@ -323,7 +322,7 @@ In kernel versions prior to 20H1, the .text section of the kernel binary bordere
 Scanning backwards page-by-page is obviously going to run us into unmapped memory and cause an access violation.  
 
 ## hal.dll
-Another interesting change in the kernel in 20H1+ is that the Hardware Abstraction Layer (HAL) has moved into the kernel image itself and no longer lives inside of hal.dll. If you open up hal.dll in a disassembler, you will notice that it actually does not even have a .text section. It is just a forwarding DLL that [forwards exports](https://docs.microsoft.com/en-us/archive/msdn-magazine/2002/march/inside-windows-an-in-depth-look-into-the-win32-portable-executable-file-format-part-2#export-forwarding) into the kernel. The forwarding is done to not break backwards compatibility with drivers and components that expect to import HAL functionality from hal.dll and not ntoskrnl.exe.  
+Another interesting change in the kernel in 20H1+ is that the Hardware Abstraction Layer (HAL) has moved into the kernel image itself and no longer lives inside of hal.dll. If you open up hal.dll in a disassembler, you will notice that it actually does not even have a `.text` section. It is just a forwarding DLL that [forwards exports](https://docs.microsoft.com/en-us/archive/msdn-magazine/2002/march/inside-windows-an-in-depth-look-into-the-win32-portable-executable-file-format-part-2#export-forwarding) into the kernel. The forwarding is done to not break backwards compatibility with drivers and components that expect to import HAL functionality from hal.dll and not ntoskrnl.exe.  
 
 <center>
 ![hal.dll]({static}/images/all-your-base-are-belong-to-us/hal-segments.png)  
@@ -331,7 +330,7 @@ Another interesting change in the kernel in 20H1+ is that the Hardware Abstracti
 </center>
 
 # Fixing Scanback
-Since the new version of the kernel has the .text section starting at 0x200000 we can adjust our scanback to the following algorithm:
+Since the new version of the kernel has the `.text` section starting at 0x200000 we can adjust our scanback to the following algorithm:
 
 ```rust
 const KUSER_SHARED_DATA: usize = 0xFFFFF78000000000;
