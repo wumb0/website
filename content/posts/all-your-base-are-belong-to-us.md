@@ -44,7 +44,7 @@ We will see later that #2 isn't true on newer versions of Windows.
 
 Every PE file starts with the bytes `MZ` (0x5a4d). To see if we have reached the beginning of the PE file, we can check to see if the page starts with `MZ`. If it does not, continue scanning back, if it does, then you have (probably) found the base of the image. I recommend doing a little bit more validation than that, such as seeing if the suspected base address + [`IMAGE_DOS_HEADER.e_lfanew`](https://www.nirsoft.net/kernel_struct/vista/IMAGE_DOS_HEADER.html) contains the bytes `PE` (0x4550).  
 
-If you're interested in a code implementation of this technique, here's [some code](https://github.com/zerosum0x0/SassyKitdi/blob/master/src/common/resolver/src/lib.rs#L45) from [zerosum0x0](https://twitter.com/zerosum0x0).  
+If you're interested in a code implementation of this technique, here's [some code](https://github.com/wumb0/zerosum0x0_SassyKitdi/blob/master/src/common/resolver/src/lib.rs#L45) from [zerosum0x0](https://twitter.com/zerosum0x0).  
 
 ### Relative Virtual Address (RVA)
 The lamest of the kernel base finding methods is just to hard code the Relative Virtual Address (RVA) of the leaked symbol into your shellcode or exploit. This requires knowing the exact version(s) your code will be running on ahead of time and also requires version detection to support multiple versions of the kernel.  
@@ -94,7 +94,7 @@ fffff802`35d8b074  fffff802`39448e00 nt!KiDebugServiceTrap+0x40
 fffff802`35d8b07c  00104a40`00000000
 </code></pre>
 
-If you look a bit lower in the code from zerosum0x0 that I linked earlier you can see this is [exactly the method being used](https://github.com/zerosum0x0/SassyKitdi/blob/master/src/common/resolver/src/lib.rs#L65) to get a kernel address.  
+If you look a bit lower in the code from zerosum0x0 that I linked earlier you can see this is [exactly the method being used](https://github.com/wumb0/zerosum0x0_SassyKitdi/blob/master/src/common/resolver/src/lib.rs#L65) to get a kernel address.  
 
 #### KTHREAD Pointers
 One of the fields in the KPRCB that is consistent across versions of the kernel is the `CurrentThread` field at offset 8. This would be at the KPCR at offset 0x188 (x64). In fact, you'll see this offset repeatedly in the kernel, as this is what the kernel uses to get a pointer to the current thread running on the processor.  
