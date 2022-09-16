@@ -1305,7 +1305,7 @@ fffff806`6e3f1060  61 70 70 65 64 20 72 65-61 64 2e 00 00 00 00 00  apped read..
 fffff806`6e3f1070  4f 76 65 72 6c 61 70 70-65 64 28 65 76 65 6e 74  Overlapped(event
 ```
 
-It is possible that these DLLs/drivers were really here at *some point* but they are gone now and what is left will mess up our page-at-a-time scanback technique to find the base of the kernel. 
+It is possible that these DLLs/drivers were really here at *some point* but they are gone now and may have been replaced by other data. Regardless, what is left will mess up our page-at-a-time scanback technique to find the base of the kernel. 
 
 ## hal.dll
 Another interesting change in the kernel in 20H1+ is that the Hardware Abstraction Layer (HAL) has moved into the kernel image itself and no longer lives inside of hal.dll. If you open up hal.dll in a disassembler, you will notice that it actually does not even have a `.text` section. It is just a forwarding DLL that [forwards exports](https://docs.microsoft.com/en-us/archive/msdn-magazine/2002/march/inside-windows-an-in-depth-look-into-the-win32-portable-executable-file-format-part-2#export-forwarding) into the kernel. The forwarding is done to not break backwards compatibility with drivers and components that expect to import HAL functionality from hal.dll and not ntoskrnl.exe.  
