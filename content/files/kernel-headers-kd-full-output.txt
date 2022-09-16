@@ -1,0 +1,4610 @@
+Opened log file 'C:\Users\wumb0\Desktop\kd.txt'
+0: kd> .foreach (addr { s -[1]b nt L200000 4d 5a 90 00 03 }) { .echo ${addr}; dc ${addr} L20; !dh ${addr}; .echo }
+.foreach (addr { s -[1]b nt L200000 4d 5a 90 00 03 }) { .echo ${addr}; dc ${addr} L20; !dh ${addr}; .echo }
+0xfffff806`6e200000
+fffff806`6e200000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e200010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e200020  00000000 00000000 00000000 00000000  ................
+fffff806`6e200030  00000000 00000000 00000000 00000118  ................
+fffff806`6e200040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e200050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e200060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e200070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: EXECUTABLE IMAGE
+FILE HEADER VALUES
+    8664 machine (X64)
+      21 number of sections
+73F1C0C4 time date stamp Fri Aug 22 23:49:24 2031
+
+       0 file pointer to symbol table
+       0 number of symbols
+      F0 size of optional header
+      22 characteristics
+            Executable
+            App can handle >2gb addresses
+
+OPTIONAL HEADER VALUES
+     20B magic #
+   14.20 linker version
+  8B5600 size of code
+  1B7E00 size of initialized data
+  495000 size of uninitialized data
+  98D010 address of entry point
+    1000 base of code
+         ----- new -----
+fffff8066e200000 image base
+    1000 section alignment
+     200 file alignment
+       1 subsystem (Native)
+   10.00 operating system version
+   10.00 image version
+   10.00 subsystem version
+ 1046000 size of image
+     800 size of headers
+  A65799 checksum
+0000000000080000 size of stack reserve
+0000000000002000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+    4160  DLL characteristics
+            High entropy VA supported
+            Dynamic base
+            NX compatible
+            Guard
+  134000 [   18C86] address [size] of Export Directory
+  131630 [     168] address [size] of Import Directory
+ 1000000 [   3B23C] address [size] of Resource Directory
+   C9000 [   67A7C] address [size] of Exception Directory
+  A56600 [    2540] address [size] of Security Directory
+ 103C000 [    50B4] address [size] of Base Relocation Directory
+   108E0 [      54] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+       0 [       0] address [size] of Thread Storage Directory
+    5B30 [     118] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+  131000 [     620] address [size] of Import Address Table Directory
+       0 [       0] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+  .rdata name
+   C7940 virtual size
+    1000 virtual address
+   C7A00 size of raw data
+     800 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+48000040 flags
+         Initialized Data
+         Not Paged
+         (no align specified)
+         Read Only
+
+
+Debug Directories(3)
+	Type       Size     Address  Pointer
+	cv           25       406e0    3fee0	Format: RSDS, guid, 1, ntkrnlmp.pdb
+	(   13)    1568       40708    3ff08
+	(   16)      24       41cc4    414c4
+
+SECTION HEADER #2
+  .pdata name
+   67A7C virtual size
+   C9000 virtual address
+   67C00 size of raw data
+   C8200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+48000040 flags
+         Initialized Data
+         Not Paged
+         (no align specified)
+         Read Only
+
+SECTION HEADER #3
+  .idata name
+    20C2 virtual size
+  131000 virtual address
+    2200 size of raw data
+  12FE00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+48000040 flags
+         Initialized Data
+         Not Paged
+         (no align specified)
+         Read Only
+
+SECTION HEADER #4
+  .edata name
+   18C86 virtual size
+  134000 virtual address
+   18E00 size of raw data
+  132000 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #5
+PROTDATA name
+       1 virtual size
+  14D000 virtual address
+     200 size of raw data
+  14AE00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+48000040 flags
+         Initialized Data
+         Not Paged
+         (no align specified)
+         Read Only
+
+SECTION HEADER #6
+   GFIDS name
+    8BFC virtual size
+  14E000 virtual address
+    8C00 size of raw data
+  14B000 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+SECTION HEADER #7
+    Pad1 name
+   A9000 virtual size
+  157000 virtual address
+       0 size of raw data
+       0 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000080 flags
+         Uninitialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+SECTION HEADER #8
+   .text name
+  3C6F59 virtual size
+  200000 virtual address
+  3C7000 size of raw data
+  153C00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+68000020 flags
+         Code
+         Not Paged
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #9
+    PAGE name
+  3C5716 virtual size
+  5C7000 virtual address
+  3C5800 size of raw data
+  51AC00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #A
+  PAGELK name
+   24E74 virtual size
+  98D000 virtual address
+   25000 size of raw data
+  8E0400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #B
+POOLCODE name
+     48B virtual size
+  9B2000 virtual address
+     600 size of raw data
+  905400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+68000020 flags
+         Code
+         Not Paged
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #C
+  PAGEKD name
+    5B92 virtual size
+  9B3000 virtual address
+    5C00 size of raw data
+  905A00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #D
+PAGEVRFY name
+   320EC virtual size
+  9B9000 virtual address
+   32200 size of raw data
+  90B600 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #E
+PAGEHDLS name
+    25D6 virtual size
+  9EC000 virtual address
+    2600 size of raw data
+  93D800 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #F
+PAGEBGFX name
+    69EA virtual size
+  9EF000 virtual address
+    6A00 size of raw data
+  93FE00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #10
+INITKDBG name
+   195BA virtual size
+  9F6000 virtual address
+   19600 size of raw data
+  946800 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+68000020 flags
+         Code
+         Not Paged
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #11
+TRACESUP name
+    175B virtual size
+  A10000 virtual address
+    1800 size of raw data
+  95FE00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+68000020 flags
+         Code
+         Not Paged
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #12
+KVASCODE name
+    23DE virtual size
+  A12000 virtual address
+    2400 size of raw data
+  961600 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+68000020 flags
+         Code
+         Not Paged
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #13
+  RETPOL name
+     740 virtual size
+  A15000 virtual address
+     800 size of raw data
+  963A00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+68000020 flags
+         Code
+         Not Paged
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #14
+  MINIEX name
+    25AE virtual size
+  A16000 virtual address
+    2600 size of raw data
+  964200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+62000020 flags
+         Code
+         Discardable
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #15
+    INIT name
+   8AA98 virtual size
+  A19000 virtual address
+   8AC00 size of raw data
+  966800 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+62000020 flags
+         Code
+         Discardable
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #16
+    Pad2 name
+  15C000 virtual size
+  AA4000 virtual address
+       0 size of raw data
+       0 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+62000080 flags
+         Uninitialized Data
+         Discardable
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #17
+   .data name
+   FA018 virtual size
+  C00000 virtual address
+   13000 size of raw data
+  9F1400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C8000040 flags
+         Initialized Data
+         Not Paged
+         (no align specified)
+         Read Write
+
+SECTION HEADER #18
+ALMOSTRO name
+   272E0 virtual size
+  CFB000 virtual address
+    1400 size of raw data
+  A04400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C8000040 flags
+         Initialized Data
+         Not Paged
+         (no align specified)
+         Read Write
+
+SECTION HEADER #19
+CACHEALI name
+    92C0 virtual size
+  D23000 virtual address
+     200 size of raw data
+  A05800 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C8000040 flags
+         Initialized Data
+         Not Paged
+         (no align specified)
+         Read Write
+
+SECTION HEADER #1A
+PAGEDATA name
+   12150 virtual size
+  D2D000 virtual address
+    1800 size of raw data
+  A05A00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #1B
+PAGEVRFD name
+   15D00 virtual size
+  D40000 virtual address
+    8000 size of raw data
+  A07200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #1C
+INITDATA name
+   17C44 virtual size
+  D56000 virtual address
+     800 size of raw data
+  A0F200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C2000020 flags
+         Code
+         Discardable
+         (no align specified)
+         Read Write
+
+SECTION HEADER #1D
+    Pad3 name
+   92000 virtual size
+  D6E000 virtual address
+       0 size of raw data
+       0 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C2000080 flags
+         Uninitialized Data
+         Discardable
+         (no align specified)
+         Read Write
+
+SECTION HEADER #1E
+   CFGRO name
+    1CC8 virtual size
+  E00000 virtual address
+    1E00 size of raw data
+  A0FA00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C8000040 flags
+         Initialized Data
+         Not Paged
+         (no align specified)
+         Read Write
+
+SECTION HEADER #1F
+    Pad4 name
+  1FE000 virtual size
+  E02000 virtual address
+       0 size of raw data
+       0 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+CA000080 flags
+         Uninitialized Data
+         Discardable
+         Not Paged
+         (no align specified)
+         Read Write
+
+SECTION HEADER #20
+   .rsrc name
+   3B23C virtual size
+ 1000000 virtual address
+   3B400 size of raw data
+  A11800 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+SECTION HEADER #21
+  .reloc name
+    9964 virtual size
+ 103C000 virtual address
+    9A00 size of raw data
+  A4CC00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e353000
+fffff806`6e353000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e353010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e353020  00000000 00000000 00000000 00000000  ................
+fffff806`6e353030  00000000 00000000 00000000 00000100  ................
+fffff806`6e353040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e353050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e353060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e353070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+    8664 machine (X64 (CHPEv2))
+       7 number of sections
+C4C8266F time date stamp Tue Aug 14 01:49:35 2074
+
+       0 file pointer to symbol table
+       0 number of symbols
+      F0 size of optional header
+    2022 characteristics
+            Executable
+            App can handle >2gb addresses
+            DLL
+
+OPTIONAL HEADER VALUES
+     20B magic #
+   14.20 linker version
+   47200 size of code
+   1B200 size of initialized data
+       0 size of uninitialized data
+   11670 address of entry point
+    1000 base of code
+         ----- new -----
+00007ff81fb20000 image base
+    1000 section alignment
+     200 file alignment
+       2 subsystem (Windows GUI)
+   10.00 operating system version
+   10.00 image version
+   10.00 subsystem version
+   67000 size of image
+     400 size of headers
+   6840A checksum
+0000000000040000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+    4160  DLL characteristics
+            High entropy VA supported
+            Dynamic base
+            NX compatible
+            Guard
+   58F20 [    1680] address [size] of Export Directory
+   5A5A0 [     2E4] address [size] of Import Directory
+   64000 [    1E70] address [size] of Resource Directory
+   5F000 [    39C0] address [size] of Exception Directory
+   61600 [    3410] address [size] of Security Directory
+   66000 [     500] address [size] of Base Relocation Directory
+   4CDE0 [      70] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+       0 [       0] address [size] of Thread Storage Directory
+   49610 [     118] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+   4A410 [     818] address [size] of Import Address Table Directory
+   57120 [     1C0] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+   470A3 virtual size
+    1000 virtual address
+   47200 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #2
+  .rdata name
+   135E6 virtual size
+   49000 virtual address
+   13600 size of raw data
+   47600 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+
+Debug Directories(4)
+	Type       Size     Address  Pointer
+	(    0)       3       33e00        0
+	(211928)       0           0        0
+	cv            0    ffffffff        0
+	(    0)       0           1        0
+
+SECTION HEADER #3
+   .data name
+    15A9 virtual size
+   5D000 virtual address
+     400 size of raw data
+   5AC00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #4
+  .pdata name
+    39C0 virtual size
+   5F000 virtual address
+    3A00 size of raw data
+   5B000 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #5
+  .didat name
+     5E8 virtual size
+   63000 virtual address
+     600 size of raw data
+   5EA00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #6
+   .rsrc name
+    1E70 virtual size
+   64000 virtual address
+    2000 size of raw data
+   5F000 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #7
+  .reloc name
+     500 virtual size
+   66000 virtual address
+     600 size of raw data
+   61000 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e357000
+fffff806`6e357000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e357010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e357020  00000000 00000000 00000000 00000000  ................
+fffff806`6e357030  00000000 00000000 00000000 000000f0  ................
+fffff806`6e357040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e357050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e357060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e357070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: EXECUTABLE IMAGE
+FILE HEADER VALUES
+    8664 machine (X64 (CHPEv2))
+       D number of sections
+9FB1DE46 time date stamp Wed Nov 25 10:41:58 2054
+
+       0 file pointer to symbol table
+       0 number of symbols
+      F0 size of optional header
+      22 characteristics
+            Executable
+            App can handle >2gb addresses
+
+OPTIONAL HEADER VALUES
+     20B magic #
+   14.20 linker version
+    1800 size of code
+  284600 size of initialized data
+       0 size of uninitialized data
+    F010 address of entry point
+    1000 base of code
+         ----- new -----
+fffff8066baa0000 image base
+    1000 section alignment
+     200 file alignment
+       1 subsystem (Native)
+   10.00 operating system version
+   10.00 image version
+   10.00 subsystem version
+  28F000 size of image
+     400 size of headers
+  28C60B checksum
+0000000000040000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+    4160  DLL characteristics
+            High entropy VA supported
+            Dynamic base
+            NX compatible
+            Guard
+    E000 [      58] address [size] of Export Directory
+    B050 [      28] address [size] of Import Directory
+  28D000 [     E50] address [size] of Resource Directory
+    A000 [     120] address [size] of Exception Directory
+  27FE00 [    2210] address [size] of Security Directory
+  28E000 [      1C] address [size] of Base Relocation Directory
+    2270 [      54] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+       0 [       0] address [size] of Thread Storage Directory
+    2000 [     118] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+    B000 [      40] address [size] of Import Address Table Directory
+       0 [       0] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+     46A virtual size
+    1000 virtual address
+     600 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+68000020 flags
+         Code
+         Not Paged
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #2
+  .rdata name
+     5D8 virtual size
+    2000 virtual address
+     600 size of raw data
+     A00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+48000040 flags
+         Initialized Data
+         Not Paged
+         (no align specified)
+         Read Only
+
+
+Debug Directories(3)
+	Type       Size     Address  Pointer
+	(    0)       0           0        0
+	(    0)       0           0        0
+	(    0)       0           0        0
+
+SECTION HEADER #3
+   .data name
+    64D8 virtual size
+    3000 virtual address
+     200 size of raw data
+    1000 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C8000040 flags
+         Initialized Data
+         Not Paged
+         (no align specified)
+         Read Write
+
+SECTION HEADER #4
+  .pdata name
+     120 virtual size
+    A000 virtual address
+     200 size of raw data
+    1200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+48000040 flags
+         Initialized Data
+         Not Paged
+         (no align specified)
+         Read Only
+
+SECTION HEADER #5
+  .idata name
+     15A virtual size
+    B000 virtual address
+     200 size of raw data
+    1400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+48000040 flags
+         Initialized Data
+         Not Paged
+         (no align specified)
+         Read Only
+
+SECTION HEADER #6
+PAGEUPDT name
+     65A virtual size
+    C000 virtual address
+     800 size of raw data
+    1600 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #7
+    PAGE name
+     672 virtual size
+    D000 virtual address
+     800 size of raw data
+    1E00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #8
+  .edata name
+      58 virtual size
+    E000 virtual address
+     200 size of raw data
+    2600 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #9
+    INIT name
+      72 virtual size
+    F000 virtual address
+     200 size of raw data
+    2800 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+62000020 flags
+         Code
+         Discardable
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #A
+  MCDATA name
+  27C000 virtual size
+   10000 virtual address
+  27C000 size of raw data
+    2A00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+SECTION HEADER #B
+   GFIDS name
+      28 virtual size
+  28C000 virtual address
+     200 size of raw data
+  27EA00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+SECTION HEADER #C
+   .rsrc name
+     E50 virtual size
+  28D000 virtual address
+    1000 size of raw data
+  27EC00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+SECTION HEADER #D
+  .reloc name
+      A4 virtual size
+  28E000 virtual address
+     200 size of raw data
+  27FC00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e35d000
+fffff806`6e35d000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e35d010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e35d020  00000000 00000000 00000000 00000000  ................
+fffff806`6e35d030  00000000 00000000 00000000 00000080  ................
+fffff806`6e35d040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e35d050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e35d060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e35d070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+     14C machine (i386)
+       3 number of sections
+D6610674 time date stamp Wed Dec 22 01:34:28 2083
+
+       0 file pointer to symbol table
+       0 number of symbols
+      E0 size of optional header
+    2022 characteristics
+            Executable
+            App can handle >2gb addresses
+            DLL
+
+OPTIONAL HEADER VALUES
+     10B magic #
+   48.00 linker version
+   1C400 size of code
+     800 size of initialized data
+       0 size of uninitialized data
+   1E232 address of entry point
+    2000 base of code
+         ----- new -----
+0000000010000000 image base
+    2000 section alignment
+     200 file alignment
+       3 subsystem (Windows CUI)
+    4.00 operating system version
+    0.00 image version
+    4.00 subsystem version
+   24000 size of image
+     200 size of headers
+   1F901 checksum
+0000000000100000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+    8560  DLL characteristics
+            High entropy VA supported
+            Dynamic base
+            NX compatible
+            No structured exception handler
+            Terminal server aware
+       0 [       0] address [size] of Export Directory
+   1E1DF [      4F] address [size] of Import Directory
+   20000 [     48C] address [size] of Resource Directory
+       0 [       0] address [size] of Exception Directory
+       0 [       0] address [size] of Security Directory
+   22000 [       C] address [size] of Base Relocation Directory
+   1E114 [      38] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+       0 [       0] address [size] of Thread Storage Directory
+       0 [       0] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+    2000 [       8] address [size] of Import Address Table Directory
+       0 [       0] address [size] of Delay Import Directory
+    2008 [      48] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+   1C238 virtual size
+    2000 virtual address
+   1C400 size of raw data
+     200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+
+Debug Directories(2)
+	Type       Size     Address  Pointer
+	(5242988)  350032      720036       31
+	(825112622)362e312e           0   720062
+
+SECTION HEADER #2
+   .rsrc name
+     48C virtual size
+   20000 virtual address
+     600 size of raw data
+   1C600 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #3
+  .reloc name
+       C virtual size
+   22000 virtual address
+     200 size of raw data
+   1CC00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e365000
+fffff806`6e365000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e365010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e365020  00000000 00000000 00000000 00000000  ................
+fffff806`6e365030  00000000 00000000 00000000 000000f8  ................
+fffff806`6e365040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e365050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e365060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e365070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+    8664 machine (X64 (CHPEv2))
+       7 number of sections
+39255CCF time date stamp Fri May 19 11:25:03 2000
+
+       0 file pointer to symbol table
+       0 number of symbols
+      F0 size of optional header
+    2022 characteristics
+            Executable
+            App can handle >2gb addresses
+            DLL
+
+OPTIONAL HEADER VALUES
+     20B magic #
+   14.20 linker version
+   54000 size of code
+   45000 size of initialized data
+       0 size of uninitialized data
+   15390 address of entry point
+    1000 base of code
+         ----- new -----
+00007ff81fa80000 image base
+    1000 section alignment
+     200 file alignment
+       3 subsystem (Windows CUI)
+   10.00 operating system version
+   10.00 image version
+   10.00 subsystem version
+   9D000 size of image
+     400 size of headers
+   9B039 checksum
+0000000000040000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+    4160  DLL characteristics
+            High entropy VA supported
+            Dynamic base
+            NX compatible
+            Guard
+   71850 [   1D720] address [size] of Export Directory
+   8EF70 [     230] address [size] of Import Directory
+   9B000 [     410] address [size] of Resource Directory
+   95000 [    4CF8] address [size] of Exception Directory
+   97800 [    3788] address [size] of Security Directory
+   9C000 [     7E4] address [size] of Base Relocation Directory
+   5E720 [      70] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+       0 [       0] address [size] of Thread Storage Directory
+   564D0 [     118] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+   56D08 [     6A0] address [size] of Import Address Table Directory
+   716D0 [      80] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+   53F7E virtual size
+    1000 virtual address
+   54000 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #2
+  .rdata name
+   3B9B6 virtual size
+   55000 virtual address
+   3BA00 size of raw data
+   54400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+
+Debug Directories(4)
+	Type       Size     Address  Pointer
+	(    0)  6f0043      74006e   6e0065
+	(6488165)      74      780045   610070
+	(7602276)      68           0   780045
+	(7209079)  76004f      720065   6c0066
+
+SECTION HEADER #3
+   .data name
+    37E0 virtual size
+   91000 virtual address
+    1C00 size of raw data
+   8FE00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #4
+  .pdata name
+    4CF8 virtual size
+   95000 virtual address
+    4E00 size of raw data
+   91A00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #5
+  .didat name
+      40 virtual size
+   9A000 virtual address
+     200 size of raw data
+   96800 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #6
+   .rsrc name
+     410 virtual size
+   9B000 virtual address
+     600 size of raw data
+   96A00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #7
+  .reloc name
+     7E4 virtual size
+   9C000 virtual address
+     800 size of raw data
+   97000 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e376000
+fffff806`6e376000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e376010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e376020  00000000 00000000 00000000 00000000  ................
+fffff806`6e376030  00000000 00000000 00000000 00000100  ................
+fffff806`6e376040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e376050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e376060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e376070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+    8664 machine (X64 (CHPEv2))
+       7 number of sections
+9F9E8C90 time date stamp Tue Nov 10 19:00:16 2054
+
+       0 file pointer to symbol table
+       0 number of symbols
+      F0 size of optional header
+    2022 characteristics
+            Executable
+            App can handle >2gb addresses
+            DLL
+
+OPTIONAL HEADER VALUES
+     20B magic #
+   14.20 linker version
+   9B400 size of code
+   6AC00 size of initialized data
+       0 size of uninitialized data
+   2FE90 address of entry point
+    1000 base of code
+         ----- new -----
+00007ff81f970000 image base
+    1000 section alignment
+     200 file alignment
+       3 subsystem (Windows CUI)
+   10.00 operating system version
+   10.00 image version
+   10.00 subsystem version
+  10B000 size of image
+     400 size of headers
+  107E46 checksum
+0000000000040000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+    4160  DLL characteristics
+            High entropy VA supported
+            Dynamic base
+            NX compatible
+            Guard
+   DD4E0 [    718C] address [size] of Export Directory
+   E466C [     348] address [size] of Import Directory
+   F7000 [   119C8] address [size] of Resource Directory
+   EF000 [    67EC] address [size] of Exception Directory
+  102400 [    4AC0] address [size] of Security Directory
+  109000 [    1478] address [size] of Base Relocation Directory
+   AFBD0 [      70] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+       0 [       0] address [size] of Thread Storage Directory
+   9D770 [     118] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+   A7EA0 [    1608] address [size] of Import Address Table Directory
+   DD0B0 [      A0] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+   9B396 virtual size
+    1000 virtual address
+   9B400 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #2
+  .rdata name
+   4CD6A virtual size
+   9D000 virtual address
+   4CE00 size of raw data
+   9B800 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+
+Debug Directories(4)
+	Type       Size     Address  Pointer
+	(4135931989)b692850f    4865001f 2025048b
+	(37505) 48d4800    248d4cc0 3c09f0c2
+	(532050820)c58b4100    4d07e083 4cc4148d
+	(2298841928)4800a280    8548df8b 480374c0
+
+SECTION HEADER #3
+   .data name
+    42AC virtual size
+   EA000 virtual address
+     400 size of raw data
+   E8600 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #4
+  .pdata name
+    67EC virtual size
+   EF000 virtual address
+    6800 size of raw data
+   E8A00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #5
+  .didat name
+      D8 virtual size
+   F6000 virtual address
+     200 size of raw data
+   EF200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #6
+   .rsrc name
+   119C8 virtual size
+   F7000 virtual address
+   11A00 size of raw data
+   EF400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #7
+  .reloc name
+    1478 virtual size
+  109000 virtual address
+    1600 size of raw data
+  100E00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e388000
+fffff806`6e388000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e388010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e388020  00000000 00000000 00000000 00000000  ................
+fffff806`6e388030  00000000 00000000 00000000 000000f8  ................
+fffff806`6e388040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e388050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e388060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e388070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+    8664 machine (X64 (CHPEv2))
+       7 number of sections
+6D85013F time date stamp Thu Mar 23 10:05:51 2028
+
+       0 file pointer to symbol table
+       0 number of symbols
+      F0 size of optional header
+    2022 characteristics
+            Executable
+            App can handle >2gb addresses
+            DLL
+
+OPTIONAL HEADER VALUES
+     20B magic #
+   14.20 linker version
+  105800 size of code
+   4D000 size of initialized data
+       0 size of uninitialized data
+   4F2D0 address of entry point
+    1000 base of code
+         ----- new -----
+00007ff81f810000 image base
+    1000 section alignment
+     200 file alignment
+       2 subsystem (Windows GUI)
+   10.00 operating system version
+   10.00 image version
+   10.00 subsystem version
+  156000 size of image
+     400 size of headers
+  154C12 checksum
+0000000000040000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+    4160  DLL characteristics
+            High entropy VA supported
+            Dynamic base
+            NX compatible
+            Guard
+  1384E0 [    3380] address [size] of Export Directory
+  13B860 [     334] address [size] of Import Directory
+  153000 [     560] address [size] of Resource Directory
+  145000 [    C78C] address [size] of Exception Directory
+  14CA00 [    50F0] address [size] of Security Directory
+  154000 [    1F58] address [size] of Base Relocation Directory
+  118FC0 [      70] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+  111018 [      28] address [size] of Thread Storage Directory
+  10AFA0 [     118] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+  114160 [     8E8] address [size] of Import Address Table Directory
+  136200 [     280] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+  1056D7 virtual size
+    1000 virtual address
+  105800 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #2
+  .rdata name
+   36D16 virtual size
+  107000 virtual address
+   36E00 size of raw data
+  105C00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+
+Debug Directories(4)
+	Type       Size     Address  Pointer
+	(2236416005) 7850fe4    41001a7d e181ce8b
+	(2894809088)    c024    f08b4800 24448948
+	(264275455)1a7cec85      be4900        0
+	(2370371543)55e8084d    85ffff0e 3d850fc0
+
+SECTION HEADER #3
+   .data name
+    6A18 virtual size
+  13E000 virtual address
+     A00 size of raw data
+  13CA00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #4
+  .pdata name
+    C78C virtual size
+  145000 virtual address
+    C800 size of raw data
+  13D400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #5
+  .didat name
+     750 virtual size
+  152000 virtual address
+     800 size of raw data
+  149C00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #6
+   .rsrc name
+     560 virtual size
+  153000 virtual address
+     600 size of raw data
+  14A400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #7
+  .reloc name
+    1F58 virtual size
+  154000 virtual address
+    2000 size of raw data
+  14AA00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e38e000
+fffff806`6e38e000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e38e010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e38e020  00000000 00000000 00000000 00000000  ................
+fffff806`6e38e030  00000000 00000000 00000000 000000f0  ................
+fffff806`6e38e040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e38e050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e38e060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e38e070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+     14C machine (i386 (CHPE))
+       6 number of sections
+3AC7C03F time date stamp Sun Apr  1 19:56:47 2001
+
+       0 file pointer to symbol table
+       0 number of symbols
+      E0 size of optional header
+    2102 characteristics
+            Executable
+            32 bit word machine
+            DLL
+
+OPTIONAL HEADER VALUES
+     10B magic #
+   14.20 linker version
+   39400 size of code
+    7800 size of initialized data
+       0 size of uninitialized data
+   17890 address of entry point
+    1000 base of code
+         ----- new -----
+0000000076e10000 image base
+    1000 section alignment
+     200 file alignment
+       2 subsystem (Windows GUI)
+   10.00 operating system version
+   10.00 image version
+   10.00 subsystem version
+   45000 size of image
+     400 size of headers
+   4ECCD checksum
+0000000000040000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+    4140  DLL characteristics
+            Dynamic base
+            NX compatible
+            Guard
+   35AC0 [    47D7] address [size] of Export Directory
+   3C6B4 [     370] address [size] of Import Directory
+   41000 [     D98] address [size] of Resource Directory
+       0 [       0] address [size] of Exception Directory
+   40A00 [    2F80] address [size] of Security Directory
+   42000 [    2704] address [size] of Base Relocation Directory
+    3F50 [      54] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+       0 [       0] address [size] of Thread Storage Directory
+    1200 [      AC] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+   3C000 [     6B0] address [size] of Import Address Table Directory
+   33BA8 [     3C0] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+   39297 virtual size
+    1000 virtual address
+   39400 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+
+Debug Directories(3)
+	Type       Size     Address  Pointer
+	(256840)   3eb30           0    3e0e6
+	(254254)   3e0b6       3e13c    3e192
+	(254436)   3dfe4       3e208    3dfc4
+
+SECTION HEADER #2
+   .data name
+     948 virtual size
+   3B000 virtual address
+     400 size of raw data
+   39800 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #3
+  .idata name
+    31BE virtual size
+   3C000 virtual address
+    3200 size of raw data
+   39C00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #4
+  .didat name
+     4AC virtual size
+   40000 virtual address
+     600 size of raw data
+   3CE00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #5
+   .rsrc name
+     D98 virtual size
+   41000 virtual address
+     E00 size of raw data
+   3D400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #6
+  .reloc name
+    2704 virtual size
+   42000 virtual address
+    2800 size of raw data
+   3E200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e398000
+fffff806`6e398000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e398010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e398020  00000000 00000000 00000000 00000000  ................
+fffff806`6e398030  00000000 00000000 00000000 000000f0  ................
+fffff806`6e398040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e398050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e398060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e398070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+    8664 machine (X64)
+       6 number of sections
+6A3EE124 time date stamp Fri Jun 26 16:29:24 2026
+
+       0 file pointer to symbol table
+       0 number of symbols
+      F0 size of optional header
+    2022 characteristics
+            Executable
+            App can handle >2gb addresses
+            DLL
+
+OPTIONAL HEADER VALUES
+     20B magic #
+   14.20 linker version
+    EA00 size of code
+    CA00 size of initialized data
+       0 size of uninitialized data
+    2E70 address of entry point
+    1000 base of code
+         ----- new -----
+00007ff819270000 image base
+    1000 section alignment
+     200 file alignment
+       2 subsystem (Windows GUI)
+   10.00 operating system version
+   10.00 image version
+   10.00 subsystem version
+   1F000 size of image
+     400 size of headers
+   239DB checksum
+0000000000040000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+    4160  DLL characteristics
+            High entropy VA supported
+            Dynamic base
+            NX compatible
+            Guard
+   15E70 [     148] address [size] of Export Directory
+   15FB8 [     21C] address [size] of Import Directory
+   1D000 [     510] address [size] of Resource Directory
+   1C000 [     DC8] address [size] of Exception Directory
+       0 [       0] address [size] of Security Directory
+   1E000 [     848] address [size] of Base Relocation Directory
+   11B70 [      54] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+       0 [       0] address [size] of Thread Storage Directory
+   10560 [     118] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+   10880 [     4C8] address [size] of Import Address Table Directory
+       0 [       0] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+    E88D virtual size
+    1000 virtual address
+    EA00 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #2
+  .rdata name
+    7374 virtual size
+   10000 virtual address
+    7400 size of raw data
+    EE00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+
+Debug Directories(3)
+	Type       Size     Address  Pointer
+	(3499098114) a080002       e0b88 95801902
+	(920484)   4b3ce       e0bb7 3602c410
+	(302536194) 838022c     8d20a38  22d063c
+
+SECTION HEADER #3
+   .data name
+    3784 virtual size
+   18000 virtual address
+    3000 size of raw data
+   16200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #4
+  .pdata name
+     DC8 virtual size
+   1C000 virtual address
+     E00 size of raw data
+   19200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #5
+   .rsrc name
+     510 virtual size
+   1D000 virtual address
+     600 size of raw data
+   1A000 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #6
+  .reloc name
+     848 virtual size
+   1E000 virtual address
+     A00 size of raw data
+   1A600 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e3a1000
+fffff806`6e3a1000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e3a1010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e3a1020  00000000 00000000 00000000 00000000  ................
+fffff806`6e3a1030  00000000 00000000 00000000 000000e8  ................
+fffff806`6e3a1040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e3a1050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e3a1060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e3a1070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+    8664 machine (X64 (CHPEv2))
+       6 number of sections
+ B15C862 time date stamp Sun Nov 23 07:15:30 1975
+
+       0 file pointer to symbol table
+       0 number of symbols
+      F0 size of optional header
+    2022 characteristics
+            Executable
+            App can handle >2gb addresses
+            DLL
+
+OPTIONAL HEADER VALUES
+     20B magic #
+   14.20 linker version
+     E00 size of code
+    2600 size of initialized data
+       0 size of uninitialized data
+    1080 address of entry point
+    1000 base of code
+         ----- new -----
+00007ff819280000 image base
+    1000 section alignment
+     200 file alignment
+       3 subsystem (Windows CUI)
+   10.00 operating system version
+   10.00 image version
+   10.00 subsystem version
+    8000 size of image
+     400 size of headers
+   11171 checksum
+0000000000040000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+    4160  DLL characteristics
+            High entropy VA supported
+            Dynamic base
+            NX compatible
+            Guard
+    2EA0 [     1F8] address [size] of Export Directory
+    3098 [      3C] address [size] of Import Directory
+    6000 [     528] address [size] of Resource Directory
+    5000 [     150] address [size] of Exception Directory
+       0 [       0] address [size] of Security Directory
+    7000 [      18] address [size] of Base Relocation Directory
+    22B0 [      70] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+       0 [       0] address [size] of Thread Storage Directory
+    2010 [     118] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+    2128 [      A0] address [size] of Import Address Table Directory
+       0 [       0] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+     DB6 virtual size
+    1000 virtual address
+     E00 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #2
+  .rdata name
+    12F8 virtual size
+    2000 virtual address
+    1400 size of raw data
+    1200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+
+Debug Directories(4)
+	Type       Size     Address  Pointer
+	(926376)   60f01       9640f    8340f
+	(   33)   25990       259ae    e22d0
+	(  128)      21       264c0    2657e
+	(484373)   63415    e0113215    27c84
+
+SECTION HEADER #3
+   .data name
+     603 virtual size
+    4000 virtual address
+     200 size of raw data
+    2600 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #4
+  .pdata name
+     150 virtual size
+    5000 virtual address
+     200 size of raw data
+    2800 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #5
+   .rsrc name
+     528 virtual size
+    6000 virtual address
+     600 size of raw data
+    2A00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #6
+  .reloc name
+      18 virtual size
+    7000 virtual address
+     200 size of raw data
+    3000 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e3a4000
+fffff806`6e3a4000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e3a4010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e3a4020  00000000 00000000 00000000 00000000  ................
+fffff806`6e3a4030  00000000 00000000 00000000 000000a8  ................
+fffff806`6e3a4040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e3a4050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e3a4060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e3a4070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+    8664 machine (X64)
+       2 number of sections
+376F1CE1 time date stamp Tue Jun 22 01:19:29 1999
+
+       0 file pointer to symbol table
+       0 number of symbols
+      F0 size of optional header
+    2022 characteristics
+            Executable
+            App can handle >2gb addresses
+            DLL
+
+OPTIONAL HEADER VALUES
+     20B magic #
+   14.20 linker version
+       0 size of code
+    1200 size of initialized data
+       0 size of uninitialized data
+       0 address of entry point
+    1000 base of code
+         ----- new -----
+0000000180000000 image base
+    1000 section alignment
+     200 file alignment
+       3 subsystem (Windows CUI)
+   10.00 operating system version
+   10.00 image version
+   10.00 subsystem version
+    3000 size of image
+     200 size of headers
+    F511 checksum
+0000000000040000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+     160  DLL characteristics
+            High entropy VA supported
+            Dynamic base
+            NX compatible
+       0 [       0] address [size] of Export Directory
+       0 [       0] address [size] of Import Directory
+    2000 [     E18] address [size] of Resource Directory
+       0 [       0] address [size] of Exception Directory
+       0 [       0] address [size] of Security Directory
+       0 [       0] address [size] of Base Relocation Directory
+    1000 [      38] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+       0 [       0] address [size] of Thread Storage Directory
+       0 [       0] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+       0 [       0] address [size] of Import Address Table Directory
+       0 [       0] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+  .rdata name
+      B0 virtual size
+    1000 virtual address
+     200 size of raw data
+     200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+
+Debug Directories(2)
+	Type       Size     Address  Pointer
+	(    0)   43d82           0    43d6c
+	(277822)       0       43d22        0
+
+SECTION HEADER #2
+   .rsrc name
+     E18 virtual size
+    2000 virtual address
+    1000 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+0xfffff806`6e3a6000
+fffff806`6e3a6000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e3a6010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e3a6020  00000000 00000000 00000000 00000000  ................
+fffff806`6e3a6030  00000000 00000000 00000000 000000f0  ................
+fffff806`6e3a6040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e3a6050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e3a6060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e3a6070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+    8664 machine (X64 (CHPEv2))
+       6 number of sections
+615A9214 time date stamp Mon Oct  4 01:33:08 2021
+
+       0 file pointer to symbol table
+       0 number of symbols
+      F0 size of optional header
+    2022 characteristics
+            Executable
+            App can handle >2gb addresses
+            DLL
+
+OPTIONAL HEADER VALUES
+     20B magic #
+   14.30 linker version
+   2DC00 size of code
+   1D600 size of initialized data
+       0 size of uninitialized data
+   2CEC0 address of entry point
+    1000 base of code
+         ----- new -----
+00007ff8037a0000 image base
+    1000 section alignment
+     200 file alignment
+       3 subsystem (Windows CUI)
+    6.00 operating system version
+   10.00 image version
+    6.00 subsystem version
+   4E000 size of image
+     400 size of headers
+   52460 checksum
+0000000000100000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+    4160  DLL characteristics
+            High entropy VA supported
+            Dynamic base
+            NX compatible
+            Guard
+   3DEB0 [    4D0C] address [size] of Export Directory
+   42BBC [      C8] address [size] of Import Directory
+   4C000 [     3F8] address [size] of Resource Directory
+   48000 [    36C0] address [size] of Exception Directory
+   4AE00 [    2390] address [size] of Security Directory
+   4D000 [     A70] address [size] of Base Relocation Directory
+   33418 [      54] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+       0 [       0] address [size] of Thread Storage Directory
+   33470 [     138] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+   2F000 [     490] address [size] of Import Address Table Directory
+       0 [       0] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+   2DA2C virtual size
+    1000 virtual address
+   2DC00 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #2
+  .rdata name
+   14DC6 virtual size
+   2F000 virtual address
+   14E00 size of raw data
+   2E000 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+
+Debug Directories(3)
+	Type       Size     Address  Pointer
+	(7602288)  720065       30d02 ff410401
+	(1627419648)27000000     6000000    4954b
+	(4456458)  740061      620061   730061
+
+SECTION HEADER #3
+   .data name
+    3FF0 virtual size
+   44000 virtual address
+    3800 size of raw data
+   42E00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #4
+  .pdata name
+    36C0 virtual size
+   48000 virtual address
+    3800 size of raw data
+   46600 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #5
+   .rsrc name
+     3F8 virtual size
+   4C000 virtual address
+     400 size of raw data
+   49E00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #6
+  .reloc name
+     A70 virtual size
+   4D000 virtual address
+     C00 size of raw data
+   4A200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e3b1000
+fffff806`6e3b1000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e3b1010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e3b1020  00000000 00000000 00000000 00000000  ................
+fffff806`6e3b1030  00000000 00000000 00000000 00000108  ................
+fffff806`6e3b1040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e3b1050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e3b1060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e3b1070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+    8664 machine (X64 (CHPEv2))
+       7 number of sections
+ED662F3B time date stamp Sun Mar 18 04:15:55 2096
+
+       0 file pointer to symbol table
+       0 number of symbols
+      F0 size of optional header
+    2022 characteristics
+            Executable
+            App can handle >2gb addresses
+            DLL
+
+OPTIONAL HEADER VALUES
+     20B magic #
+   14.20 linker version
+   22200 size of code
+   16000 size of initialized data
+       0 size of uninitialized data
+   20180 address of entry point
+    1000 base of code
+         ----- new -----
+00007ffffe270000 image base
+    1000 section alignment
+     200 file alignment
+       3 subsystem (Windows CUI)
+   10.00 operating system version
+   10.00 image version
+   10.00 subsystem version
+   3E000 size of image
+     400 size of headers
+   418C0 checksum
+0000000000040000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+    4160  DLL characteristics
+            High entropy VA supported
+            Dynamic base
+            NX compatible
+            Guard
+   2B800 [     290] address [size] of Export Directory
+   2BA90 [     2A8] address [size] of Import Directory
+   36000 [    64E8] address [size] of Resource Directory
+   33000 [    1404] address [size] of Exception Directory
+       0 [       0] address [size] of Security Directory
+   3D000 [     278] address [size] of Base Relocation Directory
+   26830 [      70] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+       0 [       0] address [size] of Thread Storage Directory
+   242D0 [     118] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+   243E8 [     658] address [size] of Import Address Table Directory
+   29AE0 [     480] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+   2202D virtual size
+    1000 virtual address
+   22200 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #2
+  .rdata name
+    9444 virtual size
+   24000 virtual address
+    9600 size of raw data
+   22600 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+
+Debug Directories(4)
+	Type       Size     Address  Pointer
+	(1263752557)  577965    72550025 656e556c
+	(1836008300)65726170       80057 72657551
+	(1936534889)6e69772d    726f632d 72752d65
+	(1885405184)736d2d69    6e69772d 726f632d
+
+SECTION HEADER #3
+   .data name
+    4138 virtual size
+   2E000 virtual address
+     800 size of raw data
+   2BC00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #4
+  .pdata name
+    1404 virtual size
+   33000 virtual address
+    1600 size of raw data
+   2C400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #5
+  .didat name
+     630 virtual size
+   35000 virtual address
+     800 size of raw data
+   2DA00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #6
+   .rsrc name
+    64E8 virtual size
+   36000 virtual address
+    6600 size of raw data
+   2E200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #7
+  .reloc name
+     278 virtual size
+   3D000 virtual address
+     400 size of raw data
+   34800 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e3b2000
+fffff806`6e3b2000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e3b2010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e3b2020  00000000 00000000 00000000 00000000  ................
+fffff806`6e3b2030  00000000 00000000 00000000 00000108  ................
+fffff806`6e3b2040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e3b2050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e3b2060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e3b2070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+    8664 machine (X64)
+       6 number of sections
+615A9413 time date stamp Mon Oct  4 01:41:39 2021
+
+       0 file pointer to symbol table
+       0 number of symbols
+      F0 size of optional header
+    2022 characteristics
+            Executable
+            App can handle >2gb addresses
+            DLL
+
+OPTIONAL HEADER VALUES
+     20B magic #
+   14.30 linker version
+   28400 size of code
+   27A00 size of initialized data
+       0 size of uninitialized data
+   27F40 address of entry point
+    1000 base of code
+         ----- new -----
+00007ff804080000 image base
+    1000 section alignment
+     200 file alignment
+       3 subsystem (Windows CUI)
+    6.00 operating system version
+   10.00 image version
+    6.00 subsystem version
+   54000 size of image
+     400 size of headers
+   52067 checksum
+0000000000100000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+    4160  DLL characteristics
+            High entropy VA supported
+            Dynamic base
+            NX compatible
+            Guard
+   3DBE0 [    3E84] address [size] of Export Directory
+   41A64 [     12C] address [size] of Import Directory
+   51000 [     400] address [size] of Resource Directory
+   4E000 [    20AC] address [size] of Exception Directory
+   4FA00 [    2390] address [size] of Security Directory
+   52000 [    1AD4] address [size] of Base Relocation Directory
+   2E080 [      54] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+       0 [       0] address [size] of Thread Storage Directory
+   2E0E0 [     138] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+   2A000 [     400] address [size] of Import Address Table Directory
+       0 [       0] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+   28266 virtual size
+    1000 virtual address
+   28400 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #2
+  .rdata name
+   18ACE virtual size
+   2A000 virtual address
+   18C00 size of raw data
+   28800 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+
+Debug Directories(3)
+	Type       Size     Address  Pointer
+	(    0)    b71e           0        0
+	(47070)       0        b774        0
+	(    0)    b7c2           0     b7f6
+
+SECTION HEADER #3
+   .data name
+    AA88 virtual size
+   43000 virtual address
+    A400 size of raw data
+   41400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #4
+  .pdata name
+    20AC virtual size
+   4E000 virtual address
+    2200 size of raw data
+   4B800 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #5
+   .rsrc name
+     400 virtual size
+   51000 virtual address
+     400 size of raw data
+   4DA00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #6
+  .reloc name
+    1AD4 virtual size
+   52000 virtual address
+    1C00 size of raw data
+   4DE00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e3be000
+fffff806`6e3be000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e3be010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e3be020  00000000 00000000 00000000 00000000  ................
+fffff806`6e3be030  00000000 00000000 00000000 00000108  ................
+fffff806`6e3be040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e3be050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e3be060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e3be070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+    8664 machine (X64 (CHPEv2))
+       7 number of sections
+2A3954A0 time date stamp Fri Jun 12 21:51:28 1992
+
+       0 file pointer to symbol table
+       0 number of symbols
+      F0 size of optional header
+    2022 characteristics
+            Executable
+            App can handle >2gb addresses
+            DLL
+
+OPTIONAL HEADER VALUES
+     20B magic #
+   14.20 linker version
+   81800 size of code
+   33000 size of initialized data
+       0 size of uninitialized data
+   4D820 address of entry point
+    1000 base of code
+         ----- new -----
+00007ffffd510000 image base
+    1000 section alignment
+     200 file alignment
+       2 subsystem (Windows GUI)
+   10.00 operating system version
+   10.00 image version
+    6.03 subsystem version
+   B9000 size of image
+     400 size of headers
+   B4F43 checksum
+0000000000040000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+    4160  DLL characteristics
+            High entropy VA supported
+            Dynamic base
+            NX compatible
+            Guard
+   A8D30 [     14C] address [size] of Export Directory
+   A8E7C [     2F8] address [size] of Import Directory
+   B7000 [     408] address [size] of Resource Directory
+   AF000 [    6960] address [size] of Exception Directory
+   B1E00 [    2560] address [size] of Security Directory
+   B8000 [     5B0] address [size] of Base Relocation Directory
+   985E0 [      70] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+   844E0 [      28] address [size] of Thread Storage Directory
+   839F0 [     118] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+   84508 [     710] address [size] of Import Address Table Directory
+   A8BAC [      60] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+   8160C virtual size
+    1000 virtual address
+   81800 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #2
+  .rdata name
+   27C18 virtual size
+   83000 virtual address
+   27E00 size of raw data
+   81C00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+
+Debug Directories(4)
+	Type       Size     Address  Pointer
+	(814057983)49000001    2b49cc8b 348d89cf
+	(3489660929)8b000004    c12b41c2  1408589
+	(1099778048)fe3d48ff    7700000f f83b4d21
+	(1107234628)ff0f4488    504d8b48 587d8b4c
+
+SECTION HEADER #3
+   .data name
+    3990 virtual size
+   AB000 virtual address
+     C00 size of raw data
+   A9A00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #4
+  .pdata name
+    6960 virtual size
+   AF000 virtual address
+    6A00 size of raw data
+   AA600 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #5
+  .didat name
+      40 virtual size
+   B6000 virtual address
+     200 size of raw data
+   B1000 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #6
+   .rsrc name
+     408 virtual size
+   B7000 virtual address
+     600 size of raw data
+   B1200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #7
+  .reloc name
+     5B0 virtual size
+   B8000 virtual address
+     600 size of raw data
+   B1800 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e3d0000
+fffff806`6e3d0000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e3d0010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e3d0020  00000000 00000000 00000000 00000000  ................
+fffff806`6e3d0030  00000000 00000000 00000000 00000108  ................
+fffff806`6e3d0040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e3d0050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e3d0060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e3d0070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+    8664 machine (X64 (CHPEv2))
+       7 number of sections
+33117106 time date stamp Mon Feb 24 05:44:22 1997
+
+       0 file pointer to symbol table
+       0 number of symbols
+      F0 size of optional header
+    2022 characteristics
+            Executable
+            App can handle >2gb addresses
+            DLL
+
+OPTIONAL HEADER VALUES
+     20B magic #
+   14.20 linker version
+  2A9C00 size of code
+  103200 size of initialized data
+       0 size of uninitialized data
+  1502C0 address of entry point
+    1000 base of code
+         ----- new -----
+00007ffffa050000 image base
+    1000 section alignment
+     200 file alignment
+       3 subsystem (Windows CUI)
+   10.00 operating system version
+   10.00 image version
+    6.01 subsystem version
+  3B1000 size of image
+     400 size of headers
+  3B4C41 checksum
+0000000000040000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+    4160  DLL characteristics
+            High entropy VA supported
+            Dynamic base
+            NX compatible
+            Guard
+  377AC0 [    8CA4] address [size] of Export Directory
+  380764 [     348] address [size] of Import Directory
+  3A9000 [    27D0] address [size] of Resource Directory
+  392000 [   16884] address [size] of Exception Directory
+  3A7C00 [    2568] address [size] of Security Directory
+  3AC000 [    4B00] address [size] of Base Relocation Directory
+  368140 [      70] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+  2CF108 [      28] address [size] of Thread Storage Directory
+  2CEFF0 [     118] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+  2CF130 [     F28] address [size] of Import Address Table Directory
+       0 [       0] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+  2A76C5 virtual size
+    1000 virtual address
+  2A7800 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #2
+    PAGE name
+    2371 virtual size
+  2A9000 virtual address
+    2400 size of raw data
+  2A7C00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #3
+  .rdata name
+   D84D4 virtual size
+  2AC000 virtual address
+   D8600 size of raw data
+  2AA000 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+
+Debug Directories(4)
+	Type       Size     Address  Pointer
+	(3505848320)14418b45    45c02344 75144189
+	(1552632006)8b483024    48382474 5f20c483
+	(1465275672)55415441    57415641 30ec8348
+	(3817555064)4ceb8b44    4948708d fde8ce8b
+
+SECTION HEADER #4
+   .data name
+    CC50 virtual size
+  385000 virtual address
+    7800 size of raw data
+  382600 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #5
+  .pdata name
+   16884 virtual size
+  392000 virtual address
+   16A00 size of raw data
+  389E00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #6
+   .rsrc name
+    27D0 virtual size
+  3A9000 virtual address
+    2800 size of raw data
+  3A0800 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #7
+  .reloc name
+    4B00 virtual size
+  3AC000 virtual address
+    4C00 size of raw data
+  3A3000 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e3d2000
+fffff806`6e3d2000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e3d2010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e3d2020  00000000 00000000 00000000 00000000  ................
+fffff806`6e3d2030  00000000 00000000 00000000 00000108  ................
+fffff806`6e3d2040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e3d2050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e3d2060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e3d2070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+     14C machine (i386 (CHPE))
+       6 number of sections
+B4592715 time date stamp Tue Nov 17 22:46:29 2065
+
+       0 file pointer to symbol table
+       0 number of symbols
+      E0 size of optional header
+    2102 characteristics
+            Executable
+            32 bit word machine
+            DLL
+
+OPTIONAL HEADER VALUES
+     10B magic #
+   14.20 linker version
+  542800 size of code
+   6F600 size of initialized data
+       0 size of uninitialized data
+  17C130 address of entry point
+    1000 base of code
+         ----- new -----
+0000000076850000 image base
+    1000 section alignment
+     200 file alignment
+       2 subsystem (Windows GUI)
+   10.00 operating system version
+   10.00 image version
+   10.00 subsystem version
+  5B6000 size of image
+     400 size of headers
+  5CA6B7 checksum
+0000000000040000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+    4140  DLL characteristics
+            Dynamic base
+            NX compatible
+            Guard
+  53D690 [    5FAC] address [size] of Export Directory
+  54C2E4 [     640] address [size] of Import Directory
+  557000 [    85A8] address [size] of Resource Directory
+       0 [       0] address [size] of Exception Directory
+  5AD800 [    F2D8] address [size] of Security Directory
+  560000 [   55318] address [size] of Base Relocation Directory
+   585F0 [      54] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+   1F918 [      18] address [size] of Thread Storage Directory
+    BE38 [      AC] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+  54B000 [    12E0] address [size] of Import Address Table Directory
+  52F600 [     FA0] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+  54263C virtual size
+    1000 virtual address
+  542800 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+
+Debug Directories(3)
+	Type       Size     Address  Pointer
+	(127363)d78b4800    1d5ee7e8 fea4e900
+	(2303197184)e8202444        14ec 840fc085
+	(251658240)833c41b7    d03b10e8 fe6c870f
+
+SECTION HEADER #2
+   .data name
+    6F88 virtual size
+  544000 virtual address
+    2600 size of raw data
+  542C00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #3
+  .idata name
+    93CA virtual size
+  54B000 virtual address
+    9400 size of raw data
+  545200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #4
+  .didat name
+    1788 virtual size
+  555000 virtual address
+    1800 size of raw data
+  54E600 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #5
+   .rsrc name
+    85A8 virtual size
+  557000 virtual address
+    8600 size of raw data
+  54FE00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #6
+  .reloc name
+   55318 virtual size
+  560000 virtual address
+   55400 size of raw data
+  558400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e3da000
+fffff806`6e3da000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e3da010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e3da020  00000000 00000000 00000000 00000000  ................
+fffff806`6e3da030  00000000 00000000 00000000 000000f0  ................
+fffff806`6e3da040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e3da050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e3da060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e3da070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+     14C machine (i386 (CHPE))
+       6 number of sections
+39046A45 time date stamp Mon Apr 24 11:37:41 2000
+
+       0 file pointer to symbol table
+       0 number of symbols
+      E0 size of optional header
+    2102 characteristics
+            Executable
+            32 bit word machine
+            DLL
+
+OPTIONAL HEADER VALUES
+     10B magic #
+   14.20 linker version
+   18A00 size of code
+    8600 size of initialized data
+       0 size of uninitialized data
+    4410 address of entry point
+    1000 base of code
+         ----- new -----
+0000000076820000 image base
+    1000 section alignment
+     200 file alignment
+       2 subsystem (Windows GUI)
+   10.00 operating system version
+   10.00 image version
+   10.00 subsystem version
+   25000 size of image
+     400 size of headers
+   2761D checksum
+0000000000040000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+    4140  DLL characteristics
+            Dynamic base
+            NX compatible
+            Guard
+   187F0 [    1053] address [size] of Export Directory
+   1B2D4 [      A0] address [size] of Import Directory
+   1E000 [    4C40] address [size] of Resource Directory
+       0 [       0] address [size] of Exception Directory
+   20800 [    26D0] address [size] of Security Directory
+   23000 [    1350] address [size] of Base Relocation Directory
+    1500 [      54] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+       0 [       0] address [size] of Thread Storage Directory
+    1008 [      AC] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+   1B000 [     2CC] address [size] of Import Address Table Directory
+   18084 [      A0] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+   18843 virtual size
+    1000 virtual address
+   18A00 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+
+Debug Directories(3)
+	Type       Size     Address  Pointer
+	(112588)   1b7c0       1b7ae    1b7a2
+	(112490)800009d9       1b752    1b744
+	(112368)   1b6e0       1b6c8    1b6ac
+
+SECTION HEADER #2
+   .data name
+     C6C virtual size
+   1A000 virtual address
+     200 size of raw data
+   18E00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #3
+  .idata name
+    132E virtual size
+   1B000 virtual address
+    1400 size of raw data
+   19000 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #4
+  .didat name
+      FC virtual size
+   1D000 virtual address
+     200 size of raw data
+   1A400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #5
+   .rsrc name
+    4C40 virtual size
+   1E000 virtual address
+    4E00 size of raw data
+   1A600 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #6
+  .reloc name
+    1350 virtual size
+   23000 virtual address
+    1400 size of raw data
+   1F400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e3df000
+fffff806`6e3df000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e3df010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e3df020  00000000 00000000 00000000 00000000  ................
+fffff806`6e3df030  00000000 00000000 00000000 00000108  ................
+fffff806`6e3df040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e3df050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e3df060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e3df070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+    8664 machine (X64)
+       6 number of sections
+61E579D9 time date stamp Mon Jan 17 09:14:49 2022
+
+       0 file pointer to symbol table
+       0 number of symbols
+      F0 size of optional header
+    2022 characteristics
+            Executable
+            App can handle >2gb addresses
+            DLL
+
+OPTIONAL HEADER VALUES
+     20B magic #
+   14.29 linker version
+    5200 size of code
+    8200 size of initialized data
+       0 size of uninitialized data
+    1980 address of entry point
+    1000 base of code
+         ----- new -----
+00007ff810570000 image base
+    1000 section alignment
+     200 file alignment
+       2 subsystem (Windows GUI)
+    6.00 operating system version
+    0.00 image version
+    6.00 subsystem version
+   11000 size of image
+     400 size of headers
+   14435 checksum
+0000000000100000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+     160  DLL characteristics
+            High entropy VA supported
+            Dynamic base
+            NX compatible
+    A9D0 [      50] address [size] of Export Directory
+    AA20 [      64] address [size] of Import Directory
+    F000 [     9A0] address [size] of Resource Directory
+    E000 [     81C] address [size] of Exception Directory
+    D000 [    1F90] address [size] of Security Directory
+   10000 [     290] address [size] of Base Relocation Directory
+    7620 [      54] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+       0 [       0] address [size] of Thread Storage Directory
+    7680 [     138] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+    7000 [     410] address [size] of Import Address Table Directory
+       0 [       0] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+    51E5 virtual size
+    1000 virtual address
+    5200 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #2
+  .rdata name
+    4996 virtual size
+    7000 virtual address
+    4A00 size of raw data
+    5600 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+
+Debug Directories(3)
+	Type       Size     Address  Pointer
+	(    0)       0           0        0
+	(    0)       0           0        0
+	(    0)       0           0        0
+
+SECTION HEADER #3
+   .data name
+    1E38 virtual size
+    C000 virtual address
+    1800 size of raw data
+    A000 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #4
+  .pdata name
+     81C virtual size
+    E000 virtual address
+     A00 size of raw data
+    B800 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #5
+   .rsrc name
+     9A0 virtual size
+    F000 virtual address
+     A00 size of raw data
+    C200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #6
+  .reloc name
+     290 virtual size
+   10000 virtual address
+     400 size of raw data
+    CC00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e3e2000
+fffff806`6e3e2000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e3e2010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e3e2020  00000000 00000000 00000000 00000000  ................
+fffff806`6e3e2030  00000000 00000000 00000000 000000f8  ................
+fffff806`6e3e2040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e3e2050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e3e2060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e3e2070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+    8664 machine (X64 (CHPEv2))
+       6 number of sections
+57E04A56 time date stamp Mon Sep 19 16:28:06 2016
+
+       0 file pointer to symbol table
+       0 number of symbols
+      F0 size of optional header
+    2022 characteristics
+            Executable
+            App can handle >2gb addresses
+            DLL
+
+OPTIONAL HEADER VALUES
+     20B magic #
+   14.20 linker version
+   39000 size of code
+    7000 size of initialized data
+       0 size of uninitialized data
+    58A0 address of entry point
+    1000 base of code
+         ----- new -----
+00007ff810540000 image base
+    1000 section alignment
+     200 file alignment
+       3 subsystem (Windows CUI)
+   10.00 operating system version
+   10.00 image version
+   10.00 subsystem version
+   43000 size of image
+     400 size of headers
+   46FCA checksum
+0000000000040000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000002000 size of heap reserve
+0000000000001000 size of heap commit
+    4160  DLL characteristics
+            High entropy VA supported
+            Dynamic base
+            NX compatible
+            Guard
+   3C4B0 [     298] address [size] of Export Directory
+   3C748 [     118] address [size] of Import Directory
+   41000 [     9D8] address [size] of Resource Directory
+   40000 [     DEC] address [size] of Exception Directory
+       0 [       0] address [size] of Security Directory
+   42000 [      3C] address [size] of Base Relocation Directory
+   3A5C0 [      70] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+       0 [       0] address [size] of Thread Storage Directory
+   3A010 [     118] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+   3A1D0 [     1C8] address [size] of Import Address Table Directory
+       0 [       0] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+   38F15 virtual size
+    1000 virtual address
+   39000 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #2
+  .rdata name
+    2F12 virtual size
+   3A000 virtual address
+    3000 size of raw data
+   39400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+
+Debug Directories(4)
+	Type       Size     Address  Pointer
+	(3089415299)       0    8b483974 a2fcb305
+	(2318425739)ad8a7f05    75c08400 db85483e
+	(3465234432)    6fe8    4853eb00 fc72058b
+	(1267451371)89c82b08      b0248c 32e90000
+
+SECTION HEADER #3
+   .data name
+    25EC virtual size
+   3D000 virtual address
+     200 size of raw data
+   3C400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #4
+  .pdata name
+     DEC virtual size
+   40000 virtual address
+     E00 size of raw data
+   3C600 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #5
+   .rsrc name
+     9D8 virtual size
+   41000 virtual address
+     A00 size of raw data
+   3D400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #6
+  .reloc name
+      3C virtual size
+   42000 virtual address
+     200 size of raw data
+   3DE00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e3f0000
+fffff806`6e3f0000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e3f0010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e3f0020  00000000 00000000 00000000 00000000  ................
+fffff806`6e3f0030  00000000 00000000 00000000 000000f0  ................
+fffff806`6e3f0040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e3f0050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e3f0060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e3f0070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+    8664 machine (X64)
+       7 number of sections
+ECBA8A04 time date stamp Tue Nov  8 22:33:24 2095
+
+       0 file pointer to symbol table
+       0 number of symbols
+      F0 size of optional header
+    2022 characteristics
+            Executable
+            App can handle >2gb addresses
+            DLL
+
+OPTIONAL HEADER VALUES
+     20B magic #
+   14.20 linker version
+    7C00 size of code
+    4E00 size of initialized data
+       0 size of uninitialized data
+    7D50 address of entry point
+    1000 base of code
+         ----- new -----
+00007ff810570000 image base
+    1000 section alignment
+     200 file alignment
+       2 subsystem (Windows GUI)
+   10.00 operating system version
+   10.00 image version
+   10.00 subsystem version
+   11000 size of image
+     400 size of headers
+    CBEF checksum
+0000000000040000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+    4160  DLL characteristics
+            High entropy VA supported
+            Dynamic base
+            NX compatible
+            Guard
+    AD30 [      80] address [size] of Export Directory
+    ADB0 [     208] address [size] of Import Directory
+    F000 [     A00] address [size] of Resource Directory
+    D000 [     600] address [size] of Exception Directory
+       0 [       0] address [size] of Security Directory
+   10000 [      F0] address [size] of Base Relocation Directory
+    A2D0 [      70] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+       0 [       0] address [size] of Thread Storage Directory
+    9010 [     118] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+    9440 [     4F0] address [size] of Import Address Table Directory
+    ACA0 [      40] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+    7AD2 virtual size
+    1000 virtual address
+    7C00 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #2
+  .rdata name
+    2FE0 virtual size
+    9000 virtual address
+    3000 size of raw data
+    8000 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+
+Debug Directories(4)
+	Type       Size     Address  Pointer
+	(2375410)       0      243f92   243f9e
+	(2380208)  245192      245184   2451a2
+	(2375720)  243fda           0   245a68
+	(2375800)  244062      2440c2   2440d8
+
+SECTION HEADER #3
+   .data name
+     8B0 virtual size
+    C000 virtual address
+     200 size of raw data
+    B000 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #4
+  .pdata name
+     600 virtual size
+    D000 virtual address
+     600 size of raw data
+    B200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #5
+  .didat name
+      10 virtual size
+    E000 virtual address
+     200 size of raw data
+    B800 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #6
+   .rsrc name
+     A00 virtual size
+    F000 virtual address
+     A00 size of raw data
+    BA00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #7
+  .reloc name
+      F0 virtual size
+   10000 virtual address
+     200 size of raw data
+    C400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e3f5000
+fffff806`6e3f5000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e3f5010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e3f5020  00000000 00000000 00000000 00000000  ................
+fffff806`6e3f5030  00000000 00000000 00000000 00000108  ................
+fffff806`6e3f5040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e3f5050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e3f5060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e3f5070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+    8664 machine (X64 (CHPEv2))
+       6 number of sections
+61E579DD time date stamp Mon Jan 17 09:14:53 2022
+
+       0 file pointer to symbol table
+       0 number of symbols
+      F0 size of optional header
+    2022 characteristics
+            Executable
+            App can handle >2gb addresses
+            DLL
+
+OPTIONAL HEADER VALUES
+     20B magic #
+   14.29 linker version
+    3E00 size of code
+    5800 size of initialized data
+       0 size of uninitialized data
+    1920 address of entry point
+    1000 base of code
+         ----- new -----
+00007ff81c3b0000 image base
+    1000 section alignment
+     200 file alignment
+       2 subsystem (Windows GUI)
+    6.00 operating system version
+    0.00 image version
+    6.00 subsystem version
+    D000 size of image
+     400 size of headers
+   163CB checksum
+0000000000100000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+     160  DLL characteristics
+            High entropy VA supported
+            Dynamic base
+            NX compatible
+    7730 [      58] address [size] of Export Directory
+    7788 [      8C] address [size] of Import Directory
+    B000 [     9A0] address [size] of Resource Directory
+    A000 [     7F8] address [size] of Exception Directory
+    9400 [    1F90] address [size] of Security Directory
+    C000 [     11C] address [size] of Base Relocation Directory
+    5560 [      54] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+       0 [       0] address [size] of Thread Storage Directory
+    55C0 [     138] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+    5000 [     398] address [size] of Import Address Table Directory
+       0 [       0] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+    3C7E virtual size
+    1000 virtual address
+    3E00 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #2
+  .rdata name
+    3446 virtual size
+    5000 virtual address
+    3600 size of raw data
+    4200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+
+Debug Directories(3)
+	Type       Size     Address  Pointer
+	(    0)  244ac8      244a84   244af0
+	(2378402)  244ab2           0   244ada
+	(2378750)  244c20      244bb2   244b9c
+
+SECTION HEADER #3
+   .data name
+     CA0 virtual size
+    9000 virtual address
+     800 size of raw data
+    7800 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #4
+  .pdata name
+     7F8 virtual size
+    A000 virtual address
+     800 size of raw data
+    8000 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #5
+   .rsrc name
+     9A0 virtual size
+    B000 virtual address
+     A00 size of raw data
+    8800 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #6
+  .reloc name
+     11C virtual size
+    C000 virtual address
+     200 size of raw data
+    9200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e3f7000
+fffff806`6e3f7000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e3f7010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e3f7020  00000000 00000000 00000000 00000000  ................
+fffff806`6e3f7030  00000000 00000000 00000000 00000100  ................
+fffff806`6e3f7040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e3f7050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e3f7060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e3f7070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+     14C machine (i386 (CHPE))
+       7 number of sections
+67BA43F7 time date stamp Sat Feb 22 16:39:03 2025
+
+       0 file pointer to symbol table
+       0 number of symbols
+      E0 size of optional header
+    2102 characteristics
+            Executable
+            32 bit word machine
+            DLL
+
+OPTIONAL HEADER VALUES
+     10B magic #
+   14.20 linker version
+  23B600 size of code
+   40C00 size of initialized data
+       0 size of uninitialized data
+  13BA40 address of entry point
+    1000 base of code
+         ----- new -----
+00000000765a0000 image base
+    1000 section alignment
+     200 file alignment
+       3 subsystem (Windows CUI)
+   10.00 operating system version
+   10.00 image version
+   10.00 subsystem version
+  27F000 size of image
+     400 size of headers
+  28A17C checksum
+0000000000040000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+    4140  DLL characteristics
+            Dynamic base
+            NX compatible
+            Guard
+  2352F0 [    35DB] address [size] of Export Directory
+  241938 [     438] address [size] of Import Directory
+  247000 [   13D38] address [size] of Resource Directory
+       0 [       0] address [size] of Exception Directory
+  27A400 [    7F48] address [size] of Security Directory
+  25B000 [   23E9C] address [size] of Base Relocation Directory
+   3E0A0 [      54] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+   15250 [      18] address [size] of Thread Storage Directory
+    CE60 [      AC] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+  241000 [     934] address [size] of Import Address Table Directory
+  233960 [     5A0] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+  2378CB virtual size
+    1000 virtual address
+  237A00 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+
+Debug Directories(3)
+	Type       Size     Address  Pointer
+	(4284809216)86642504    84450000   850fe4
+	(2201516939)7b8908c7     3efc138 73ab05f6
+	(1166756039)c08548c7     184850f 8b480000
+
+SECTION HEADER #2
+  .proxy name
+    3BB0 virtual size
+  239000 virtual address
+    3C00 size of raw data
+  237E00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+SECTION HEADER #3
+   .data name
+    3C00 virtual size
+  23D000 virtual address
+    1A00 size of raw data
+  23BA00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #4
+  .idata name
+    4C8E virtual size
+  241000 virtual address
+    4E00 size of raw data
+  23D400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #5
+  .didat name
+     31C virtual size
+  246000 virtual address
+     400 size of raw data
+  242200 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #6
+   .rsrc name
+   13D38 virtual size
+  247000 virtual address
+   13E00 size of raw data
+  242600 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #7
+  .reloc name
+   23E9C virtual size
+  25B000 virtual address
+   24000 size of raw data
+  256400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0xfffff806`6e3fc000
+fffff806`6e3fc000  00905a4d 00000003 00000004 0000ffff  MZ..............
+fffff806`6e3fc010  000000b8 00000000 00000040 00000000  ........@.......
+fffff806`6e3fc020  00000000 00000000 00000000 00000000  ................
+fffff806`6e3fc030  00000000 00000000 00000000 000000e8  ................
+fffff806`6e3fc040  0eba1f0e cd09b400 4c01b821 685421cd  ........!..L.!Th
+fffff806`6e3fc050  70207369 72676f72 63206d61 6f6e6e61  is program canno
+fffff806`6e3fc060  65622074 6e757220 206e6920 20534f44  t be run in DOS 
+fffff806`6e3fc070  65646f6d 0a0d0d2e 00000024 00000000  mode....$.......
+
+File Type: DLL
+FILE HEADER VALUES
+     14C machine (i386)
+       6 number of sections
+2AB009D1 time date stamp Thu Sep 10 22:52:01 1992
+
+       0 file pointer to symbol table
+       0 number of symbols
+      E0 size of optional header
+    2102 characteristics
+            Executable
+            32 bit word machine
+            DLL
+
+OPTIONAL HEADER VALUES
+     10B magic #
+   14.20 linker version
+   1A800 size of code
+    4600 size of initialized data
+       0 size of uninitialized data
+    7370 address of entry point
+    1000 base of code
+         ----- new -----
+0000000076570000 image base
+    1000 section alignment
+     200 file alignment
+       3 subsystem (Windows CUI)
+   10.00 operating system version
+   10.00 image version
+   10.00 subsystem version
+   23000 size of image
+     400 size of headers
+   233EC checksum
+0000000000040000 size of stack reserve
+0000000000001000 size of stack commit
+0000000000100000 size of heap reserve
+0000000000001000 size of heap commit
+    4540  DLL characteristics
+            Dynamic base
+            NX compatible
+            No structured exception handler
+            Guard
+   11D80 [    99D3] address [size] of Export Directory
+   1D364 [     154] address [size] of Import Directory
+   20000 [     3D8] address [size] of Resource Directory
+       0 [       0] address [size] of Exception Directory
+   1EE00 [    2690] address [size] of Security Directory
+   21000 [    1304] address [size] of Base Relocation Directory
+    28E0 [      54] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+       0 [       0] address [size] of Thread Storage Directory
+    1000 [      AC] address [size] of Load Configuration Directory
+       0 [       0] address [size] of Bound Import Directory
+   1D000 [     360] address [size] of Import Address Table Directory
+    E0AC [     320] address [size] of Delay Import Directory
+       0 [       0] address [size] of COR20 Header Directory
+       0 [       0] address [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+   1A753 virtual size
+    1000 virtual address
+   1A800 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+
+
+Debug Directories(3)
+	Type       Size     Address  Pointer
+	(   96)   60f01       d640f    a340f
+	(1342988301)    300b       c1d01    b741d
+	(4028183069)c015e017       a2619  10f0114
+
+SECTION HEADER #2
+   .data name
+     4F4 virtual size
+   1C000 virtual address
+     200 size of raw data
+   1AC00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #3
+  .idata name
+    1D9A virtual size
+   1D000 virtual address
+    1E00 size of raw data
+   1AE00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #4
+  .didat name
+     8C4 virtual size
+   1F000 virtual address
+     A00 size of raw data
+   1CC00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         (no align specified)
+         Read Write
+
+SECTION HEADER #5
+   .rsrc name
+     3D8 virtual size
+   20000 virtual address
+     400 size of raw data
+   1D600 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         (no align specified)
+         Read Only
+
+SECTION HEADER #6
+  .reloc name
+    1304 virtual size
+   21000 virtual address
+    1400 size of raw data
+   1DA00 file pointer to raw data
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         (no align specified)
+         Read Only
+
+0: kd> .logclose
+.logclose
+Closing open log file C:\Users\wumb0\Desktop\kd.txt
