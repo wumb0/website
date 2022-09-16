@@ -301,9 +301,7 @@ Version detection can be accomplished by looking at the `NtMajorVersion`, `NtMin
 # What Has Changed?
 Now that we are all up to speed on what techniques are already out there, we need to take a look at what Microsoft has changed in the most recent versions of Windows that get in the way of some of these techniques and then how to work around these changes to make sure exploitation and/or execution can keep working on 20H1 and higher.  
 
-## Kernel Mapping
-
-## Fake Headers
+## Kernel Mapping and Fake Headers
 In kernel versions prior to 20H1, the `.text` section of the kernel binary bordered the top of the image. This means that it also bordered the PE header for the image. This fact is why it is possible to use the scanback technique from a pointer into the `.text` section. In kernel versions 20H1 and up, the `.text` section no longer borders the PE header. In fact, no code sections at all border the PE header. The `.rdata` (read-only data), `.pdata` (exception data), and `.idata` (import data) sections now border the PE header. Between `.idata` and the next readable section, `PROTDATA` lies a few unmapped pages and then the text section at 0x200000 bytes offset from the base of the PE. Fortunately, `.text` and `KVASCODE` are contiguous with the sections in between them.   
 
 <div class="uk-grid">
@@ -522,6 +520,7 @@ For starters the machine type for this "DLL" is i386, which seems unlikely to be
 
 <details>
 <summary>NT header scan output</summary>
+```
 0xfffff806`6e200000
 fffff806`6e200000  00905a4d 00000003 00000004 0000ffff  MZ..............
 fffff806`6e200010  000000b8 00000000 00000040 00000000  ........@.......
@@ -1287,11 +1286,13 @@ SECTION HEADER #6
          Discardable
          (no align specified)
          Read Only
+```
 </details>
 
 The first one is the header dump for kernel. Note the valid debug directory. If you want the full output you can get that [here]({attach}/files/kernel-headers-kd-full-output.txt).
 
 Some of these headers are less valid than they appear. The last header tells us that the code section starts at an offset of 0x1000 bytes. Investigating that memory location yields not code, but ASCII data. 
+
 ```
 0: kd> db fffff806`6e3f0000+1000
 fffff806`6e3f1000  29 0a 2d 2d 0a 0a 50 6f-73 74 20 61 20 6d 65 73  ).--..Post a mes
