@@ -1289,9 +1289,9 @@ SECTION HEADER #6
 ```
 </details>
 
-The first one is the header dump for kernel. Note the valid debug directory. If you want the full output you can get that [here]({attach}/files/kernel-headers-kd-full-output.txt).
+The first one is the header dump for the kernel. Note the valid debug directory. If you want the full output you can get that [here]({attach}/files/kernel-headers-kd-full-output.txt).
 
-Some of these headers are less valid than they appear. The last header tells us that the code section starts at an offset of 0x1000 bytes. Investigating that memory location yields not code, but ASCII data. 
+Some of these headers are less valid than they appear. The last header tells us that the code section starts at an offset of 0x1000 bytes, as is common for PE files. Investigating that memory location yields not code, but ASCII data. 
 
 ```
 0: kd> db fffff806`6e3f0000+1000
@@ -1337,7 +1337,7 @@ unsafe {
 }
 let kernel_base = cursor as usize;
 ```
-Obviously, this code has to be version dependent so we can still use the `KUSER_SHARED_DATA` version detection method to decide which step amount to use. The algorithm is the same as before, but instead of rounding down to the nearest page and then scanning backward by page size, we use 0x200000.  
+Obviously, this code has to be version dependent so we can still use the `KUSER_SHARED_DATA` version detection method to decide which step amount to use. The algorithm is the same as before, but instead of rounding down to the nearest page and then scanning backward by page size, we use 0x200000. This technique actually also works on 19H1, since the kernel is mapped with large pages (yes **entirely RWX** in 19H1) and large pages happen to be 0x200000 bytes in size.  
 
 Another alternative is to parse each header and try to figure out which one is ntoskrnl.exe. I've tried two alternatives that work: checking the number of sections or looking up the PDB path via the DEBUG data directory.  
 
