@@ -1,8 +1,8 @@
-Title: Rust for C Developers Part 1: Introduction
+Title: Rust for C Developers Part 0: Introduction
 Date: 2024-04-10 13:37
 Category: Programming
 Tags: rust, windows, c
-Slug: rust-for-c-devs-part-1
+Slug: rust-for-c-devs-part-0
 Authors: wumb0
 
 Hello! It's been a while. Life has been very busy in the past few years, and I haven't posted as much as I've intended to. Isn't that how these things always go? I've got a bit of time to breathe, so I'm going to attempt to start a weekly(ish) blog series inspired by my friend scuzz3y. This series is going to be about Rust, specifically how to write it if you're coming from a lower level C/C++ background.  
