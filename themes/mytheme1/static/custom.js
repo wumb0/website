@@ -27,3 +27,7 @@ $("summary").on('click', function(e) {
 
 // https://stackoverflow.com/a/43321596
 $("summary").mousedown(function(e) { if (e.detail > 1) { e.preventDefault(); } });
+
+// let's add the UK table class to all tables for now. if we have issues then maybe
+// we can be more specific
+$("table").addClass("uk-table uk-table-divider")
