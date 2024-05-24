@@ -5,7 +5,7 @@ Tags: rust, windows, c
 Slug: rust-for-c-devs-part-0
 Authors: wumb0
 
-Hello! It's been a while. Life has been very busy in the past few years, and I haven't posted as much as I've intended to. Isn't that how these things always go? I've got a bit of time to breathe, so I'm going to attempt to start a weekly(ish) blog series inspired by my friend scuzz3y. This series is going to be about Rust, specifically how to write it if you're coming from a lower level C/C++ background.  
+Hello! It's been a while. Life has been very busy in the past few years, and I haven't posted as much as I've intended to. Isn't that how these things always go? I've got a bit of time to breathe, so I'm going to attempt to start a periodic blog series inspired by my friend scuzz3y. This series is going to be about Rust, specifically how to write it if you're coming from a lower level C/C++ background.  
 
 When I first learned Rust, I tried to write it like I was writing C. That caused me a lot of pain and suffering at the hands of both the compiler and the `unsafe` keyword. Since then, I have learned a lot on how to write better Rust code that not only makes more sense, but that is far less painful and requires less `unsafe` overall. If you already know Rust, hopefully this series teaches you a thing or two that you did not already know. If you're new to Rust, then I hope this gives you a good head start into transitioning your projects from C/C++ to Rust (or at least to consider it).  
 
@@ -283,6 +283,23 @@ When will you see `unsafe` used?
 - Implementing the `Send` and `Sync` traits. You can tell the compiler that your type is transferrable (sendable) between threads (`Send`) and/or usable by multiple threads simultaneously (`Sync`). If you are wrong, then that type may cause a crash.  
 - Union access  
 - Mutable static variable access  
+
+You can also mark entire functions `unsafe`, which just declares the whole thing as an `unsafe` block. In other words, you will not need to wrap dangerous operations (such as dereferencing a pointer) in `unsafe`. That would be redundant and the compiler would tell you it is unneeded.  When you declare a function `unsafe`, the compiler will issue a warning if there is no comment explaining why via a section comment denoted by the `# Safety` header. For example:
+
+```rust
+/// A dangerous function
+/// # Safety
+/// Pointer dereference! Without this comment section the compiler will issue a warning
+unsafe fn danger(ptr: *mut u8) -> u8 {
+    *ptr
+}
+```
+
+When you call the function `danger` you will be required to call it with an `unsafe` block. 
+
+```rust
+let myu8 = unsafe { danger(u8ptr) };
+```
 
 ## Generics
 C++ has templating. C has... macros? Rust has generics. You can make a struct, enum, trait, etc. generic over a type. That looks like this:  
