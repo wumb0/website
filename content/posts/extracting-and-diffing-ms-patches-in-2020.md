@@ -26,7 +26,7 @@ Luckily, the Microsoft Update Catalog has a pretty good search feature. The most
 
 So for example, if I am looking for the July 2020 patch set for Windows 10 1903 x64 I would search `2020-07 1903 x64 cumulative` and one of the top hits should be the result I'm looking for.
 
-<center>
+<center markdown="1">
 ![Searching for an update]({static}/images/extracting-and-diffing-ms-patches-in-2020/msupdate-search.png)  
 <small>Relevant results are easy to get with the right search!</small>
 </center>
@@ -39,7 +39,7 @@ As you can see, results were returned for a few different release numbers (1903,
 ## Dynamic and Servicing Stack Updates
 Microsoft also distributes a few other kinds of updates via the Microsoft Update Catalog. If you leave off the word *cumulative* from the search above, then you get some more results, including *Dynamic* and *Servicing Stack* updates that are considerably smaller than the cumulative updates.  
 
-<center>
+<center markdown="1">
 ![Update variations]({static}/images/extracting-and-diffing-ms-patches-in-2020/msupdate-variations.png)  
 <small>Different Kinds of Updates</small>
 </center>
@@ -576,21 +576,21 @@ There are [plenty](https://googleprojectzero.blogspot.com/2017/10/using-binary-d
 
 I am going to open both versions of `ntoskrnl.exe` in IDA Pro 7.5, accept the symbol download prompt, and let the auto-analysis finish. Then, I'm going to close the newer of the two versions (2020-08) and call up [BinDiff](https://www.zynamics.com/bindiff.html) to diff the new version (secondary) against the older one (primary).  
 
-<center>
+<center markdown="1">
 ![Matched Functions]({static}/images/extracting-and-diffing-ms-patches-in-2020/patchdiff-matched-functions.png)  
 <small>There are only a few changed functions between the two versions</small>
 </center>
 
 I'm going to look at `MmDuplicateMemory` because changes in functions related to memory always catch my eye! Below is an overview of the combined call graph in BinDiff. Green blocks are unchanged, yellow blocks have differences, red blocks were removed by the patch, and gray blocks were added by the patch.  
 
-<center>
+<center markdown="1">
 ![Overview graph]({static}/images/extracting-and-diffing-ms-patches-in-2020/bindiff-overview.png)  
 <small>Graph overview with BinDiff in combined mode</small>
 </center>
 
 There are many changes, but I wanted to highlight one block in particular right near the top of the function (indicated by the red arrow):  
 
-<center>
+<center markdown="1">
 ![Changed block]({static}/images/extracting-and-diffing-ms-patches-in-2020/bindiff-changed-block.png)  
 <small>Can you spot the important change?</small>
 </center>

@@ -379,7 +379,7 @@ Set bu breakpoint
 
 At the top of the system call handler you can see that `RSP` is moved into `_KPCR.UserRsp` and `_PRCB.RspBase` is moved into `RSP`. `_KPCR.UserRsp` is then pushed onto the kernel stack for recovery later (at the end of the system call handler).  
 
-<center>
+<center markdown="1">
 ![KiSystemCall64]({static}/images/windows-10-kvas-and-software-smep/KiSystemCall64.png)  
 <small>The system call handler when KVAS is disabled for the system</small>
 </center>
@@ -399,34 +399,34 @@ Set bu breakpoint
 
 `KiSystemCall64Shadow` is used. The beginning of this function is similar to `KiSystemCall64`, with a few extra steps. It backs up `RSP` to `_KPRCB.UserRspShadow`, swaps `_KPRCB.KernelDirectoryTableBase` into `CR3` if the second bit of `_KPRCB.ShadowFlags` is set, and restores the kernel stack pointer to `RSP` from `_KPRCB.RspBaseShadow`, before pushing `_KPRCB.UserRspShadow` to the stack (as opposed to `_KPCR.UserRsp`). See the disassembly below:  
 
-<center>
+<center markdown="1">
 ![KiSystemCall64Shadow]({static}/images/windows-10-kvas-and-software-smep/KiSystemCall64Shadow.png)  
 <small>The system call handler when KVAS is enabled for the system</small>
 </center>
 
 At the end of `KiSystemCall64Shadow` there is a jump to `KiSystemServiceUser` which is partway through `KiSystemCall64`.  
 
-<center>
+<center markdown="1">
 ![KiSystemCall64Shadow_end]({static}/images/windows-10-kvas-and-software-smep/KiSystemCall64Shadow_end.png)  
 <small>The end of the Shadow syscall handler jumps to the label `KiSystemServiceUser`, which is in the middle of `KiSystemCall64`</small>
 </center>
 
 At the end of `KiSystemCall64` there is a test to see if `KiKvaShadow` is 1 (KVAS enabled) and if it is a jump to `KiKernelSysretExit` is made.  
 
-<center>
+<center markdown="1">
 ![KiSystemCall64_return]({static}/images/windows-10-kvas-and-software-smep/KiSystemCall64_return.png)  
 <small>The end of `KiSystemCall64` calls `KiKernelSysretExit` if KVAS is enabled</small>
 </center>
 
 `KiKernelSysretExit` checks the 2nd bit of `_KPRCB.ShadowFlags` to see if KVAS is enforced for the process (0 = enforced, 1 = not enforced). If it is enforced, then `_KPROCESS.UserDirectoryTableBase` is loaded into `CR3`. If the low bit of `_KPRCB.UserDirectoryTableBase` is set and the low bit of `_KPRCB.ShadowFlags` is set, then the low bit of `_KPRCB.ShadowFlags` is unset indicating that the user page table is now in use.  
 
-<center>
+<center markdown="1">
 ![KiKernelSysretExit]({static}/images/windows-10-kvas-and-software-smep/KiKernelSysretExit.png)  
 <small>KiKernelSysretExit checks if `CR3` needs to be updated or not on exit from the kernel</small>
 </center>
 
 `KiKernelSysretExit` is called in a few different places. Unsurprisingly, these places are exit-points from the kernel.   
-<center>
+<center markdown="1">
 ![KiKernelSysretExit_xref]({static}/images/windows-10-kvas-and-software-smep/KiKernelSysretExit_xref.png)  
 <small>`KiKernelSysretExit` is called in a few kernel exitpoint functions</small>
 </center>
@@ -435,7 +435,7 @@ At the end of `KiSystemCall64` there is a test to see if `KiKvaShadow` is 1 (KVA
 
 Next, let's look at cross references of `KiKvaShadow` just to get an idea of what functions are affected by KVAS. 
 
-<center>
+<center markdown="1">
 ![KiKvaShadow_xref]({static}/images/windows-10-kvas-and-software-smep/KiKvaShadow_xref.png)  
 <small>The shadow flag is checked in many places</small>
 </center>
@@ -446,28 +446,28 @@ There are quite a few functions where this flag is checked. Investigating intere
 
 Now that we have seen a few places where the kernel switches up `CR3`, let's look at thread context switching to see how it is handled. Thread context switching is performed by the `nt!KiSwapContext` function, which saves the context and then calls `nt!SwapContext`:  
 
-<center>
+<center markdown="1">
 ![KiSwapContext]({static}/images/windows-10-kvas-and-software-smep/KiSwapContext.png)  
 <small>`KiSwapContext` is a small function that calls `SwapContext`</small>
 </center>
 
 The `RCX` and `RDX` registers hold the destination and source `_KTHREAD` structures, respectively. These values are moved into `RSI` and `RDI` in preparation for a call to `nt!SwapContext`. An overview of `SwapContext` can be seen below:   
 
-<center>
+<center markdown="1">
 ![SwapContext_overview]({static}/images/windows-10-kvas-and-software-smep/SwapContext_overview.png)  
 <small>`SwapContext` is a fairly large function</small>
 </center>
 
 In `SwapContext`, `RDI` is a pointer to the thread being switched out and `RSI` is a pointer to the thread being switched in. Among other things and especially important to us, `SwapContext` is responsible for switching in the correct page table to `CR3`, checking the destination process's address policy, and setting up `_KPRCB.ShadowFlags` as well as `_KPRCB.KernelDirectoryTableBase`. If the destination process is the same as the source process, this entire process is unnecessary and is skipped. If they are different, then they may have different address policies. The destination process (`RSI.ApcState.Process`) is loaded into `R14` and then if KVAS is enabled on the system, the 2nd bit of `_KPROCESS.DirectoryTableBase` is checked to see if it is a kernel page table. If it is a kernel page table, the high bit of the page table will be set and the low bit of `_KPRCB.ShadowFlags` will be set. The (potentially) modified kernel page table address is then moved int `_KPRCB.KernelDirectoryTableBase`, the page table's high bit is unset, the 2nd bit of `_KPRCB.ShadowFlags` is masked off (unset), and `_KPROCESS.AddressPolicy` is checked. If the address policy is 1 (KVAS not enforced), then `_KPRCB.ShadowFlags` is xor-ed with 3 (0b11) to set the 2nd bit and unset the first resulting in a `_KPRCB.ShadowFlags` value of 2. Then, the page table address is put into `CR3`. Interrupts are disabled (`cli`) and then re-enabled (`sti`) to prevent the system from interrupting this process. If running under Hyper-V, then instead of accessing `CR3` directly, a hypercall will be made to switch address spaces.  
 
-<center>
+<center markdown="1">
 ![SwapContext_AddressPolicy]({static}/images/windows-10-kvas-and-software-smep/SwapContext_AddressPolicy.png)  
 <small>The correct `ShadowFlags` are set based on a number of checks, then `CR3` is updated with the new page table base</small>
 </center>
 
 A few blocks down, the thread's initial stack (`_KTHREAD.InitialStack`) is saved in `_KPRCB.RspBase` and either `_KPCR.TssBase->Rsp0` or `_KPRCB.RspBaseShadow`; the latter is used on a KVAS enabled system.  
 
-<center>
+<center markdown="1">
 ![SwapContext_tss_or_RspBaseShadow]({static}/images/windows-10-kvas-and-software-smep/SwapContext_tss_or_RspBaseShadow.png)  
 <small>The current thread's kernel stack base is kept in different places for KVAS and non-KVAS processes</small>
 </center>
@@ -507,7 +507,7 @@ nt!_KTHREAD
 A final question: What do all of these functions have in common?  
 **They are all in the KVASCODE section of the kernel binary.**  
 
-<center>
+<center markdown="1">
 ![KVASCODE]({static}/images/windows-10-kvas-and-software-smep/KVASCODE.png)  
 <small>The KVASCODE section is mapped for both sets of page tables</small>
 </center>
@@ -1183,7 +1183,7 @@ KERNEL32!SortGetSortKey+0xedf:
 ### Results
 As expected, all tests but the last caused a crash immediately. Interestingly, the CPU executed the breakpoint instruction and crashed on the next instruction on every test that crashed. Instruction caching? Or just how the CPU is designed. Very interesting!  
 
-<center>
+<center markdown="1">
 ![noexecute]({static}/images/windows-10-kvas-and-software-smep/noexecute.png)  
 <small>:(</small>
 </center>

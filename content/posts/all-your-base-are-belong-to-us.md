@@ -27,7 +27,7 @@ Two of these methods rely on having some kind of memory leak of a kernel address
 ### NtQuerySystemInformation
 The easiest and most version independent way to get the base of the kernel and all other kernel modules as via [`NtQuerySystemInformation`](https://docs.microsoft.com/en-us/windows/win32/sysinfo/zwquerysysteminformation) using the `SystemModuleInformation` (0xB) member of the [`SYSTEM_INFORMATION_CLASS`](https://www.geoffchappell.com/studies/windows/km/ntoskrnl/api/ex/sysinfo/class.htm) enumeration. When queried (with an appropriate buffer size), the function will return a filled out [`SYSTEM_MODULE_INFORMATION`](https://undocumented.ntinternals.net/index.html?page=UserMode%2FStructures%2FSYSTEM_MODULE_INFORMATION.html) structure that contains a DWORD for the number of modules present and then an anysize array of [`SYSTEM_MODULE`](http://undocumented.ntinternals.net/index.html?page=UserMode%2FStructures%2FSYSTEM_MODULE.html) structures representing the modules. [Here's some C code](https://github.com/sam-b/windows_kernel_address_leaks/blob/master/NtQuerySysInfo_SystemModuleInformation/NtQuerySysInfo_SystemModuleInformation/NtQuerySysInfo_SystemModuleInformation.cpp) that uses it to query driver names and bases. You can actually get the base addresses and names of every kernel module via some documented APIs too: [`EnumDeviceDrivers`](https://docs.microsoft.com/en-us/windows/win32/api/psapi/nf-psapi-enumdevicedrivers) and [`GetDeviceDriverBaseNameA`](https://docs.microsoft.com/en-us/windows/win32/api/psapi/nf-psapi-getdevicedriverbasenamea) from the [PSAPI](https://docs.microsoft.com/en-us/windows/win32/api/psapi/) can be used together in order to accomplish that. On the backend they use `NtQuerySystemInformation` with the `SystemModuleInformation` class. FYI, psapi is just a small stub around the [API set](https://docs.microsoft.com/en-us/windows/win32/apiindex/windows-apisets) DLL `api-ms-win-core-psapi-l1-1-0.dll`, which ends up forwarding to kernelbase.dll in all versions.  
 
-<center>
+<center markdown="1">
 ![kernelbase!EnumDeviceDrivers]({static}/images/all-your-base-are-belong-to-us/psapi-qsi.png)  
 <small>A portion of `kernelbase!EnumDeviceDrivers` showing a call to `NtQuerySystemInformation`</small>
 </center>
@@ -99,7 +99,7 @@ If you look a bit lower in the code from zerosum0x0 that I linked earlier you ca
 #### KTHREAD Pointers
 One of the fields in the KPRCB that is consistent across versions of the kernel is the `CurrentThread` field at offset 8. This would be at the KPCR at offset 0x188 (x64). In fact, you'll see this offset repeatedly in the kernel, as this is what the kernel uses to get a pointer to the current thread running on the processor.  
 
-<center>
+<center markdown="1">
 ![nt!KiKernelSysretExit]({static}/images/all-your-base-are-belong-to-us/gs188.png)  
 <small>Here's an example from `KiKernelSysretExit`, which might look [familiar]({static}/images/windows-10-kvas-and-software-smep/KiKernelSysretExit.png) from my [KVAS post]({filename}/posts/windows-10-kvas-and-software-smep.md)</small>
 </center>
@@ -1310,7 +1310,7 @@ It is possible that these DLLs/drivers were really here at *some point* but they
 ## hal.dll
 Another interesting change in the kernel in 20H1+ is that the Hardware Abstraction Layer (HAL) has moved into the kernel image itself and no longer lives inside of hal.dll. If you open up hal.dll in a disassembler, you will notice that it actually does not even have a `.text` section. It is just a forwarding DLL that [forwards exports](https://docs.microsoft.com/en-us/archive/msdn-magazine/2002/march/inside-windows-an-in-depth-look-into-the-win32-portable-executable-file-format-part-2#export-forwarding) into the kernel. The forwarding is done to not break backwards compatibility with drivers and components that expect to import HAL functionality from hal.dll and not ntoskrnl.exe.  
 
-<center>
+<center markdown="1">
 ![hal.dll]({static}/images/all-your-base-are-belong-to-us/hal-segments.png)  
 <small>hal.dll has no code! It does still have the Hal* exports.</small>
 </center>
